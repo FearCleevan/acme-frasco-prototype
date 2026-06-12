@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDE / NDT Services | Frasco Industrial Inspections</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=Syne:wght@600;700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    @keyframes slideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+    .anim-up{opacity:0;animation:slideUp 0.85s cubic-bezier(.16,1,.3,1) forwards}
+    .anim-scale{opacity:0;animation:scaleIn 0.8s cubic-bezier(.16,1,.3,1) forwards}
+    .d100{animation-delay:100ms}.d200{animation-delay:200ms}.d300{animation-delay:300ms}.d500{animation-delay:500ms}
+    .sr-hidden{opacity:0;transform:translateY(36px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+    .sr-visible{opacity:1;transform:none!important}
+    .scan-card{position:relative;overflow:hidden}
+    .scan-card::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(232,96,12,.9),transparent);top:-2px;opacity:0;pointer-events:none}
+    .scan-card:hover::after{opacity:1;animation:sweep 1.5s cubic-bezier(.4,0,.6,1) forwards}
+    @keyframes sweep{0%{top:0;opacity:1}100%{top:100%;opacity:.2}}
+    .blueprint{background-image:linear-gradient(rgba(232,96,12,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,96,12,.07) 1px,transparent 1px);background-size:52px 52px}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#e8600c;border-radius:3px}
+  </style>
+  <style type="text/tailwindcss">@tailwind base;@tailwind components;@tailwind utilities;</style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={important:'#root',theme:{extend:{colors:{'ink':'#111111','panel':'#1a1a1a','surface':'#222222','orange':'#e8600c','amber':'#f5b301','paper':'#f5f5f5','soft':'#eeeeee','lead':'#5a5a5a','ghost':'#d8d8d8'},fontFamily:{'display':['Bricolage Grotesque','sans-serif'],'label':['Syne','sans-serif'],'body':['Inter Tight','sans-serif'],'mono':['JetBrains Mono','monospace']},boxShadow:{'orange':'0 16px 40px -10px rgba(232,96,12,.3)','heavy':'0 30px 70px -15px rgba(0,0,0,.5)'}}}}
+  </script>
+</head>
+<body id="root">
+<div class="font-body bg-paper text-ink min-h-screen flex flex-col">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between bg-ink border-b border-white/10">
+    <div class="flex items-center gap-4 md:gap-12">
+      <a href="frasco-prototype-5.html" class="flex items-center gap-3 font-label font-bold text-xl text-white uppercase tracking-tight">
+        <div class="w-[3px] h-7 bg-orange"></div>FRASCO
+      </a>
+      <nav class="hidden lg:flex items-center gap-7">
+        <div class="relative group">
+          <button class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-orange">
+            Services <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor" class="group-hover:rotate-180 transition-transform duration-300"><path d="M2.558 6.295a.5.5 0 0 1 .707 0L8 10.03l4.735-3.736a.5.5 0 0 1 .707.708L8.354 11.06a.5.5 0 0 1-.708 0L2.558 7.003a.5.5 0 0 1 0-.708Z"/></svg>
+          </button>
+          <div class="absolute top-full mt-3 left-0 w-72 bg-white border border-ghost shadow-heavy opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-250 translate-y-2 group-hover:translate-y-0 z-60">
+            <div class="p-2">
+              <a href="nde-ndt.html" class="flex items-center gap-3 px-4 py-3 bg-soft text-ink"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm text-orange">NDE / NDT</div><div class="text-xs text-lead font-mono mt-0.5">Eddy current, ultrasonic, thermography</div></div></a>
+              <a href="tube-inspection.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Tube Inspection</div><div class="text-xs text-lead font-mono mt-0.5">Chillers, condensers, heat exchangers</div></div></a>
+              <a href="asset-integrity.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Asset Integrity</div><div class="text-xs text-lead font-mono mt-0.5">Weld testing, API, QA/QC, turnaround</div></div></a>
+              <a href="lifting-equipment.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-amber rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Lifting Equipment</div><div class="text-xs text-lead font-mono mt-0.5">Certification, cranes, wire rope</div></div></a>
+            </div>
+            <div class="border-t border-ghost px-4 py-3 flex justify-between items-center">
+              <span class="text-[10px] font-mono text-lead uppercase tracking-widest">Not sure what you need?</span>
+              <a href="contact.html" class="text-[10px] font-mono text-orange uppercase tracking-widest hover:underline">Ask us →</a>
+            </div>
+          </div>
+        </div>
+        <a href="about.html" class="text-[11px] font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors">About</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="tel:19024315483" class="hidden sm:flex items-center gap-2 text-white/60 hover:text-orange transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 21c-1.654 0-3.282-.4-4.74-1.2l-.45-.24C8.7 17.889 6.152 15.34 4.48 12.23l-.25-.45C3.43 10.314 3.007 8.671 3 7v-.67c-.002-.534.21-1.046.59-1.42L5.28 3.22a.5.5 0 0 1 .627-.022l2.25 3.86a.5.5 0 0 1-.11.644L6.66 9.33a.5.5 0 0 0-.1.59l.35.66C8.177 12.909 10.09 14.818 12.42 16.07l.66.36a.5.5 0 0 0 .59-.1l1.89-1.89a.5.5 0 0 1 .644-.11l3.86 2.25a.5.5 0 0 1-.022.627l-1.69 1.69A1.97 1.97 0 0 1 17 21Z"/></svg>
+        <span class="font-mono text-[11px] tracking-wider">902-431-5483</span>
+      </a>
+      <button id="mob-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="contact.html" class="bg-orange text-white font-mono text-[11px] font-bold px-5 py-2.5 uppercase tracking-widest hover:bg-amber hover:text-ink transition-colors">Request Inspection</a>
+    </div>
+  </header>
+
+  <!-- Mobile overlay -->
+  <div id="mob-menu" class="fixed inset-0 bg-ink z-[100] translate-x-full transition-transform duration-500 flex flex-col p-8">
+    <div class="flex justify-between items-center mb-14">
+      <span class="font-label font-bold text-2xl text-white">FRASCO<span class="text-orange">.</span></span>
+      <button id="mob-close" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-7">
+      <a href="nde-ndt.html" class="mob-l text-4xl font-display font-bold text-orange">NDE / NDT</a>
+      <a href="tube-inspection.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Tube Inspection</a>
+      <a href="asset-integrity.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Asset Integrity</a>
+      <a href="lifting-equipment.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Lifting Equipment</a>
+      <a href="about.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">About Us</a>
+      <a href="contact.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Contact</a>
+    </nav>
+    <div class="mt-auto"><span class="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">24/7 Response</span><a href="tel:19024315483" class="text-white text-xl font-body">1-902-431-5483</a></div>
+  </div>
+
+  <main class="flex-grow pt-16">
+
+    <!-- HERO -->
+    <section class="relative h-[65vh] min-h-[400px] overflow-hidden flex items-center">
+      <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1920&q=80" alt="NDT inspection" class="absolute inset-0 w-full h-full object-cover anim-scale">
+      <div class="absolute inset-0 bg-ink/75"></div>
+      <div class="absolute inset-0 blueprint opacity-40"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="anim-up">
+          <a href="frasco-prototype-5.html" class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-white/50 hover:text-orange transition-colors mb-8">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg> Back to Home
+          </a>
+          <div class="flex items-center gap-4 mb-4"><div class="w-10 h-[2px] bg-orange"></div><span class="font-mono text-[10px] uppercase tracking-[.25em] text-orange">Non-Destructive Evaluation</span></div>
+          <h1 class="font-label text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tight leading-none mb-6">NDE / NDT<br><span class="text-white/40">Services</span></h1>
+          <p class="text-white/70 max-w-xl font-body text-base leading-relaxed">Nine certified inspection methods. Portable field-ready equipment. No coating removal required. Results delivered on-site, same day.</p>
+        </div>
+      </div>
+      <div class="absolute bottom-8 left-6 md:left-12 flex items-center gap-6 anim-up d500">
+        <div class="text-[10px] font-mono uppercase tracking-widest text-white/40">CAN/CGSB-48.9712 Certified · Level II & III Technicians</div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="py-20 bg-white border-b border-ghost">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16 items-center">
+        <div class="lg:w-1/2" data-sr>
+          <h2 class="font-label text-3xl md:text-4xl font-bold text-ink uppercase tracking-tight mb-6">Advanced NDT — No Disassembly. No Delay.</h2>
+          <p class="text-lead leading-relaxed mb-6">Frasco's NDE/NDT services provide accurate, reliable inspection data for the widest range of industrial components — tubes, welds, vessels, structures, and more. Our certified level-II and level-III technicians bring the lab to your site.</p>
+          <p class="text-lead leading-relaxed">All inspections are performed to the highest applicable national and international codes and standards. Reports are comprehensive, clear, and signed same day.</p>
+        </div>
+        <div class="lg:w-1/2 grid grid-cols-3 gap-4" data-sr>
+          <div class="bg-orange text-white p-6 flex flex-col gap-2"><div class="font-label text-4xl font-bold">9</div><div class="text-[10px] font-mono uppercase tracking-widest opacity-75">Methods</div></div>
+          <div class="bg-ink text-white p-6 flex flex-col gap-2"><div class="font-label text-4xl font-bold">24/7</div><div class="text-[10px] font-mono uppercase tracking-widest opacity-75">Availability</div></div>
+          <div class="bg-soft text-ink p-6 flex flex-col gap-2 border border-ghost"><div class="font-label text-4xl font-bold">0</div><div class="text-[10px] font-mono uppercase tracking-widest text-lead">Coating Removal</div></div>
+          <div class="col-span-3 bg-panel text-white p-6 border-l-4 border-orange"><p class="font-mono text-[11px] uppercase tracking-widest text-orange mb-2">Certifications</p><p class="font-body text-sm text-white/70">CAN/CGSB-48.9712 · API 510 · 570 · 653 · CWB CSA W178.2</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 METHODS GRID -->
+    <section class="py-24 bg-soft">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-16" data-sr>
+          <h2 class="text-[10px] font-mono uppercase tracking-widest text-white mb-4 bg-orange inline-block px-2 py-0.5">Inspection Methods</h2>
+          <h3 class="font-label text-3xl md:text-4xl font-bold text-ink uppercase tracking-tight">Nine Certified<br>NDE / NDT Methods</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <!-- 1 Eddy Current -->
+          <div data-sr class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-orange/10 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M6.343 6.343A8 8 0 1 0 17.657 17.657M6.343 17.657A8 8 0 1 1 17.657 6.343"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">01</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Eddy Current</h4>
+            <p class="text-lead text-sm leading-relaxed">Industry-leading technology for detecting surface and near-surface defects in conductive materials. No coating removal required — probe arrays allow fast coverage of large areas.</p>
+          </div>
+
+          <!-- 2 Near Field -->
+          <div data-sr data-sr-delay="100" class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-orange/10 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="1.5"><path d="M12 2a10 10 0 0 1 10 10M12 6a6 6 0 0 1 6 6M12 10a2 2 0 0 1 2 2"/><circle cx="12" cy="12" r="1" fill="#e8600c"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">02</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Near Field Testing</h4>
+            <p class="text-lead text-sm leading-relaxed">Specialized electromagnetic technique ideal for inspecting ferromagnetic tubes. Effective in finned or fouled tubes where other methods are impractical.</p>
+          </div>
+
+          <!-- 3 Magnetic Particle -->
+          <div data-sr data-sr-delay="200" class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-ink flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3" stroke="white"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">03</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Magnetic Particle</h4>
+            <p class="text-lead text-sm leading-relaxed">Rapid, reliable detection of surface and slightly sub-surface discontinuities in ferromagnetic materials. Widely used for weld and casting inspection.</p>
+          </div>
+
+          <!-- 4 Liquid Penetrant -->
+          <div data-sr class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-orange/10 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="1.5"><path d="M12 2C8 9 4 13 4 16a8 8 0 0 0 16 0c0-3-4-7-8-14Z"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">04</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Liquid Penetrant</h4>
+            <p class="text-lead text-sm leading-relaxed">Cost-effective method for locating surface-breaking defects on any non-porous material. Applicable to metals, plastics, ceramics, and more.</p>
+          </div>
+
+          <!-- 5 Ultrasonic -->
+          <div data-sr data-sr-delay="100" class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-orange/10 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">05</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Ultrasonic Testing</h4>
+            <p class="text-lead text-sm leading-relaxed">High-frequency sound waves detect internal discontinuities and measure wall thickness on vessels, piping, and structural components with precision.</p>
+          </div>
+
+          <!-- 6 Thermography -->
+          <div data-sr data-sr-delay="200" class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-amber/20 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f5b301" stroke-width="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0Z"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">06</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Thermography</h4>
+            <p class="text-lead text-sm leading-relaxed">Infrared thermal imaging reveals hidden defects, moisture infiltration, electrical hot spots, and insulation failures — completely non-contact and non-invasive.</p>
+          </div>
+
+          <!-- 7 Borescope -->
+          <div data-sr class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-orange/10 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">07</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Borescope &amp; Visual</h4>
+            <p class="text-lead text-sm leading-relaxed">High-definition remote visual inspection of inaccessible areas — tubes, tanks, vessels, engines. Real-time video recording for documentation.</p>
+          </div>
+
+          <!-- 8 PMI -->
+          <div data-sr data-sr-delay="100" class="scan-card bg-white border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-ink flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-ghost">08</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Positive Material ID</h4>
+            <p class="text-lead text-sm leading-relaxed">XRF (X-Ray Fluorescence) analysis confirms alloy composition and identifies material substitutions — critical for process plant safety and compliance.</p>
+          </div>
+
+          <!-- 9 Remote Visual -->
+          <div data-sr data-sr-delay="200" class="scan-card bg-ink border border-ghost p-8 group hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 bg-orange/20 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-white/20">09</span>
+            </div>
+            <h4 class="font-label text-xl font-bold text-orange uppercase tracking-tight mb-3">Remote Visual</h4>
+            <p class="text-white/65 text-sm leading-relaxed">Deploy remotely-operated cameras into confined spaces, tanks, and structures. Safe assessment without entry — full video report documentation.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED: EDDY CURRENT -->
+    <section class="py-24 bg-ink relative overflow-hidden">
+      <div class="absolute inset-0 blueprint opacity-30"></div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+        <div class="lg:w-1/2" data-sr>
+          <div class="flex items-center gap-4 mb-8"><div class="h-[1px] w-10 bg-orange"></div><span class="font-mono text-[10px] uppercase tracking-[.25em] text-orange">Featured Method</span></div>
+          <h2 class="font-label text-3xl md:text-4xl font-bold text-white uppercase tracking-tight mb-6 leading-tight">Eddy Current Testing — The Gold Standard</h2>
+          <p class="text-white/65 mb-6 leading-relaxed">Eddy current is Frasco's specialty. Using high-frequency alternating current, our ECT probes detect surface and sub-surface flaws in conductive materials without any surface preparation.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>No coating or paint removal needed</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Real-time data acquisition and mapping</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>High-speed scanning with probe arrays</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Ideal for heat exchanger and condenser tubes</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>CAN/CGSB-48.9712 certified technicians</li>
+          </ul>
+          <a href="contact.html" class="inline-flex items-center gap-3 bg-orange text-white px-6 py-3 font-mono text-[11px] uppercase tracking-widest font-bold hover:bg-amber hover:text-ink transition-colors">Book Eddy Current Inspection →</a>
+        </div>
+        <div class="lg:w-1/2" data-sr>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white/5 border border-white/10 p-6"><div class="text-orange text-3xl font-display font-bold mb-2">±0.1mm</div><div class="text-white/50 text-[10px] font-mono uppercase tracking-widest">Detection Accuracy</div></div>
+            <div class="bg-orange p-6"><div class="text-white text-3xl font-display font-bold mb-2">Live</div><div class="text-white/75 text-[10px] font-mono uppercase tracking-widest">On-Site Results</div></div>
+            <div class="bg-white/5 border border-white/10 p-6"><div class="text-white text-3xl font-display font-bold mb-2">0</div><div class="text-white/50 text-[10px] font-mono uppercase tracking-widest">Coating Removal Required</div></div>
+            <div class="bg-white/5 border border-white/10 p-6"><div class="text-white text-3xl font-display font-bold mb-2">L II+III</div><div class="text-white/50 text-[10px] font-mono uppercase tracking-widest">Certified Technicians</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="py-20 bg-white border-t border-ghost">
+      <div class="max-w-7xl mx-auto px-6">
+        <h3 data-sr class="text-center font-label text-3xl font-bold text-ink uppercase tracking-tight mb-14">Certifications &amp; Standards</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div data-sr class="border border-ghost p-8 text-center hover:border-orange hover:shadow-lg transition-all duration-300">
+            <div class="font-label text-2xl font-bold text-ink mb-2">CAN/CGSB-48.9712</div>
+            <div class="text-lead text-sm font-body">National standard for NDE personnel qualification and certification in Canada.</div>
+          </div>
+          <div data-sr data-sr-delay="150" class="border border-ghost p-8 text-center hover:border-orange hover:shadow-lg transition-all duration-300">
+            <div class="font-label text-2xl font-bold text-ink mb-2">API 510 · 570 · 653</div>
+            <div class="text-lead text-sm font-body">American Petroleum Institute pressure vessel, piping and storage tank inspection codes.</div>
+          </div>
+          <div data-sr data-sr-delay="300" class="border border-ghost p-8 text-center hover:border-orange hover:shadow-lg transition-all duration-300">
+            <div class="font-label text-2xl font-bold text-ink mb-2">CWB CSA W178.2</div>
+            <div class="text-lead text-sm font-body">Canadian Welding Bureau certification for welding inspection personnel.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-orange">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 data-sr class="font-label text-4xl md:text-5xl font-bold text-white uppercase tracking-tight mb-6">Ready to Book an NDT Inspection?</h2>
+        <p data-sr class="text-white/80 mb-10 font-body text-lg leading-relaxed">Available 24/7 across Nova Scotia, New Brunswick, Newfoundland and beyond. Our certified team mobilizes fast — call us or submit a request online.</p>
+        <div data-sr class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="contact.html" class="bg-white text-orange font-mono text-[11px] uppercase tracking-widest font-bold px-8 py-4 hover:bg-ink hover:text-white transition-colors">Request Inspection Online</a>
+          <a href="tel:19024315483" class="bg-ink text-white font-mono text-[11px] uppercase tracking-widest font-bold px-8 py-4 hover:bg-white hover:text-orange transition-colors">Call 1-902-431-5483</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white pt-16 pb-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 font-label font-bold text-xl text-white uppercase tracking-tight mb-5"><div class="w-[3px] h-7 bg-orange"></div>FRASCO INDUSTRIAL INSPECTIONS</div>
+          <p class="text-white/55 max-w-sm mb-6 leading-relaxed font-body text-sm">Non-destructive evaluation and asset integrity testing — designed to limit your facility's downtime. Certified. Portable. Same-day.</p>
+          <div class="font-mono text-[10px] uppercase tracking-widest text-white/35">Serving NS · NB · Newfoundland · Canada · USA · Overseas</div>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-mono uppercase tracking-widest text-white/40 font-bold mb-5">Services</h4>
+          <ul class="space-y-3 text-sm font-body text-white/55">
+            <li><a href="nde-ndt.html" class="text-orange">NDE / NDT</a></li>
+            <li><a href="tube-inspection.html" class="hover:text-orange transition-colors">Tube Inspection</a></li>
+            <li><a href="asset-integrity.html" class="hover:text-orange transition-colors">Asset Integrity</a></li>
+            <li><a href="lifting-equipment.html" class="hover:text-orange transition-colors">Lifting Equipment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-mono uppercase tracking-widest text-white/40 font-bold mb-5">Contact</h4>
+          <ul class="space-y-3 text-sm font-body text-white/55">
+            <li><a href="tel:19024315483" class="hover:text-orange transition-colors">1-902-431-5483</a></li>
+            <li>Fax: 1-902-481-1007</li>
+            <li><a href="mailto:frascoinspect@gmail.com" class="hover:text-orange transition-colors">frascoinspect@gmail.com</a></li>
+            <li class="pt-2 text-[10px] font-mono uppercase tracking-widest">25 Raddall Ave., Unit 4<br>Dartmouth, NS B3B 1L4</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 gap-4">
+        <p class="text-[10px] font-mono uppercase tracking-widest text-white/30">© 2026 Frasco Industrial Inspections — All Rights Reserved.</p>
+        <div class="flex gap-6">
+          <a href="about.html" class="text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-orange transition-colors">About</a>
+          <a href="contact.html" class="text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-orange transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const mob=document.getElementById('mob-menu'),mobT=document.getElementById('mob-toggle'),mobC=document.getElementById('mob-close'),mobLinks=document.querySelectorAll('.mob-l');
+  const openMob=()=>{mob.classList.remove('translate-x-full');document.body.style.overflow='hidden'};
+  const closeMob=()=>{mob.classList.add('translate-x-full');document.body.style.overflow=''};
+  mobT?.addEventListener('click',openMob);mobC?.addEventListener('click',closeMob);mobLinks.forEach(l=>l.addEventListener('click',closeMob));
+  const srObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const d=parseInt(e.target.dataset.srDelay||0);setTimeout(()=>e.target.classList.add('sr-visible'),d);srObs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('[data-sr]').forEach(el=>{el.classList.add('sr-hidden');srObs.observe(el)});
+});
+</script>
+</body>
+</html>

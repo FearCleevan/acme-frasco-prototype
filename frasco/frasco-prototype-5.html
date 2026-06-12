@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRASCO | Industrial Inspection Services — Dartmouth, NS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=Syne:wght@600;700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+    @keyframes revealL{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+    @keyframes lineGrow{from{width:0}to{width:100%}}
+    .anim-fade{animation:fadeIn 1.2s ease-out forwards}
+    .anim-up{opacity:0;animation:slideUp 0.85s cubic-bezier(.16,1,.3,1) forwards}
+    .anim-scale{opacity:0;animation:scaleIn 0.8s cubic-bezier(.16,1,.3,1) forwards}
+    .anim-revL{animation:revealL 1.2s cubic-bezier(.77,0,.175,1) forwards}
+    .anim-line{animation:lineGrow 1.5s cubic-bezier(.77,0,.175,1) forwards}
+    .d100{animation-delay:100ms}.d200{animation-delay:200ms}.d300{animation-delay:300ms}
+    .d500{animation-delay:500ms}.d700{animation-delay:700ms}.d1000{animation-delay:1000ms}
+    .sr-hidden{opacity:0;transform:translateY(36px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+    .sr-hidden.sr-left{transform:translateX(-28px)}
+    .sr-visible{opacity:1;transform:none!important}
+    @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .ticker{animation:tick 22s linear infinite}
+    .scan-card{position:relative;overflow:hidden}
+    .scan-card::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(232,96,12,.9),transparent);top:-2px;opacity:0;pointer-events:none}
+    .scan-card:hover::after{opacity:1;animation:sweep 1.5s cubic-bezier(.4,0,.6,1) forwards}
+    @keyframes sweep{0%{top:0;opacity:1}100%{top:100%;opacity:.2}}
+    .blueprint{background-image:linear-gradient(rgba(232,96,12,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,96,12,.07) 1px,transparent 1px);background-size:52px 52px}
+    .stat-bar{height:3px;width:28px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+    .stat-item:hover .stat-bar{width:100%}
+    #cta-stack [data-layer]{transition:all .8s cubic-bezier(.16,1,.3,1)}
+    .rot-block{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+    .rot-block-wrap:hover .rot-block{transform:rotate(0deg)!important}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#111}
+    ::-webkit-scrollbar-thumb{background:#e8600c;border-radius:3px}
+    .no-scroll{-ms-overflow-style:none;scrollbar-width:none}
+    .no-scroll::-webkit-scrollbar{display:none}
+  </style>
+  <style type="text/tailwindcss">@tailwind base;@tailwind components;@tailwind utilities;</style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={important:'#root',theme:{extend:{colors:{'ink':'#111111','panel':'#1a1a1a','surface':'#222222','orange':'#e8600c','amber':'#f5b301','paper':'#f5f5f5','soft':'#eeeeee','lead':'#5a5a5a','ghost':'#d8d8d8'},fontFamily:{'display':['Bricolage Grotesque','sans-serif'],'label':['Syne','sans-serif'],'body':['Inter Tight','sans-serif'],'mono':['JetBrains Mono','monospace']},boxShadow:{'orange':'0 16px 40px -10px rgba(232,96,12,.3)','heavy':'0 30px 70px -15px rgba(0,0,0,.5)'}}}}
+  </script>
+</head>
+
+<body id="root">
+<div class="font-body bg-paper text-ink overflow-x-hidden min-h-screen flex flex-col">
+
+  <!-- ── NAVBAR ──────────────────────────────────────── -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between bg-ink border-b border-white/10">
+    <div class="flex items-center gap-4 md:gap-12">
+      <a href="frasco-prototype-5.html" class="flex items-center gap-3 font-label font-bold text-xl text-white uppercase tracking-tight">
+        <div class="w-[3px] h-7 bg-orange"></div>FRASCO
+      </a>
+      <nav class="hidden lg:flex items-center gap-7">
+        <div class="relative group">
+          <button class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors">
+            Services
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor" class="group-hover:rotate-180 transition-transform duration-300"><path d="M2.558 6.295a.5.5 0 0 1 .707 0L8 10.03l4.735-3.736a.5.5 0 0 1 .707.708L8.354 11.06a.5.5 0 0 1-.708 0L2.558 7.003a.5.5 0 0 1 0-.708Z"/></svg>
+          </button>
+          <div class="absolute top-full mt-3 left-0 w-72 bg-white border border-ghost shadow-heavy opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-250 translate-y-2 group-hover:translate-y-0 z-60">
+            <div class="p-2">
+              <a href="nde-ndt.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">NDE / NDT</div><div class="text-xs text-lead font-mono mt-0.5">Eddy current, ultrasonic, thermography</div></div></a>
+              <a href="tube-inspection.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Tube Inspection</div><div class="text-xs text-lead font-mono mt-0.5">Chillers, condensers, heat exchangers</div></div></a>
+              <a href="asset-integrity.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Asset Integrity</div><div class="text-xs text-lead font-mono mt-0.5">Weld testing, API, QA/QC, turnaround</div></div></a>
+              <a href="lifting-equipment.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-amber rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Lifting Equipment</div><div class="text-xs text-lead font-mono mt-0.5">Certification, cranes, wire rope</div></div></a>
+            </div>
+            <div class="border-t border-ghost px-4 py-3 flex justify-between items-center">
+              <span class="text-[10px] font-mono text-lead uppercase tracking-widest">Not sure what you need?</span>
+              <a href="contact.html" class="text-[10px] font-mono text-orange uppercase tracking-widest hover:underline">Ask us →</a>
+            </div>
+          </div>
+        </div>
+        <a href="#process" class="text-[11px] font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors">Process</a>
+        <a href="#industries" class="text-[11px] font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors">Industries</a>
+        <a href="about.html" class="text-[11px] font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors">About</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="tel:19024315483" class="hidden sm:flex items-center gap-2 text-white/60 hover:text-orange transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 21c-1.654 0-3.282-.4-4.74-1.2l-.45-.24C8.7 17.889 6.152 15.34 4.48 12.23l-.25-.45C3.43 10.314 3.007 8.671 3 7v-.67c-.002-.534.21-1.046.59-1.42L5.28 3.22a.5.5 0 0 1 .627-.022l2.25 3.86a.5.5 0 0 1-.11.644L6.66 9.33a.5.5 0 0 0-.1.59l.35.66C8.177 12.909 10.09 14.818 12.42 16.07l.66.36a.5.5 0 0 0 .59-.1l1.89-1.89a.5.5 0 0 1 .644-.11l3.86 2.25a.5.5 0 0 1-.022.627l-1.69 1.69A1.97 1.97 0 0 1 17 21Z"/></svg>
+        <span class="font-mono text-[11px] tracking-wider">902-431-5483</span>
+      </a>
+      <button id="mob-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="contact.html" class="bg-orange text-white font-mono text-[11px] font-bold px-5 py-2.5 uppercase tracking-widest hover:bg-amber hover:text-ink transition-colors">Request Inspection</a>
+    </div>
+  </header>
+
+  <!-- Mobile overlay -->
+  <div id="mob-menu" class="fixed inset-0 bg-ink z-[100] translate-x-full transition-transform duration-500 flex flex-col p-8">
+    <div class="flex justify-between items-center mb-14">
+      <span class="font-label font-bold text-2xl text-white">FRASCO<span class="text-orange">.</span></span>
+      <button id="mob-close" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-7">
+      <a href="nde-ndt.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">NDE / NDT</a>
+      <a href="tube-inspection.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Tube Inspection</a>
+      <a href="asset-integrity.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Asset Integrity</a>
+      <a href="lifting-equipment.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Lifting Equipment</a>
+      <a href="about.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">About Us</a>
+      <a href="contact.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Contact</a>
+    </nav>
+    <div class="mt-auto">
+      <span class="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">24/7 Response</span>
+      <a href="tel:19024315483" class="text-white text-xl font-body">1-902-431-5483</a>
+    </div>
+  </div>
+
+  <main class="flex-grow">
+
+    <!-- ── HERO ───────────────────────────────────────── -->
+    <section class="relative min-h-screen flex flex-col overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1920&q=80" alt="Industrial inspection" class="absolute inset-0 w-full h-full object-cover anim-scale d200">
+      <div class="absolute inset-0 bg-ink/65 anim-fade d300"></div>
+      <div class="absolute inset-0 blueprint opacity-50"></div>
+
+      <div class="absolute top-24 right-8 md:right-12 z-20 hidden md:block anim-fade d500">
+        <div class="flex items-center gap-3 bg-white/10 backdrop-blur border border-white/15 px-4 py-2">
+          <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-white">24/7 Available · Dartmouth, NS</span>
+        </div>
+      </div>
+
+      <div class="relative flex-grow flex items-center max-w-7xl mx-auto px-4 sm:px-6 w-full pt-20">
+        <div class="bg-white/95 backdrop-blur-lg border-l-4 border-orange p-8 md:p-12 max-w-[680px] w-full shadow-heavy anim-up d700">
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-[1px] bg-orange"></div>
+              <span class="font-mono text-[10px] uppercase tracking-[.25em] text-lead">Non-Destructive Testing · Nova Scotia</span>
+            </div>
+            <h1 class="font-label text-3xl sm:text-4xl md:text-[54px] leading-tight md:leading-[1.0] font-bold text-ink tracking-tight">
+              THE STANDARD<br>OF INDUSTRIAL<br><span class="bg-orange text-white px-2 anim-revL">PRECISION</span>
+            </h1>
+            <div class="w-full h-[1px] bg-ghost anim-line"></div>
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+              <p class="text-ink/70 text-base max-w-[280px] leading-relaxed opacity-0 anim-fade d1000">
+                Certified personnel. On-site. Same-day results. Available 24/7 across Nova Scotia, New Brunswick, Newfoundland and beyond.
+              </p>
+              <a href="#services" class="inline-flex items-center justify-center bg-ink text-white font-mono text-[11px] uppercase tracking-widest px-8 py-3 hover:bg-orange transition-colors duration-300 whitespace-nowrap opacity-0 anim-fade" style="animation-delay:1200ms">
+                View Capabilities
+              </a>
+            </div>
+            <div class="pt-2">
+              <div class="w-full h-[1px] bg-ghost mb-3"></div>
+              <div class="overflow-hidden w-full h-7">
+                <div class="ticker flex gap-8 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest text-ink font-bold">
+                  <span class="flex items-center gap-8 shrink-0">
+                    <span>Eddy Current</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>Ultrasonic Testing</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>CGSB-48.9712 Certified</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>API 510 · 570 · 653</span><span class="w-1.5 h-1.5 bg-amber rounded-full"></span>
+                    <span>Tube Inspection</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>Asset Integrity</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>CWB CSA W178.2</span><span class="w-1.5 h-1.5 bg-amber rounded-full"></span>
+                  </span>
+                  <span class="flex items-center gap-8 shrink-0">
+                    <span>Eddy Current</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>Ultrasonic Testing</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>CGSB-48.9712 Certified</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>API 510 · 570 · 653</span><span class="w-1.5 h-1.5 bg-amber rounded-full"></span>
+                    <span>Tube Inspection</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>Asset Integrity</span><span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    <span>CWB CSA W178.2</span><span class="w-1.5 h-1.5 bg-amber rounded-full"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="w-full h-[1px] bg-ghost mt-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SERVICES GRID ──────────────────────────────── -->
+    <section id="services" class="py-24 px-6 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-14 gap-8">
+          <div data-sr class="max-w-2xl">
+            <h2 class="text-[10px] font-mono uppercase tracking-widest text-white mb-4 bg-orange inline-block px-2 py-0.5">Inspection Capabilities</h2>
+            <h3 class="font-label text-3xl md:text-4xl font-bold text-ink uppercase tracking-tight">Four Disciplines.<br>One Certified Standard.</h3>
+          </div>
+          <p data-sr class="text-lead max-w-sm font-body text-sm leading-relaxed">Solutions delivered locally, domestically and internationally — certified technicians, same-day results, no coating removal required on most methods.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
+
+          <!-- NDE/NDT — spans 2 cols -->
+          <a href="nde-ndt.html" data-sr class="scan-card sm:col-span-2 group relative overflow-hidden border border-ghost block">
+            <div class="aspect-[2/1] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=80" alt="NDT" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-orange mb-2 block">01 / Core Service</span>
+              <h4 class="font-label text-2xl md:text-3xl font-bold text-white uppercase mb-2">NDE / NDT</h4>
+              <p class="text-sm text-white/75 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-lg">Eddy current, near field, magnetic particle, liquid penetrant, ultrasonic, thermography, borescope, PMI and remote visual. No coating removal required.</p>
+              <div class="w-full h-[1px] bg-white/20 mb-4"></div>
+              <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white group-hover:text-orange flex items-center gap-2 transition-colors">
+                View Methods <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M3 12h18"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Tube Inspection -->
+          <a href="tube-inspection.html" data-sr class="scan-card group relative overflow-hidden border border-ghost block">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=800&q=80" alt="Tube Inspection" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-orange mb-2 block">02 / Preventative</span>
+              <h4 class="font-label text-xl font-bold text-white uppercase mb-2">Tube Inspection</h4>
+              <p class="text-xs text-white/75 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Chillers, condensers, evaporators, heat exchangers, fin fans and boilers.</p>
+              <div class="w-full h-[1px] bg-white/20 mb-4"></div>
+              <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white group-hover:text-orange flex items-center gap-2 transition-colors">
+                View Methods <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M3 12h18"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Asset Integrity -->
+          <a href="asset-integrity.html" data-sr class="scan-card group relative overflow-hidden border border-ghost block">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="Asset Integrity" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-orange mb-2 block">03 / QA · QC</span>
+              <h4 class="font-label text-xl font-bold text-white uppercase mb-2">Asset Integrity</h4>
+              <p class="text-xs text-white/75 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Weld testing, API pressure vessel, storage tanks, piping, 3rd-party verification, audit, dimensional, turnaround.</p>
+              <div class="w-full h-[1px] bg-white/20 mb-4"></div>
+              <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white group-hover:text-orange flex items-center gap-2 transition-colors">
+                View Methods <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M3 12h18"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Lifting Equipment -->
+          <a href="lifting-equipment.html" data-sr class="scan-card group relative bg-ink overflow-hidden border border-ghost block">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" alt="Lifting" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-70">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-amber mb-2 block">04 / Certification</span>
+              <h4 class="font-label text-xl font-bold text-white uppercase mb-2">Lifting Equipment</h4>
+              <p class="text-xs text-white/75 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Certification, wire rope, fork lifts, gantry cranes, cranes & components, work station cranes.</p>
+              <div class="w-full h-[1px] bg-white/20 mb-4"></div>
+              <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white group-hover:text-amber flex items-center gap-2 transition-colors">
+                View Scope <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M3 12h18"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- 24/7 Emergency -->
+          <a href="contact.html" data-sr class="group relative bg-orange overflow-hidden border border-ghost flex flex-col items-center justify-center p-10 text-center transition-all duration-500 hover:bg-ink block">
+            <div class="font-label text-5xl md:text-6xl font-bold text-white group-hover:text-orange transition-colors mb-3 leading-none">24/7</div>
+            <div class="font-mono text-[11px] uppercase tracking-widest text-white/80 group-hover:text-white/60 mb-6">Emergency Response</div>
+            <span class="bg-white text-orange group-hover:bg-orange group-hover:text-white border border-white/30 font-mono text-[10px] uppercase tracking-widest px-6 py-2.5 transition-all duration-300">Request Now</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STAT COUNTERS ──────────────────────────────── -->
+    <section class="py-20 bg-white border-y border-ghost">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-14 gap-x-8">
+          <div data-sr class="stat-item flex flex-col"><div class="stat-bar bg-orange mb-5"></div><div class="text-ink text-4xl md:text-5xl font-display font-bold mb-1 tracking-tight">24/7</div><div class="text-[10px] font-mono uppercase tracking-widest text-lead">Emergency Response</div></div>
+          <div data-sr class="stat-item flex flex-col"><div class="stat-bar bg-ink mb-5"></div><div class="text-ink text-4xl md:text-5xl font-display font-bold mb-1 tracking-tight">9</div><div class="text-[10px] font-mono uppercase tracking-widest text-lead">NDE / NDT Methods</div></div>
+          <div data-sr class="stat-item flex flex-col"><div class="stat-bar bg-orange mb-5"></div><div class="text-ink text-4xl md:text-5xl font-display font-bold mb-1 tracking-tight">3</div><div class="text-[10px] font-mono uppercase tracking-widest text-lead">Cert Standards</div></div>
+          <div data-sr class="stat-item flex flex-col"><div class="stat-bar bg-amber mb-5"></div><div class="text-ink text-4xl md:text-5xl font-display font-bold mb-1 tracking-tight">13+</div><div class="text-[10px] font-mono uppercase tracking-widest text-lead">Industries Served</div></div>
+          <div data-sr class="stat-item flex flex-col"><div class="stat-bar bg-ink mb-5"></div><div class="text-ink text-3xl md:text-4xl font-display font-bold mb-1 tracking-tight">Same<br>Day</div><div class="text-[10px] font-mono uppercase tracking-widest text-lead">On-Site Results</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROCESS ─────────────────────────────────────── -->
+    <section id="process" class="py-24 px-6 bg-soft relative blueprint">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-sr>
+          <h2 class="text-[10px] font-mono uppercase tracking-widest text-white mb-4 bg-orange inline-block px-2 py-0.5">Inspection Workflow</h2>
+          <h3 class="font-label text-3xl md:text-4xl font-bold text-ink uppercase tracking-tight">From Scope to Signed Report</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div data-sr class="relative group bg-white p-8 border border-ghost hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+            <div class="text-ghost text-[100px] font-label font-bold absolute -top-10 -left-4 leading-none group-hover:text-orange/20 transition-colors duration-700">01</div>
+            <div class="relative z-10 pt-8"><h4 class="text-ink font-label font-bold uppercase tracking-tight text-xl mb-4">Scope</h4><p class="text-lead text-sm leading-relaxed">Define inspection objectives, equipment type and access requirements. Documentation of standards required.</p></div>
+          </div>
+          <div data-sr data-sr-delay="150" class="relative group bg-white p-8 border border-ghost hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+            <div class="text-ghost text-[100px] font-label font-bold absolute -top-10 -left-4 leading-none group-hover:text-orange/20 transition-colors duration-700">02</div>
+            <div class="relative z-10 pt-8"><h4 class="text-ink font-label font-bold uppercase tracking-tight text-xl mb-4">Mobilise</h4><p class="text-lead text-sm leading-relaxed">Certified technicians dispatched with portable, calibrated equipment. On-site coordination with your facility team.</p></div>
+          </div>
+          <div data-sr data-sr-delay="300" class="relative group bg-white p-8 border border-ghost hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+            <div class="text-ghost text-[100px] font-label font-bold absolute -top-10 -left-4 leading-none group-hover:text-orange/20 transition-colors duration-700">03</div>
+            <div class="relative z-10 pt-8"><h4 class="text-ink font-label font-bold uppercase tracking-tight text-xl mb-4">Inspect</h4><p class="text-lead text-sm leading-relaxed">Comprehensive NDE/NDT evaluation using the method best suited to the application — minimal downtime to your operation.</p></div>
+          </div>
+          <div data-sr data-sr-delay="450" class="relative group bg-ink p-8 border border-ghost hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+            <div class="text-white/10 text-[100px] font-label font-bold absolute -top-10 -left-4 leading-none group-hover:text-orange/30 transition-colors duration-700">04</div>
+            <div class="relative z-10 pt-8"><h4 class="text-orange font-label font-bold uppercase tracking-tight text-xl mb-4">Report</h4><p class="text-white/70 text-sm leading-relaxed">Highest-level quality reporting delivered same-day. Clear findings, recommendations and compliance documentation.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── INDUSTRIES SCROLL ───────────────────────────── -->
+    <section id="industries" class="py-24 bg-ink overflow-hidden">
+      <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div class="flex flex-col lg:flex-row gap-16 items-start">
+          <div class="flex-1 lg:max-w-sm pt-4">
+            <div data-sr class="flex items-center gap-4 mb-8"><div class="h-[1px] w-10 bg-orange"></div><span class="font-mono text-[10px] uppercase tracking-[.25em] text-white/50">Sectors Served</span></div>
+            <h2 data-sr class="text-4xl md:text-5xl font-display font-bold text-white leading-tight mb-8">Trusted Across<br>Heavy Industry.</h2>
+            <p data-sr class="text-white/60 mb-10 leading-relaxed font-body text-sm">Energy, refining, power generation, heating & cooling, marine, mining, welding, fabrication, offshore, pulp & paper, maintenance & construction, environmental, and crane & lifting — served domestically and internationally.</p>
+            <a href="contact.html" data-sr class="inline-flex items-center gap-3 bg-orange text-white px-6 py-3 font-mono text-[11px] uppercase tracking-widest font-bold hover:bg-amber hover:text-ink transition-colors">
+              Request Inspection <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="flex-1 w-full min-w-0">
+            <div id="ind-scroll" class="overflow-x-auto pb-10 -mx-6 px-6 lg:mx-0 lg:px-0 no-scroll scroll-smooth">
+              <div class="flex gap-5 min-w-max">
+                <div data-sr class="relative h-[380px] w-[240px] shrink-0 overflow-hidden group border border-white/5 shadow-heavy"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-ink/70 group-hover:bg-ink/30 transition-colors"></div><div class="absolute inset-0 p-7 flex flex-col justify-between text-white"><h3 class="font-label text-2xl font-bold">Energy</h3><div class="font-label text-[80px] italic opacity-10 text-orange leading-none">01</div></div></div>
+                <div data-sr class="relative h-[380px] w-[240px] shrink-0 overflow-hidden group border border-white/5 shadow-heavy"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-ink/70 group-hover:bg-ink/30 transition-colors"></div><div class="absolute inset-0 p-7 flex flex-col justify-between text-white"><h3 class="font-label text-2xl font-bold">Refining &<br>Upgrading</h3><div class="font-label text-[80px] italic opacity-10 text-orange leading-none">02</div></div></div>
+                <div data-sr class="relative h-[380px] w-[240px] shrink-0 overflow-hidden group border border-white/5 shadow-heavy"><img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-ink/70 group-hover:bg-ink/30 transition-colors"></div><div class="absolute inset-0 p-7 flex flex-col justify-between text-white"><h3 class="font-label text-2xl font-bold">Power<br>Generation</h3><div class="font-label text-[80px] italic opacity-10 text-orange leading-none">03</div></div></div>
+                <div data-sr class="relative h-[380px] w-[240px] shrink-0 overflow-hidden group border border-white/5 shadow-heavy"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-ink/70 group-hover:bg-ink/30 transition-colors"></div><div class="absolute inset-0 p-7 flex flex-col justify-between text-white"><h3 class="font-label text-2xl font-bold">Marine</h3><div class="font-label text-[80px] italic opacity-10 text-orange leading-none">04</div></div></div>
+                <div data-sr class="relative h-[380px] w-[240px] shrink-0 overflow-hidden group border border-white/5 shadow-heavy"><img src="https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-ink/70 group-hover:bg-ink/30 transition-colors"></div><div class="absolute inset-0 p-7 flex flex-col justify-between text-white"><h3 class="font-label text-2xl font-bold">Mining</h3><div class="font-label text-[80px] italic opacity-10 text-orange leading-none">05</div></div></div>
+                <div data-sr class="relative h-[380px] w-[240px] shrink-0 overflow-hidden group border border-white/5 shadow-heavy"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-ink/70 group-hover:bg-ink/30 transition-colors"></div><div class="absolute inset-0 p-7 flex flex-col justify-between text-white"><h3 class="font-label text-2xl font-bold">Construction &<br>Offshore</h3><div class="font-label text-[80px] italic opacity-10 text-orange leading-none">06</div></div></div>
+              </div>
+            </div>
+            <div class="flex gap-4 mt-4 justify-end">
+              <button id="ind-l" class="w-12 h-12 border border-white/15 flex items-center justify-center text-white hover:bg-white hover:text-ink transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg></button>
+              <button id="ind-r" class="w-12 h-12 bg-orange text-white flex items-center justify-center hover:bg-amber hover:text-ink transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA SECTION ─────────────────────────────────── -->
+    <section class="py-24 px-6 bg-orange">
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+        <div class="lg:w-1/2">
+          <div id="cta-stack" class="relative min-h-[460px]">
+            <div data-layer="3" class="absolute inset-0 bg-ink opacity-0" style="width:96%"></div>
+            <div data-layer="2" class="absolute inset-0 bg-panel opacity-0" style="width:96%"></div>
+            <div data-layer="1" class="absolute inset-0 bg-soft opacity-0" style="width:96%"></div>
+            <div data-layer="0" class="relative z-10 bg-white p-10 md:p-14 border border-ghost shadow-heavy flex flex-col gap-10">
+              <div class="w-14 h-14 bg-ink flex items-center justify-center">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e8600c" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div class="space-y-4">
+                <p class="font-mono text-[11px] uppercase tracking-[.25em] text-orange font-bold">Every hour of downtime costs money</p>
+                <h3 class="font-label text-3xl md:text-5xl font-bold text-ink uppercase tracking-tight leading-tight">Keep Your<br>Facility Running.</h3>
+              </div>
+              <div class="space-y-3">
+                <a href="tel:19024315483" class="flex items-center gap-3 text-ink font-display text-3xl font-bold hover:text-orange transition-colors">1-902-431-5483</a>
+                <div class="font-mono text-[10px] uppercase tracking-widest text-lead">25 Raddall Ave., Unit 4 · Dartmouth, NS B3B 1L4<br>NS · NB · Newfoundland · Canada · USA · Overseas</div>
+              </div>
+              <a href="contact.html" class="inline-flex items-center justify-center bg-orange text-white font-mono text-[11px] uppercase tracking-widest px-8 py-4 hover:bg-ink transition-colors w-full sm:w-auto">Request an Inspection →</a>
+            </div>
+          </div>
+        </div>
+        <div data-sr class="lg:w-1/2 space-y-8">
+          <h2 class="font-label text-3xl md:text-5xl font-bold text-white uppercase tracking-tight leading-tight">FRASCO strives to be a leader in all aspects of industrial inspection.</h2>
+          <p class="text-white/85 leading-relaxed font-body">A team of skilled certified personnel available 24/7 to safely execute any project — increasing reliability, productivity and safety while ensuring asset integrity. Services delivered on a local, domestic and international level.</p>
+          <div class="grid grid-cols-3 gap-6 pt-4 border-t border-white/20">
+            <div><div class="text-white text-2xl font-display font-bold mb-1">CAN/CGSB</div><div class="text-white/60 text-[10px] font-mono uppercase tracking-widest">48.9712</div></div>
+            <div><div class="text-white text-2xl font-display font-bold mb-1">CWB</div><div class="text-white/60 text-[10px] font-mono uppercase tracking-widest">CSA W178.2</div></div>
+            <div><div class="text-white text-2xl font-display font-bold mb-1">API</div><div class="text-white/60 text-[10px] font-mono uppercase tracking-widest">510 · 570 · 653</div></div>
+          </div>
+          <a href="about.html" class="inline-flex items-center gap-3 bg-white text-orange font-mono text-[11px] uppercase tracking-widest font-bold px-6 py-3 hover:bg-ink hover:text-white transition-colors">Learn About Frasco →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <footer class="bg-ink text-white pt-16 pb-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 font-label font-bold text-xl text-white uppercase tracking-tight mb-5"><div class="w-[3px] h-7 bg-orange"></div>FRASCO INDUSTRIAL INSPECTIONS</div>
+          <p class="text-white/55 max-w-sm mb-6 leading-relaxed font-body text-sm">Non-destructive evaluation and asset integrity testing — designed to limit your facility's downtime and unexpected machinery expense. Certified. Portable. Same-day.</p>
+          <div class="font-mono text-[10px] uppercase tracking-widest text-white/35">Serving NS · NB · Newfoundland · Canada · USA · Overseas</div>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-mono uppercase tracking-widest text-white/40 font-bold mb-5">Services</h4>
+          <ul class="space-y-3 text-sm font-body text-white/55">
+            <li><a href="nde-ndt.html" class="hover:text-orange transition-colors">NDE / NDT</a></li>
+            <li><a href="tube-inspection.html" class="hover:text-orange transition-colors">Tube Inspection</a></li>
+            <li><a href="asset-integrity.html" class="hover:text-orange transition-colors">Asset Integrity</a></li>
+            <li><a href="lifting-equipment.html" class="hover:text-orange transition-colors">Lifting Equipment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-mono uppercase tracking-widest text-white/40 font-bold mb-5">Contact</h4>
+          <ul class="space-y-3 text-sm font-body text-white/55">
+            <li><a href="tel:19024315483" class="hover:text-orange transition-colors">1-902-431-5483</a></li>
+            <li>Fax: 1-902-481-1007</li>
+            <li><a href="mailto:frascoinspect@gmail.com" class="hover:text-orange transition-colors">frascoinspect@gmail.com</a></li>
+            <li class="pt-2 text-[10px] font-mono uppercase tracking-widest">25 Raddall Ave., Unit 4<br>Dartmouth, NS B3B 1L4</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 gap-4">
+        <p class="text-[10px] font-mono uppercase tracking-widest text-white/30">© 2026 Frasco Industrial Inspections — All Rights Reserved.</p>
+        <div class="flex gap-6">
+          <a href="about.html" class="text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-orange transition-colors">About</a>
+          <a href="contact.html" class="text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-orange transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const mob=document.getElementById('mob-menu'),mobT=document.getElementById('mob-toggle'),mobC=document.getElementById('mob-close'),mobLinks=document.querySelectorAll('.mob-l');
+  const openMob=()=>{mob.classList.remove('translate-x-full');document.body.style.overflow='hidden'};
+  const closeMob=()=>{mob.classList.add('translate-x-full');document.body.style.overflow=''};
+  mobT?.addEventListener('click',openMob);mobC?.addEventListener('click',closeMob);mobLinks.forEach(l=>l.addEventListener('click',closeMob));
+  const srObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const d=parseInt(e.target.dataset.srDelay||0);setTimeout(()=>e.target.classList.add('sr-visible'),d);srObs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('[data-sr]').forEach(el=>{el.classList.add('sr-hidden');srObs.observe(el)});
+  const indS=document.getElementById('ind-scroll');
+  document.getElementById('ind-l')?.addEventListener('click',()=>indS?.scrollBy({left:-280,behavior:'smooth'}));
+  document.getElementById('ind-r')?.addEventListener('click',()=>indS?.scrollBy({left:280,behavior:'smooth'}));
+  const stack=document.getElementById('cta-stack');
+  if(stack){const so=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){stack.querySelectorAll('[data-layer]').forEach(layer=>{const d=parseInt(layer.dataset.layer);layer.classList.remove('opacity-0');layer.style.transform=d===0?'':`translate(${d*-16}px,${d*13}px)`});so.unobserve(stack)}})},{threshold:0.2});so.observe(stack)}
+});
+</script>
+</body>
+</html>

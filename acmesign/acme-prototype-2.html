@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acme Sign — Prototype D: Neon Sign Shop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --bg: #0e0f11;
+            --panel: #141618;
+            --panel2: #191b1e;
+            --line: #252830;
+            --txt: #ecedf0;
+            --muted: #7a7f8a;
+            --accent: #FF2D20;
+            --glow: rgba(255, 45, 32, .18);
+            --soft: #1c1e22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--txt);
+            background: var(--bg);
+            line-height: 1.6
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Syne', sans-serif;
+            line-height: 1.04;
+            letter-spacing: -.5px
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: .25s;
+            cursor: pointer;
+            border: none
+        }
+
+        .btn:hover {
+            background: #e01a0f;
+            box-shadow: 0 0 24px rgba(255, 45, 32, .45)
+        }
+
+        .btn-o {
+            background: transparent;
+            color: var(--txt);
+            border: 1px solid var(--line)
+        }
+
+        .btn-o:hover {
+            border-color: var(--accent);
+            color: var(--accent)
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(14, 15, 17, .88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px
+        }
+
+        .logo {
+            font-family: 'Syne';
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--txt)
+        }
+
+        .logo span {
+            color: var(--accent)
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            align-items: center
+        }
+
+        .navlinks>a {
+            color: var(--muted)
+        }
+
+        .navlinks>a:hover {
+            color: var(--txt)
+        }
+
+        /* Dropdown */
+        .has-drop {
+            position: relative
+        }
+
+        .drop-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--muted)
+        }
+
+        .drop-toggle:hover {
+            color: var(--txt)
+        }
+
+        .drop-toggle svg {
+            transition: transform .25s
+        }
+
+        .has-drop:hover .drop-toggle svg {
+            transform: rotate(180deg)
+        }
+
+        .drop {
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: var(--panel2);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 10px;
+            min-width: 560px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .7);
+            opacity: 0;
+            visibility: hidden;
+            transition: .22s;
+            z-index: 60
+        }
+
+        .has-drop:hover .drop {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        .drop::before {
+            content: '';
+            position: absolute;
+            top: -14px;
+            left: 0;
+            right: 0;
+            height: 14px
+        }
+
+        .drop-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px
+        }
+
+        .drop a {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            transition: .15s
+        }
+
+        .drop a:hover {
+            background: var(--soft)
+        }
+
+        .drop a b {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--txt)
+        }
+
+        .drop a small {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.4
+        }
+
+        .drop a:hover b {
+            color: var(--accent)
+        }
+
+        .drop-foot {
+            margin-top: 8px;
+            border-top: 1px solid var(--line);
+            padding: 12px 14px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .drop-foot span {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .drop-foot a {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 13px
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px
+        }
+
+        .burger span {
+            width: 24px;
+            height: 2px;
+            background: var(--txt)
+        }
+
+        .mobile {
+            display: none;
+            border-top: 1px solid var(--line);
+            background: var(--panel)
+        }
+
+        .mobile a {
+            display: block;
+            padding: 14px 28px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted)
+        }
+
+        .mobile .sub-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 14px 28px;
+            border-bottom: 1px solid var(--line);
+            font-weight: 500
+        }
+
+        .mobile-sub {
+            display: none;
+            background: var(--soft)
+        }
+
+        .mobile-sub a {
+            padding-left: 44px;
+            font-size: 14px;
+            color: var(--muted);
+            font-weight: 400
+        }
+
+        .mobile-sub.open {
+            display: block
+        }
+
+        @media(max-width:880px) {
+            .navlinks {
+                display: none
+            }
+
+            .burger {
+                display: flex
+            }
+
+            .mobile.open {
+                display: block
+            }
+        }
+
+        /* Hero — dark with glow */
+        .hero {
+            padding: 64px 0 44px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 45, 32, .13) 0%, transparent 70%);
+            top: -200px;
+            left: -150px;
+            pointer-events: none
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 104px);
+            font-weight: 800;
+            max-width: 16ch;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero h1 mark {
+            background: none;
+            color: var(--accent);
+            text-shadow: 0 0 40px rgba(255, 45, 32, .5)
+        }
+
+        .hero-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero-row p {
+            color: var(--muted);
+            max-width: 50ch;
+            font-size: 18px
+        }
+
+        .hero-imgs {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 14px;
+            margin-top: 40px;
+            height: 440px;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero-imgs img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+            filter: brightness(.88)
+        }
+
+        @media(max-width:820px) {
+            .hero-imgs {
+                grid-template-columns: 1fr;
+                height: auto
+            }
+
+            .hero-imgs img {
+                height: 240px
+            }
+        }
+
+        /* Hero word animation */
+        .hero h1 .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(60px);
+            animation: rise .9s cubic-bezier(.22, 1, .36, 1) forwards
+        }
+
+        @keyframes rise {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* Marquee */
+        .marq {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 18px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 50px 0;
+            background: var(--panel)
+        }
+
+        .marq-track {
+            display: inline-block;
+            animation: scroll 30s linear infinite
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        .marq span {
+            font-family: 'Syne';
+            font-weight: 700;
+            font-size: 22px;
+            margin: 0 26px;
+            color: var(--txt)
+        }
+
+        .marq .dot {
+            color: var(--accent)
+        }
+
+        .section {
+            padding: 80px 0
+        }
+
+        .lead {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 44px;
+            flex-wrap: wrap
+        }
+
+        .lead h2 {
+            font-size: 46px;
+            font-weight: 700
+        }
+
+        .lead p {
+            color: var(--muted);
+            max-width: 42ch
+        }
+
+        /* Tiles */
+        .show {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 14px
+        }
+
+        .tile {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            min-height: 280px;
+            border: 1px solid var(--line)
+        }
+
+        .tile img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+            filter: brightness(.8)
+        }
+
+        .tile:hover img {
+            transform: scale(1.06);
+            filter: brightness(.95)
+        }
+
+        .tile .ov {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 30%, rgba(0, 0, 0, .85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 26px;
+            color: #fff
+        }
+
+        .tile .ov small {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600
+        }
+
+        .tile .ov h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-top: 6px
+        }
+
+        .t-led {
+            grid-column: span 4
+        }
+
+        .t-wrap {
+            grid-column: span 2
+        }
+
+        .t-ch {
+            grid-column: span 2
+        }
+
+        .t-win {
+            grid-column: span 2
+        }
+
+        .t-app {
+            grid-column: span 2
+        }
+
+        @media(max-width:820px) {
+            .show {
+                grid-template-columns: 1fr
+            }
+
+            .tile {
+                grid-column: span 1 !important
+            }
+        }
+
+        /* Split */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            background: var(--panel)
+        }
+
+        .split img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 440px;
+            filter: brightness(.85)
+        }
+
+        .split .txt {
+            padding: 56px
+        }
+
+        .split .num {
+            font-family: 'Syne';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase
+        }
+
+        .split h2 {
+            font-size: 38px;
+            font-weight: 700;
+            margin: 14px 0 18px
+        }
+
+        .split p {
+            color: var(--muted);
+            margin-bottom: 22px
+        }
+
+        .split ul {
+            list-style: none;
+            display: grid;
+            gap: 14px
+        }
+
+        .split li {
+            padding-left: 26px;
+            position: relative;
+            color: var(--txt)
+        }
+
+        .split li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%
+        }
+
+        .split li b {
+            font-weight: 600
+        }
+
+        .split li span {
+            color: var(--muted)
+        }
+
+        @media(max-width:820px) {
+            .split {
+                grid-template-columns: 1fr
+            }
+
+            .split img {
+                min-height: 260px
+            }
+
+            .split .txt {
+                padding: 32px
+            }
+        }
+
+        /* About band */
+        .about {
+            background: linear-gradient(135deg, #1a0a09, #0e0f11);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 64px 56px;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255, 45, 32, .08), transparent);
+            pointer-events: none
+        }
+
+        .about h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            max-width: 24ch;
+            margin: 0 auto 18px;
+            position: relative
+        }
+
+        .about p {
+            color: var(--muted);
+            max-width: 70ch;
+            margin: 0 auto 28px;
+            font-size: 17px;
+            position: relative
+        }
+
+        .about .btn {
+            background: var(--txt);
+            color: var(--bg);
+            position: relative
+        }
+
+        .about .btn:hover {
+            background: var(--accent);
+            color: #fff
+        }
+
+        @media(max-width:820px) {
+            .about {
+                padding: 40px 26px
+            }
+        }
+
+        /* Detail cards */
+        .detail {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px
+        }
+
+        .dcard {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 36px;
+            background: var(--panel)
+        }
+
+        .dcard h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--txt)
+        }
+
+        .dcard h3 i {
+            font-style: normal;
+            color: var(--accent)
+        }
+
+        .dcard p {
+            color: var(--muted);
+            margin-bottom: 14px;
+            font-size: 15px
+        }
+
+        .dcard ul {
+            list-style: none;
+            display: grid;
+            gap: 10px
+        }
+
+        .dcard li {
+            padding-left: 22px;
+            position: relative;
+            font-size: 15px;
+            color: var(--muted)
+        }
+
+        .dcard li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .dcard li b {
+            font-weight: 600;
+            color: var(--txt)
+        }
+
+        @media(max-width:820px) {
+            .detail {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto
+        }
+
+        .tags span {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: 30px;
+            padding: 9px 18px;
+            font-size: 14px;
+            color: var(--muted);
+            transition: .2s;
+            cursor: default
+        }
+
+        .tags span:hover {
+            border-color: var(--accent);
+            color: var(--txt)
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--line)
+        }
+
+        .car-track {
+            display: flex;
+            transition: transform .7s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .car-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 16/9
+        }
+
+        .car-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.82)
+        }
+
+        .car-cap {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, .85));
+            color: #fff
+        }
+
+        .car-cap small {
+            display: inline-block;
+            background: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px
+        }
+
+        .car-cap h3 {
+            font-size: 28px;
+            font-weight: 700
+        }
+
+        .car-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(20, 22, 24, .85);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            transition: .2s
+        }
+
+        .car-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent)
+        }
+
+        .car-btn:hover svg path {
+            stroke: #fff
+        }
+
+        .car-btn.prev {
+            left: 18px
+        }
+
+        .car-btn.next {
+            right: 18px
+        }
+
+        .car-btn svg {
+            width: 20px;
+            height: 20px
+        }
+
+        .car-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5
+        }
+
+        .car-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+            border: none;
+            cursor: pointer;
+            transition: .25s
+        }
+
+        .car-dot.active {
+            background: var(--accent);
+            width: 26px;
+            border-radius: 4px;
+            box-shadow: 0 0 12px rgba(255, 45, 32, .6)
+        }
+
+        @media(max-width:560px) {
+            .car-cap h3 {
+                font-size: 20px
+            }
+
+            .car-btn {
+                width: 42px;
+                height: 42px
+            }
+        }
+
+        /* Service area */
+        .area {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 56px;
+            text-align: center
+        }
+
+        .area h3 {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .area p {
+            color: var(--muted);
+            max-width: 80ch;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.9
+        }
+
+        .area b {
+            color: var(--txt)
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 100px 0
+        }
+
+        .cta h2 {
+            font-size: clamp(44px, 7vw, 76px);
+            font-weight: 800;
+            margin-bottom: 18px;
+            text-shadow: 0 0 60px rgba(255, 45, 32, .2)
+        }
+
+        .cta p {
+            color: var(--muted);
+            margin-bottom: 30px;
+            font-size: 18px
+        }
+
+        /* Footer */
+        footer {
+            background: var(--panel);
+            border-top: 1px solid var(--line);
+            padding: 60px 0 26px
+        }
+
+        .fgrid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.4fr;
+            gap: 40px;
+            margin-bottom: 40px
+        }
+
+        .fgrid h4 {
+            font-family: 'Syne';
+            color: var(--txt);
+            margin-bottom: 14px;
+            font-size: 18px
+        }
+
+        .fgrid a,
+        .fgrid p {
+            display: block;
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 8px
+        }
+
+        .fgrid a:hover {
+            color: var(--txt)
+        }
+
+        .copy {
+            border-top: 1px solid var(--line);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        @media(max-width:820px) {
+            .fgrid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:560px) {
+            .fgrid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Reveals */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none
+        }
+
+        .reveal.d1 {
+            transition-delay: .08s
+        }
+
+        .reveal.d2 {
+            transition-delay: .16s
+        }
+
+        .reveal.d3 {
+            transition-delay: .24s
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none
+            }
+
+            .hero h1 .word {
+                opacity: 1;
+                transform: none;
+                animation: none
+            }
+
+            html {
+                scroll-behavior: auto
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="wrap">
+            <nav>
+                <div class="logo">ACME<span>.</span>SIGN</div>
+                <div class="navlinks">
+                    <a href="#">Home</a>
+                    <div class="has-drop">
+                        <span class="drop-toggle">Services
+                            <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
+                                <path d="M1 1l4.5 4.5L10 1" stroke="currentColor" stroke-width="1.6"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </span>
+                        <div class="drop">
+                            <div class="drop-grid">
+                                <a href="#"><b>Channel Signs</b><small>3D lit & non-lit channel letters</small></a>
+                                <a href="#"><b>Dimension Signs</b><small>Custom dimensional lettering</small></a>
+                                <a href="#"><b>Illuminated Signs</b><small>Light boxes, any shape or size</small></a>
+                                <a href="#"><b>Safety & Parking Signs</b><small>In-house hazard & safety
+                                        signage</small></a>
+                                <a href="#"><b>Window Graphics</b><small>Opaque, frosted & perforated vinyl</small></a>
+                                <a href="#"><b>Banners</b><small>13 oz vinyl, fast turnaround</small></a>
+                                <a href="#"><b>Decals & Stickers</b><small>Custom cut-to-shape decals</small></a>
+                                <a href="#"><b>Apparel</b><small>Screen printing & embroidery</small></a>
+                                <a href="#"><b>Gallery</b><small>Browse our completed work</small></a>
+                                <a href="#"><b>Artwork Guidelines</b><small>File prep & submission specs</small></a>
+                                <a href="#"><b>Sign Service</b><small>Installation, repair & vinyl install</small></a>
+                            </div>
+                            <div class="drop-foot"><span>Not sure what you need?</span><a href="#contact">Ask us →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#wraps">Vehicle Wraps</a>
+                    <a href="#led">LED Signs</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <a href="#contact" class="btn">Get a Quote</a>
+                <div class="burger" onclick="document.getElementById('mob').classList.toggle('open')">
+                    <span></span><span></span><span></span></div>
+            </nav>
+        </div>
+        <div class="mobile" id="mob">
+            <a href="#">Home</a>
+            <div class="sub-toggle" onclick="document.getElementById('msub').classList.toggle('open')">
+                <span>Services</span><span>+</span></div>
+            <div class="mobile-sub" id="msub">
+                <a href="#">Channel Signs</a><a href="#">Dimension Signs</a><a href="#">Illuminated Signs</a>
+                <a href="#">Safety & Parking Signs</a><a href="#">Window Graphics</a><a href="#">Banners</a>
+                <a href="#">Decals & Stickers</a><a href="#">Apparel</a><a href="#">Gallery</a>
+                <a href="#">Artwork Guidelines</a><a href="#">Sign Service</a>
+            </div>
+            <a href="#wraps">Vehicle Wraps</a>
+            <a href="#led">LED Signs</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="wrap">
+            <h1>
+                <span class="word" style="animation-delay:.05s">Let</span>
+                <span class="word" style="animation-delay:.12s">us</span>
+                <span class="word" style="animation-delay:.19s">help</span>
+                <span class="word" style="animation-delay:.26s">you</span>
+                <span class="word" style="animation-delay:.33s">make</span>
+                <span class="word" style="animation-delay:.40s">a</span>
+                <mark><span class="word" style="animation-delay:.47s">great</span>
+                    <span class="word" style="animation-delay:.54s">first</span>
+                    <span class="word" style="animation-delay:.61s">impression.</span></mark>
+            </h1>
+            <div class="hero-row">
+                <p>ACME Sign & Graphics specializes in creating highly effective signs, programmable LED signs and
+                    displays, vehicle wrap designs, custom apparel and branding assets for businesses of any size — and
+                    that fits your budget.</p>
+                <div style="display:flex;gap:12px"><a href="#contact" class="btn">Get a Quote</a><a href="#work"
+                        class="btn btn-o">View Work</a></div>
+            </div>
+            <div class="hero-imgs">
+                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80"
+                    alt="LED sign">
+                <img src="https://images.unsplash.com/photo-1606229365485-93a3b8ee0385?auto=format&fit=crop&w=600&q=80"
+                    alt="Vehicle wrap">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80"
+                    alt="Storefront signs">
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marq">
+        <div class="marq-track">
+            <span>LED Signs<span class="dot"> · </span></span><span>Vehicle Wraps<span class="dot"> ·
+                </span></span><span>Channel Letters<span class="dot"> · </span></span><span>Window Graphics<span
+                    class="dot"> · </span></span><span>Banners<span class="dot"> · </span></span><span>Apparel<span
+                    class="dot"> · </span></span><span>Decals<span class="dot"> · </span></span><span>Safety Signs<span
+                    class="dot"> · </span></span><span>Sign Service<span class="dot"> · </span></span>
+            <span>LED Signs<span class="dot"> · </span></span><span>Vehicle Wraps<span class="dot"> ·
+                </span></span><span>Channel Letters<span class="dot"> · </span></span><span>Window Graphics<span
+                    class="dot"> · </span></span><span>Banners<span class="dot"> · </span></span><span>Apparel<span
+                    class="dot"> · </span></span><span>Decals<span class="dot"> · </span></span><span>Safety Signs<span
+                    class="dot"> · </span></span><span>Sign Service<span class="dot"> · </span></span>
+        </div>
+    </div>
+
+    <!-- SERVICES SHOWCASE -->
+    <section class="section" id="services" style="padding-top:0">
+        <div class="wrap">
+            <div class="lead reveal">
+                <h2>What we make</h2>
+                <p>From one sign to several thousand — best materials, best methods, results that exceed expectations.
+                </p>
+            </div>
+            <div class="show reveal d1">
+                <a class="tile t-led" href="#led"><img
+                        src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80">
+                    <div class="ov"><small>Programmable</small>
+                        <h3>LED Signs & Displays</h3>
+                    </div>
+                </a>
+                <a class="tile t-wrap" href="#wraps"><img
+                        src="https://images.unsplash.com/photo-1606229365485-93a3b8ee0385?auto=format&fit=crop&w=600&q=80">
+                    <div class="ov"><small>Mobile Branding</small>
+                        <h3>Vehicle Wraps</h3>
+                    </div>
+                </a>
+                <a class="tile t-ch" href="#signs"><img
+                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80">
+                    <div class="ov"><small>Dimensional</small>
+                        <h3>Channel Signs</h3>
+                    </div>
+                </a>
+                <a class="tile t-win" href="#signs"><img
+                        src="https://images.unsplash.com/photo-1567447817063-9d62a92f4be2?auto=format&fit=crop&w=600&q=80">
+                    <div class="ov"><small>Vinyl</small>
+                        <h3>Window Graphics</h3>
+                    </div>
+                </a>
+                <a class="tile t-app" href="#other"><img
+                        src="https://images.unsplash.com/photo-1581344947731-fdcc1ee59b95?auto=format&fit=crop&w=600&q=80">
+                    <div class="ov"><small>Branded</small>
+                        <h3>Apparel & More</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LED FEATURE -->
+    <section class="section" id="led" style="padding-top:0">
+        <div class="wrap">
+            <div class="split reveal">
+                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80">
+                <div class="txt">
+                    <div class="num">01 — Programmable LED Signs & Displays</div>
+                    <h2>Get noticed 72% more than static signs.</h2>
+                    <p>Bright, easily programmable LED signs perfect for any business, church, school or event —
+                        excellent value without compromising quality. Solutions that fit all budgets.</p>
+                    <ul>
+                        <li><b>Indoor LED Displays</b> — <span>retail, corporate events and trade shows.</span></li>
+                        <li><b>Outdoor LED Displays</b> — <span>weather-resistant for advertising and
+                                storefronts.</span></li>
+                        <li><b>LED Video Walls</b> — <span>high-resolution for conferences and venues.</span></li>
+                        <li><b>Digital Signage</b> — <span>dynamic content, real-time engagement.</span></li>
+                    </ul>
+                    <div style="margin-top:26px"><a href="#contact" class="btn">Get a Quote</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPS FEATURE -->
+    <section class="section" id="wraps" style="padding-top:0">
+        <div class="wrap">
+            <div class="split reveal">
+                <div class="txt">
+                    <div class="num">02 — The Original ACME Commercial Wrap</div>
+                    <h2>Your fleet, working as a billboard.</h2>
+                    <p>Suitable for vans, trucks, trailers, cars and SUVs. Strategically placed logos, taglines and
+                        brand elements ensure your company makes a statement without uttering a word.</p>
+                    <ul>
+                        <li><b>Full Vehicle Wraps</b> — <span>vibrant graphics covering every inch.</span></li>
+                        <li><b>Partial Wraps</b> — <span>striking, cost-effective brand placement.</span></li>
+                        <li><b>Fleet Graphics</b> — <span>uniform branding across your entire fleet.</span></li>
+                        <li><b>Custom Designs</b> — <span>bespoke graphics aligned with your brand.</span></li>
+                    </ul>
+                    <div style="margin-top:26px"><a href="#contact" class="btn">Wrap My Vehicle</a></div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1606229365485-93a3b8ee0385?auto=format&fit=crop&w=800&q=80">
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT BAND -->
+    <section class="section" style="padding-top:0">
+        <div class="wrap">
+            <div class="about reveal">
+                <h2>Sign solutions for business and non-profit organizations across Atlantic Canada.</h2>
+                <p>Whether you need one sign or several thousand, we advise on the best materials and production methods
+                    to ensure results that exceed expectations.</p>
+                <a href="#work" class="btn">View the Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIGNS + OTHER -->
+    <section class="section" id="signs" style="padding-top:0">
+        <div class="wrap">
+            <div class="lead reveal">
+                <h2>Signs & more</h2>
+                <p>Tailor-made solutions for every business size and budget.</p>
+            </div>
+            <div class="detail reveal d1">
+                <div class="dcard">
+                    <h3><i>—</i> Signs</h3>
+                    <p>Channel letters, illuminated signs, storefront, directional, pylon and dimensional signage.</p>
+                    <ul>
+                        <li><b>Channel & Dimension Signs</b> — illuminated 3D lettering.</li>
+                        <li><b>Illuminated Signs</b> — light boxes in any shape or size.</li>
+                        <li><b>Storefront & Pylon Signs</b> — maximum impact and visibility.</li>
+                        <li><b>Safety & Parking Signs</b> — custom hazard and safety signage.</li>
+                        <li><b>Sign Service</b> — installation, repair and vinyl install.</li>
+                    </ul>
+                </div>
+                <div class="dcard" id="other">
+                    <h3><i>—</i> Print & Graphics</h3>
+                    <p>Window graphics, banners, decals, apparel, embroidery and more.</p>
+                    <ul>
+                        <li><b>Window Graphics</b> — opaque, frosted & perforated vinyl.</li>
+                        <li><b>Banners & A-Frames</b> — 13 oz vinyl, fast turnaround.</li>
+                        <li><b>Decals & Stickers</b> — custom cut-to-shape for any surface.</li>
+                        <li><b>Apparel</b> — screen printing & embroidery, 35+ years experience.</li>
+                        <li><b>Artwork Guidelines</b> — file prep and submission specs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAROUSEL GALLERY -->
+    <section class="section" id="work" style="padding-top:0">
+        <div class="wrap">
+            <div class="lead reveal">
+                <h2>Recent work</h2>
+                <p>Signs, wraps and displays delivered across Nova Scotia.</p>
+            </div>
+            <div class="carousel reveal" id="carousel">
+                <div class="car-track" id="carTrack">
+                    <div class="car-slide"><img
+                            src="https://images.unsplash.com/photo-1606229365485-93a3b8ee0385?auto=format&fit=crop&w=1400&q=80">
+                        <div class="car-cap"><small>Vehicle Wraps</small>
+                            <h3>Commercial Fleet Wrap</h3>
+                        </div>
+                    </div>
+                    <div class="car-slide"><img
+                            src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1400&q=80">
+                        <div class="car-cap"><small>LED Displays</small>
+                            <h3>Programmable Storefront Sign</h3>
+                        </div>
+                    </div>
+                    <div class="car-slide"><img
+                            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80">
+                        <div class="car-cap"><small>Channel Signs</small>
+                            <h3>Illuminated Channel Letters</h3>
+                        </div>
+                    </div>
+                    <div class="car-slide"><img
+                            src="https://images.unsplash.com/photo-1567447817063-9d62a92f4be2?auto=format&fit=crop&w=1400&q=80">
+                        <div class="car-cap"><small>Window Graphics</small>
+                            <h3>Full Storefront Vinyl Wrap</h3>
+                        </div>
+                    </div>
+                    <div class="car-slide"><img
+                            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80">
+                        <div class="car-cap"><small>Banners</small>
+                            <h3>Event & Promotional Banners</h3>
+                        </div>
+                    </div>
+                </div>
+                <button class="car-btn prev" id="carPrev"><svg viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18l-6-6 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></button>
+                <button class="car-btn next" id="carNext"><svg viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></button>
+                <div class="car-dots" id="carDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK CATEGORIES -->
+    <section class="section" style="padding-top:0">
+        <div class="wrap">
+            <div class="lead reveal" style="justify-content:center;text-align:center">
+                <h2>Work categories</h2>
+            </div>
+            <div class="tags reveal d1">
+                <span>LED Signs</span><span>Vehicle Wraps</span><span>Channel Signs</span><span>Dimension
+                    Signs</span><span>Illuminated Signs</span><span>Safety & Parking Signs</span><span>Window
+                    Graphics</span><span>Banners</span><span>A-Frames</span><span>Decals</span><span>Stickers</span><span>Apparel</span><span>Screen
+                    Print</span><span>Embroidery</span><span>Planterbox Signs</span><span>Sandwich
+                    Boards</span><span>Vinyl Installation</span><span>Pop-up Displays</span><span>Message
+                    Boards</span><span>Graphic Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE AREA -->
+    <section class="section" style="padding-top:0">
+        <div class="wrap">
+            <div class="area reveal">
+                <h3>Proudly serving Atlantic Canada</h3>
+                <p><b>Nova Scotia</b> — Halifax, Dartmouth, Bedford, Sackville, Truro, Wolfville, New Minas, Kentville,
+                    Digby, Yarmouth, Pictou, Antigonish, New Glasgow, Sydney, Cape Breton — <b>New Brunswick</b>,
+                    Moncton, Amherst, and <b>Prince Edward Island</b>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <div class="wrap">
+            <h2>Let's make your<br>sign.</h2>
+            <p>Mon–Fri · 8:30 AM – 5:00 PM · 25 Raddall Ave, Unit 4, Dartmouth, NS</p>
+            <a href="mailto:info@acmesign.ca" class="btn">Get a Free Quote</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="wrap">
+            <div class="fgrid">
+                <div>
+                    <div class="logo" style="margin-bottom:14px">ACME<span>.</span>SIGN</div>
+                    <p>Sign solutions for business and non-profit organizations across Atlantic Canada.</p>
+                </div>
+                <div>
+                    <h4>Contact</h4><a href="tel:+19024811007">+1 (902) 481-1007</a>
+                    <p>Fax: +1 (902) 481-0511</p><a href="mailto:info@acmesign.ca">info@acmesign.ca</a>
+                </div>
+                <div>
+                    <h4>Address</h4>
+                    <p>25 Raddall Avenue, Unit 4<br>Dartmouth, Nova Scotia<br>B3B 1L4</p>
+                </div>
+                <div>
+                    <h4>Hours</h4>
+                    <p>Mon – Fri<br>8:30 AM – 5:00 PM</p>
+                </div>
+            </div>
+            <div class="copy"><span>© 2026 Acme Sign & Graphics. All rights reserved.</span><span>LED Signs · Vehicle
+                    Wraps · Interior & Exterior Signs</span></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
+    <script>
+        (function () {
+            const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let lenis = null;
+            if (!reduce && window.Lenis) {
+                lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+                function raf(t) { lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+                document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+                    const id = a.getAttribute('href'); if (id && id.length > 1) { const el = document.querySelector(id); if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -90 }); } }
+                }));
+            }
+            if (!reduce) {
+                const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: .15 });
+                document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+            } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+
+            const track = document.getElementById('carTrack');
+            if (track) {
+                const slides = [...track.children], dotsWrap = document.getElementById('carDots'); let i = 0, timer = null;
+                slides.forEach((_, idx) => { const b = document.createElement('button'); b.className = 'car-dot' + (idx === 0 ? ' active' : ''); b.addEventListener('click', () => go(idx)); dotsWrap.appendChild(b); });
+                const dots = [...dotsWrap.children];
+                function go(n) { i = (n + slides.length) % slides.length; track.style.transform = `translateX(-${i * 100}%)`; dots.forEach((d, x) => d.classList.toggle('active', x === i)); }
+                document.getElementById('carNext').addEventListener('click', () => { go(i + 1); reset(); });
+                document.getElementById('carPrev').addEventListener('click', () => { go(i - 1); reset(); });
+                function auto() { timer = setInterval(() => go(i + 1), 5000); }
+                function reset() { clearInterval(timer); auto(); }
+                if (!reduce) auto();
+                const car = document.getElementById('carousel');
+                car.addEventListener('mouseenter', () => clearInterval(timer));
+                car.addEventListener('mouseleave', () => { if (!reduce) auto(); });
+            }
+        })();
+    </script>
+</body>
+
+</html>

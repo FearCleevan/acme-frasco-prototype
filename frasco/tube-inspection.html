@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tube Inspection Services | Frasco Industrial Inspections</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=Syne:wght@600;700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    @keyframes slideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+    .anim-up{opacity:0;animation:slideUp 0.85s cubic-bezier(.16,1,.3,1) forwards}
+    .anim-scale{opacity:0;animation:scaleIn 0.8s cubic-bezier(.16,1,.3,1) forwards}
+    .d200{animation-delay:200ms}.d500{animation-delay:500ms}
+    .sr-hidden{opacity:0;transform:translateY(36px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+    .sr-visible{opacity:1;transform:none!important}
+    .scan-card{position:relative;overflow:hidden}
+    .scan-card::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(232,96,12,.9),transparent);top:-2px;opacity:0;pointer-events:none}
+    .scan-card:hover::after{opacity:1;animation:sweep 1.5s cubic-bezier(.4,0,.6,1) forwards}
+    @keyframes sweep{0%{top:0;opacity:1}100%{top:100%;opacity:.2}}
+    .blueprint{background-image:linear-gradient(rgba(232,96,12,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,96,12,.07) 1px,transparent 1px);background-size:52px 52px}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#e8600c;border-radius:3px}
+  </style>
+  <style type="text/tailwindcss">@tailwind base;@tailwind components;@tailwind utilities;</style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={important:'#root',theme:{extend:{colors:{'ink':'#111111','panel':'#1a1a1a','surface':'#222222','orange':'#e8600c','amber':'#f5b301','paper':'#f5f5f5','soft':'#eeeeee','lead':'#5a5a5a','ghost':'#d8d8d8'},fontFamily:{'display':['Bricolage Grotesque','sans-serif'],'label':['Syne','sans-serif'],'body':['Inter Tight','sans-serif'],'mono':['JetBrains Mono','monospace']},boxShadow:{'orange':'0 16px 40px -10px rgba(232,96,12,.3)','heavy':'0 30px 70px -15px rgba(0,0,0,.5)'}}}}
+  </script>
+</head>
+<body id="root">
+<div class="font-body bg-paper text-ink min-h-screen flex flex-col">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between bg-ink border-b border-white/10">
+    <div class="flex items-center gap-4 md:gap-12">
+      <a href="frasco-prototype-5.html" class="flex items-center gap-3 font-label font-bold text-xl text-white uppercase tracking-tight">
+        <div class="w-[3px] h-7 bg-orange"></div>FRASCO
+      </a>
+      <nav class="hidden lg:flex items-center gap-7">
+        <div class="relative group">
+          <button class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-orange">
+            Services <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor" class="group-hover:rotate-180 transition-transform duration-300"><path d="M2.558 6.295a.5.5 0 0 1 .707 0L8 10.03l4.735-3.736a.5.5 0 0 1 .707.708L8.354 11.06a.5.5 0 0 1-.708 0L2.558 7.003a.5.5 0 0 1 0-.708Z"/></svg>
+          </button>
+          <div class="absolute top-full mt-3 left-0 w-72 bg-white border border-ghost shadow-heavy opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-250 translate-y-2 group-hover:translate-y-0 z-60">
+            <div class="p-2">
+              <a href="nde-ndt.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">NDE / NDT</div><div class="text-xs text-lead font-mono mt-0.5">Eddy current, ultrasonic, thermography</div></div></a>
+              <a href="tube-inspection.html" class="flex items-center gap-3 px-4 py-3 bg-soft text-ink"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm text-orange">Tube Inspection</div><div class="text-xs text-lead font-mono mt-0.5">Chillers, condensers, heat exchangers</div></div></a>
+              <a href="asset-integrity.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Asset Integrity</div><div class="text-xs text-lead font-mono mt-0.5">Weld testing, API, QA/QC, turnaround</div></div></a>
+              <a href="lifting-equipment.html" class="flex items-center gap-3 px-4 py-3 text-ink hover:bg-soft transition-colors"><div class="w-1.5 h-1.5 bg-amber rounded-full shrink-0"></div><div><div class="font-label font-bold text-sm">Lifting Equipment</div><div class="text-xs text-lead font-mono mt-0.5">Certification, cranes, wire rope</div></div></a>
+            </div>
+            <div class="border-t border-ghost px-4 py-3 flex justify-between items-center">
+              <span class="text-[10px] font-mono text-lead uppercase tracking-widest">Not sure what you need?</span>
+              <a href="contact.html" class="text-[10px] font-mono text-orange uppercase tracking-widest hover:underline">Ask us →</a>
+            </div>
+          </div>
+        </div>
+        <a href="about.html" class="text-[11px] font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors">About</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="tel:19024315483" class="hidden sm:flex items-center gap-2 text-white/60 hover:text-orange transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 21c-1.654 0-3.282-.4-4.74-1.2l-.45-.24C8.7 17.889 6.152 15.34 4.48 12.23l-.25-.45C3.43 10.314 3.007 8.671 3 7v-.67c-.002-.534.21-1.046.59-1.42L5.28 3.22a.5.5 0 0 1 .627-.022l2.25 3.86a.5.5 0 0 1-.11.644L6.66 9.33a.5.5 0 0 0-.1.59l.35.66C8.177 12.909 10.09 14.818 12.42 16.07l.66.36a.5.5 0 0 0 .59-.1l1.89-1.89a.5.5 0 0 1 .644-.11l3.86 2.25a.5.5 0 0 1-.022.627l-1.69 1.69A1.97 1.97 0 0 1 17 21Z"/></svg>
+        <span class="font-mono text-[11px] tracking-wider">902-431-5483</span>
+      </a>
+      <button id="mob-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="contact.html" class="bg-orange text-white font-mono text-[11px] font-bold px-5 py-2.5 uppercase tracking-widest hover:bg-amber hover:text-ink transition-colors">Request Inspection</a>
+    </div>
+  </header>
+
+  <!-- Mobile overlay -->
+  <div id="mob-menu" class="fixed inset-0 bg-ink z-[100] translate-x-full transition-transform duration-500 flex flex-col p-8">
+    <div class="flex justify-between items-center mb-14">
+      <span class="font-label font-bold text-2xl text-white">FRASCO<span class="text-orange">.</span></span>
+      <button id="mob-close" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-7">
+      <a href="nde-ndt.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">NDE / NDT</a>
+      <a href="tube-inspection.html" class="mob-l text-4xl font-display font-bold text-orange">Tube Inspection</a>
+      <a href="asset-integrity.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Asset Integrity</a>
+      <a href="lifting-equipment.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Lifting Equipment</a>
+      <a href="about.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">About Us</a>
+      <a href="contact.html" class="mob-l text-4xl font-display font-bold text-white hover:text-orange transition-colors">Contact</a>
+    </nav>
+    <div class="mt-auto"><span class="block font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">24/7 Response</span><a href="tel:19024315483" class="text-white text-xl font-body">1-902-431-5483</a></div>
+  </div>
+
+  <main class="flex-grow pt-16">
+
+    <!-- HERO -->
+    <section class="relative h-[65vh] min-h-[400px] overflow-hidden flex items-center">
+      <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1920&q=80" alt="Tube inspection" class="absolute inset-0 w-full h-full object-cover anim-scale">
+      <div class="absolute inset-0 bg-ink/75"></div>
+      <div class="absolute inset-0 blueprint opacity-40"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="anim-up">
+          <a href="frasco-prototype-5.html" class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-white/50 hover:text-orange transition-colors mb-8">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg> Back to Home
+          </a>
+          <div class="flex items-center gap-4 mb-4"><div class="w-10 h-[2px] bg-orange"></div><span class="font-mono text-[10px] uppercase tracking-[.25em] text-orange">Preventative Inspection</span></div>
+          <h1 class="font-label text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tight leading-none mb-6">Tube<br><span class="text-white/40">Inspection</span></h1>
+          <p class="text-white/70 max-w-xl font-body text-base leading-relaxed">Comprehensive tube inspection for all heat-transfer systems. Detect wall loss, pitting, cracking, and blockages before they cause failures — same-day reporting.</p>
+        </div>
+      </div>
+      <div class="absolute bottom-8 left-6 md:left-12 anim-up d500">
+        <div class="text-[10px] font-mono uppercase tracking-widest text-white/40">Eddy Current Technology · All Tube Materials · Portable Equipment</div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="py-20 bg-white border-b border-ghost">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16 items-center">
+        <div class="lg:w-1/2" data-sr>
+          <h2 class="font-label text-3xl md:text-4xl font-bold text-ink uppercase tracking-tight mb-6">Know What's Inside Your Tubes Before It Fails</h2>
+          <p class="text-lead leading-relaxed mb-6">Frasco provides complete tube bundle inspection using eddy current and near-field testing — the fastest, most accurate non-destructive methods available for heat-transfer equipment. Our portable systems come directly to your facility.</p>
+          <p class="text-lead leading-relaxed">From chillers to fin fans, we evaluate tube wall condition across seven equipment types and deliver a comprehensive report on-site — enabling data-driven maintenance planning without unnecessary shutdowns.</p>
+        </div>
+        <div class="lg:w-1/2 grid grid-cols-2 gap-4" data-sr>
+          <div class="bg-orange text-white p-8 text-center"><div class="font-label text-5xl font-bold">7</div><div class="text-[10px] font-mono uppercase tracking-widest mt-2 opacity-80">Equipment Types</div></div>
+          <div class="bg-ink text-white p-8 text-center"><div class="font-label text-5xl font-bold">ECT</div><div class="text-[10px] font-mono uppercase tracking-widest mt-2 opacity-80">Primary Method</div></div>
+          <div class="col-span-2 bg-soft border border-ghost p-6 border-l-4 border-orange">
+            <p class="font-mono text-[11px] uppercase tracking-widest text-orange mb-2">Why Tube Inspection?</p>
+            <p class="font-body text-sm text-lead">A single failed tube can shut down an entire heat exchanger. Early detection of wall loss, pitting, and stress cracking prevents unplanned downtime and costly emergency repairs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 EQUIPMENT TYPES -->
+    <section class="py-24 bg-soft">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-16" data-sr>
+          <h2 class="text-[10px] font-mono uppercase tracking-widest text-white mb-4 bg-orange inline-block px-2 py-0.5">Scope of Inspection</h2>
+          <h3 class="font-label text-3xl md:text-4xl font-bold text-ink uppercase tracking-tight">Seven Equipment<br>Types Covered</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
+          <div data-sr class="scan-card bg-white border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-20">01</div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Chillers</h4>
+            <p class="text-lead text-sm leading-relaxed">HVAC and industrial chiller tube bundle inspection using multi-frequency eddy current. Detect corrosion, erosion, and pitting across copper and titanium tubes.</p>
+          </div>
+
+          <div data-sr data-sr-delay="100" class="scan-card bg-white border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-20">02</div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Condensers</h4>
+            <p class="text-lead text-sm leading-relaxed">Steam and refrigeration condenser inspection for power and process facilities. Identifies plugged, thinned, and cracked tubes before leakage occurs.</p>
+          </div>
+
+          <div data-sr data-sr-delay="200" class="scan-card bg-white border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-20">03</div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Evaporators</h4>
+            <p class="text-lead text-sm leading-relaxed">Refrigeration and industrial evaporator coil and tube inspection. Detects fouling, deposits and wall thickness reduction to keep energy efficiency high.</p>
+          </div>
+
+          <div data-sr data-sr-delay="300" class="scan-card bg-white border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-20">04</div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Coolers</h4>
+            <p class="text-lead text-sm leading-relaxed">Lube oil, intercooler, aftercooler, and process cooler tube inspection. Prevents cross-contamination and unexpected thermal equipment failure.</p>
+          </div>
+
+          <div data-sr class="scan-card bg-white border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-20">05</div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Heat Exchangers</h4>
+            <p class="text-lead text-sm leading-relaxed">Shell-and-tube heat exchanger inspection across refining, chemical and petrochemical processes. Multi-frequency ECT, NFT and IRIS available.</p>
+          </div>
+
+          <div data-sr data-sr-delay="100" class="scan-card bg-white border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-20">06</div>
+            <h4 class="font-label text-xl font-bold text-ink uppercase tracking-tight mb-3">Fin Fans</h4>
+            <p class="text-lead text-sm leading-relaxed">Air-cooled heat exchanger (fin fan) tube and header inspection. Near-field testing handles finned and fouled external surfaces without removal.</p>
+          </div>
+
+          <div data-sr data-sr-delay="200" class="scan-card bg-ink border border-ghost p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 sm:col-span-2 lg:col-span-1">
+            <div class="text-orange text-5xl font-label font-bold mb-5 opacity-30">07</div>
+            <h4 class="font-label text-xl font-bold text-orange uppercase tracking-tight mb-3">Boilers</h4>
+            <p class="text-white/65 text-sm leading-relaxed">Fire-tube and water-tube boiler inspection. Detects overheating, internal and external corrosion, pitting and deposition — critical for safe, compliant boiler operation.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED: ECT -->
+    <section class="py-24 bg-ink relative overflow-hidden">
+      <div class="absolute inset-0 blueprint opacity-30"></div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+        <div class="lg:w-1/2" data-sr>
+          <div class="flex items-center gap-4 mb-8"><div class="h-[1px] w-10 bg-orange"></div><span class="font-mono text-[10px] uppercase tracking-[.25em] text-orange">Primary Technology</span></div>
+          <h2 class="font-label text-3xl md:text-4xl font-bold text-white uppercase tracking-tight mb-6 leading-tight">Eddy Current Tube Testing (ECT)</h2>
+          <p class="text-white/65 mb-6 leading-relaxed">ECT is the fastest, most versatile method for non-ferrous tube inspection. Frasco's systems deliver high-speed automated scanning with data acquisition, producing colour-coded tube maps of the entire bundle.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Copper, titanium, brass, stainless, Admiralty</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Detect OD and ID defects simultaneously</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Colour-coded tube condition map provided</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Full bundle inspection in hours, not days</li>
+            <li class="flex items-center gap-3 text-white/70 text-sm"><div class="w-1.5 h-1.5 bg-orange rounded-full shrink-0"></div>Near Field Testing (NFT) for ferromagnetic tubes</li>
+          </ul>
+          <a href="contact.html" class="inline-flex items-center gap-3 bg-orange text-white px-6 py-3 font-mono text-[11px] uppercase tracking-widest font-bold hover:bg-amber hover:text-ink transition-colors">Book a Tube Inspection →</a>
+        </div>
+        <div class="lg:w-1/2 space-y-4" data-sr>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white/5 border border-white/10 p-6"><div class="text-orange text-3xl font-display font-bold mb-2">ECT</div><div class="text-white/50 text-[10px] font-mono uppercase tracking-widest">Non-Ferrous Tubes</div></div>
+            <div class="bg-orange p-6"><div class="text-white text-3xl font-display font-bold mb-2">NFT</div><div class="text-white/75 text-[10px] font-mono uppercase tracking-widest">Ferromagnetic Tubes</div></div>
+          </div>
+          <div class="bg-white/5 border border-white/10 p-6">
+            <p class="text-orange font-mono text-[11px] uppercase tracking-widest mb-3">Deliverables</p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-3 text-white/65 text-sm"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Full tube-by-tube condition map</li>
+              <li class="flex items-center gap-3 text-white/65 text-sm"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Defect location, depth, and type</li>
+              <li class="flex items-center gap-3 text-white/65 text-sm"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Plug/replace recommendations</li>
+              <li class="flex items-center gap-3 text-white/65 text-sm"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Signed report same day on site</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <h3 data-sr class="font-label text-3xl font-bold text-ink uppercase tracking-tight mb-14 text-center">How a Tube Inspection Works</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div data-sr class="bg-soft border border-ghost p-8 text-center"><div class="w-12 h-12 bg-orange text-white font-label font-bold text-xl flex items-center justify-center mx-auto mb-6">1</div><h4 class="font-label font-bold uppercase tracking-tight mb-3">Scope &amp; Access</h4><p class="text-lead text-sm leading-relaxed">Confirm tube specifications, access requirements and inspection objectives with your facility team.</p></div>
+          <div data-sr data-sr-delay="150" class="bg-soft border border-ghost p-8 text-center"><div class="w-12 h-12 bg-orange text-white font-label font-bold text-xl flex items-center justify-center mx-auto mb-6">2</div><h4 class="font-label font-bold uppercase tracking-tight mb-3">Mobilise On-Site</h4><p class="text-lead text-sm leading-relaxed">Portable ECT equipment arrives at your facility. Probes calibrated to tube size and material.</p></div>
+          <div data-sr data-sr-delay="300" class="bg-soft border border-ghost p-8 text-center"><div class="w-12 h-12 bg-orange text-white font-label font-bold text-xl flex items-center justify-center mx-auto mb-6">3</div><h4 class="font-label font-bold uppercase tracking-tight mb-3">Full Bundle Scan</h4><p class="text-lead text-sm leading-relaxed">Every tube scanned and data captured. Entire heat exchanger bundle covered efficiently.</p></div>
+          <div data-sr data-sr-delay="450" class="bg-ink border border-ghost p-8 text-center"><div class="w-12 h-12 bg-orange text-ink font-label font-bold text-xl flex items-center justify-center mx-auto mb-6">4</div><h4 class="font-label font-bold uppercase tracking-tight mb-3 text-orange">Report On-Site</h4><p class="text-white/65 text-sm leading-relaxed">Signed, comprehensive report delivered same day — colour-coded condition map included.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-orange">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 data-sr class="font-label text-4xl md:text-5xl font-bold text-white uppercase tracking-tight mb-6">Don't Wait for a Leak to Find Out</h2>
+        <p data-sr class="text-white/80 mb-10 font-body text-lg leading-relaxed">Proactive tube inspection pays for itself many times over compared to emergency shutdown costs. Contact Frasco today to schedule your inspection.</p>
+        <div data-sr class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="contact.html" class="bg-white text-orange font-mono text-[11px] uppercase tracking-widest font-bold px-8 py-4 hover:bg-ink hover:text-white transition-colors">Request Tube Inspection</a>
+          <a href="tel:19024315483" class="bg-ink text-white font-mono text-[11px] uppercase tracking-widest font-bold px-8 py-4 hover:bg-white hover:text-orange transition-colors">Call 1-902-431-5483</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white pt-16 pb-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 font-label font-bold text-xl text-white uppercase tracking-tight mb-5"><div class="w-[3px] h-7 bg-orange"></div>FRASCO INDUSTRIAL INSPECTIONS</div>
+          <p class="text-white/55 max-w-sm mb-6 leading-relaxed font-body text-sm">Non-destructive evaluation and asset integrity testing — designed to limit your facility's downtime. Certified. Portable. Same-day.</p>
+          <div class="font-mono text-[10px] uppercase tracking-widest text-white/35">Serving NS · NB · Newfoundland · Canada · USA · Overseas</div>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-mono uppercase tracking-widest text-white/40 font-bold mb-5">Services</h4>
+          <ul class="space-y-3 text-sm font-body text-white/55">
+            <li><a href="nde-ndt.html" class="hover:text-orange transition-colors">NDE / NDT</a></li>
+            <li><a href="tube-inspection.html" class="text-orange">Tube Inspection</a></li>
+            <li><a href="asset-integrity.html" class="hover:text-orange transition-colors">Asset Integrity</a></li>
+            <li><a href="lifting-equipment.html" class="hover:text-orange transition-colors">Lifting Equipment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-mono uppercase tracking-widest text-white/40 font-bold mb-5">Contact</h4>
+          <ul class="space-y-3 text-sm font-body text-white/55">
+            <li><a href="tel:19024315483" class="hover:text-orange transition-colors">1-902-431-5483</a></li>
+            <li>Fax: 1-902-481-1007</li>
+            <li><a href="mailto:frascoinspect@gmail.com" class="hover:text-orange transition-colors">frascoinspect@gmail.com</a></li>
+            <li class="pt-2 text-[10px] font-mono uppercase tracking-widest">25 Raddall Ave., Unit 4<br>Dartmouth, NS B3B 1L4</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 gap-4">
+        <p class="text-[10px] font-mono uppercase tracking-widest text-white/30">© 2026 Frasco Industrial Inspections — All Rights Reserved.</p>
+        <div class="flex gap-6">
+          <a href="about.html" class="text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-orange transition-colors">About</a>
+          <a href="contact.html" class="text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-orange transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const mob=document.getElementById('mob-menu'),mobT=document.getElementById('mob-toggle'),mobC=document.getElementById('mob-close'),mobLinks=document.querySelectorAll('.mob-l');
+  const openMob=()=>{mob.classList.remove('translate-x-full');document.body.style.overflow='hidden'};
+  const closeMob=()=>{mob.classList.add('translate-x-full');document.body.style.overflow=''};
+  mobT?.addEventListener('click',openMob);mobC?.addEventListener('click',closeMob);mobLinks.forEach(l=>l.addEventListener('click',closeMob));
+  const srObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const d=parseInt(e.target.dataset.srDelay||0);setTimeout(()=>e.target.classList.add('sr-visible'),d);srObs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('[data-sr]').forEach(el=>{el.classList.add('sr-hidden');srObs.observe(el)});
+});
+</script>
+</body>
+</html>

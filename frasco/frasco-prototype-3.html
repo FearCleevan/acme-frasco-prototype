@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frasco — Prototype 3: Heavy Iron</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --concrete: #efefed;
+            --panel: #e5e4e0;
+            --ink: #1c1c1c;
+            --orange: #e8400c;
+            --steel: #2d4a6b;
+            --muted: #5f5f5b;
+            --line: #ccccc8;
+            --white: #fff;
+            --display: 'Barlow Condensed', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--concrete);
+            color: var(--ink);
+            line-height: 1.6
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--display);
+            line-height: 1.0;
+            text-transform: uppercase;
+            letter-spacing: .01em
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 28px
+        }
+
+        .mono {
+            font-family: var(--mono)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--orange);
+            color: #fff;
+            padding: 16px 30px;
+            font-weight: 700;
+            font-size: 15px;
+            font-family: var(--display);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            border: none;
+            cursor: pointer;
+            transition: .2s;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)
+        }
+
+        .btn:hover {
+            background: #c23209
+        }
+
+        .btn-o {
+            background: transparent;
+            color: var(--ink);
+            border: 2px solid var(--ink);
+            clip-path: none
+        }
+
+        .btn-o:hover {
+            background: var(--ink);
+            color: var(--concrete)
+        }
+
+        /* stencil floor label */
+        .floor-label {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .floor-rule {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px
+        }
+
+        .floor-rule::before,
+        .floor-rule::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--ink)
+        }
+
+        .floor-rule span {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            white-space: nowrap
+        }
+
+        /* utility top bar */
+        .util {
+            background: var(--orange);
+            color: #fff
+        }
+
+        .util .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 28px;
+            font-family: var(--mono);
+            font-size: 11.5px;
+            letter-spacing: .05em;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--ink);
+            border-bottom: 4px solid var(--orange)
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px
+        }
+
+        .logo {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 30px;
+            letter-spacing: .06em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .logo .bar {
+            width: 4px;
+            height: 26px;
+            background: var(--orange)
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 26px;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            align-items: center
+        }
+
+        .navlinks a {
+            color: #9aa0a8
+        }
+
+        .navlinks a:hover {
+            color: #fff
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer
+        }
+
+        .burger span {
+            width: 24px;
+            height: 2px;
+            background: #fff
+        }
+
+        @media(max-width:880px) {
+
+            .navlinks,
+            .nav-cta {
+                display: none
+            }
+
+            .burger {
+                display: flex
+            }
+        }
+
+        .mobile {
+            display: none;
+            background: var(--ink);
+            border-bottom: 4px solid var(--orange)
+        }
+
+        .mobile a {
+            display: block;
+            padding: 14px 28px;
+            border-top: 1px solid #2e2e2e;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            color: #9aa0a8
+        }
+
+        .mobile .sub-toggle {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer
+        }
+
+        .mobile-sub {
+            display: none;
+            background: #141414
+        }
+
+        .mobile-sub a {
+            color: #888
+        }
+
+        .mobile-sub.open {
+            display: block
+        }
+
+        @media(max-width:880px) {
+            .mobile.open {
+                display: block
+            }
+        }
+
+        /* dropdown */
+        .has-drop {
+            position: relative
+        }
+
+        .drop-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            color: #9aa0a8
+        }
+
+        .drop-toggle:hover {
+            color: #fff
+        }
+
+        .drop-toggle svg {
+            transition: transform .25s
+        }
+
+        .has-drop:hover .drop-toggle svg {
+            transform: rotate(180deg)
+        }
+
+        .drop {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: var(--ink);
+            border: 2px solid var(--orange);
+            padding: 6px;
+            min-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .22s;
+            z-index: 60
+        }
+
+        .has-drop:hover .drop {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        .drop::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            right: 0;
+            height: 12px
+        }
+
+        .drop a {
+            display: flex;
+            gap: 14px;
+            padding: 12px 14px;
+            border-bottom: 1px solid #2e2e2e;
+            transition: .15s;
+            align-items: baseline
+        }
+
+        .drop a:last-of-type {
+            border-bottom: none
+        }
+
+        .drop a:hover {
+            background: #2a2a2a
+        }
+
+        .drop a .n {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--orange);
+            min-width: 24px
+        }
+
+        .drop a b {
+            font-family: var(--display);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: #fff;
+            display: block
+        }
+
+        .drop a small {
+            color: #777;
+            font-family: var(--mono);
+            font-size: 11px
+        }
+
+        .drop-foot {
+            padding: 10px 14px 4px;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between
+        }
+
+        .drop-foot span {
+            font-size: 11px;
+            color: #666;
+            font-family: var(--mono)
+        }
+
+        .drop-foot a {
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 12px
+        }
+
+        /* hero — dark full-bleed diagonal split */
+        .hero {
+            background: var(--ink);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            min-height: 86vh;
+            display: flex;
+            align-items: center
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1600&q=80') center/cover;
+            opacity: .2;
+            filter: grayscale(.4)
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, rgba(28, 28, 28, 1) 48%, rgba(28, 28, 28, .2) 100%)
+        }
+
+        .hero .wrap {
+            position: relative;
+            z-index: 2
+        }
+
+        .hero-tag {
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: .14em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 32px;
+            height: 2px;
+            background: var(--orange)
+        }
+
+        .hero h1 {
+            font-size: clamp(58px, 10vw, 126px);
+            font-weight: 800;
+            max-width: 11ch;
+            margin-bottom: 22px;
+            line-height: .96
+        }
+
+        .hero h1 .line {
+            display: block
+        }
+
+        .hero h1 .accent {
+            color: var(--orange)
+        }
+
+        .hero p {
+            color: #aab0b8;
+            font-size: 18px;
+            max-width: 56ch;
+            margin-bottom: 36px
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 52px;
+            flex-wrap: wrap;
+            border-top: 1px solid #2e2e2e;
+            padding-top: 32px
+        }
+
+        .hero-stats .stat .n {
+            font-family: var(--display);
+            font-size: 46px;
+            font-weight: 800;
+            color: #fff
+        }
+
+        .hero-stats .stat .l {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .12em;
+            color: #777;
+            text-transform: uppercase;
+            margin-top: 2px
+        }
+
+        /* orange side accent bar */
+        .accent-bar {
+            width: 5px;
+            height: 100%;
+            background: var(--orange);
+            position: absolute;
+            left: 0;
+            top: 0
+        }
+
+        .section {
+            padding: 86px 0
+        }
+
+        /* big section label painted on floor */
+        .section-label {
+            background: var(--ink);
+            padding: 20px 28px;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .section-label h3 {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: clamp(28px, 4vw, 48px);
+            letter-spacing: .04em;
+            color: #fff;
+            text-transform: uppercase
+        }
+
+        .section-label .n {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: #666;
+            letter-spacing: .1em
+        }
+
+        /* service cards — panel-mounted */
+        .svc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            background: var(--line)
+        }
+
+        .svc {
+            background: var(--white);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: .2s
+        }
+
+        .svc::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--orange);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: .3s
+        }
+
+        .svc:hover::before {
+            transform: scaleY(1)
+        }
+
+        .svc:hover {
+            background: var(--panel)
+        }
+
+        .svc .id {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--orange);
+            letter-spacing: .1em;
+            margin-bottom: 12px
+        }
+
+        .svc h3 {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 800;
+            margin-bottom: 16px
+        }
+
+        .svc ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px
+        }
+
+        .svc li {
+            font-family: var(--mono);
+            font-size: 11.5px;
+            color: var(--muted);
+            background: var(--concrete);
+            border: 1px solid var(--line);
+            padding: 5px 10px
+        }
+
+        @media(max-width:760px) {
+            .svc-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* split feature */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            background: var(--line);
+            margin-bottom: 4px
+        }
+
+        .split .imgwrap {
+            position: relative;
+            min-height: 460px;
+            overflow: hidden
+        }
+
+        .split img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.08) saturate(.85);
+            transition: .5s
+        }
+
+        .split:hover img {
+            transform: scale(1.03)
+        }
+
+        .split .img-cap {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: rgba(28, 28, 28, .85);
+            padding: 12px 18px;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .1em;
+            color: #aaa;
+            text-transform: uppercase
+        }
+
+        .split .txt {
+            background: var(--white);
+            padding: 52px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .split .tag-line {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .12em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 14px
+        }
+
+        .split h2 {
+            font-size: clamp(30px, 3.8vw, 46px);
+            font-weight: 800;
+            margin-bottom: 18px
+        }
+
+        .split p {
+            color: var(--muted);
+            margin-bottom: 22px
+        }
+
+        .split ul {
+            list-style: none
+        }
+
+        .split li {
+            padding: 11px 0;
+            border-top: 1px solid var(--line);
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: baseline;
+            gap: 12px
+        }
+
+        .split li::before {
+            content: '//';
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--orange)
+        }
+
+        @media(max-width:820px) {
+            .split {
+                grid-template-columns: 1fr
+            }
+
+            .split .imgwrap {
+                min-height: 260px
+            }
+
+            .split .txt {
+                padding: 32px
+            }
+        }
+
+        /* about panel */
+        .about-panel {
+            background: var(--steel);
+            color: #fff;
+            padding: 66px 0;
+            position: relative;
+            overflow: hidden
+        }
+
+        .about-panel::before {
+            content: 'FRASCO';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--display);
+            font-size: 200px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, .04);
+            letter-spacing: .1em;
+            pointer-events: none;
+            white-space: nowrap
+        }
+
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center
+        }
+
+        .about-inner h2 {
+            font-size: clamp(32px, 4.5vw, 52px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #fff
+        }
+
+        .about-inner p {
+            color: #c0cdd8;
+            margin-bottom: 26px;
+            font-size: 17px
+        }
+
+        .certs-list {
+            display: grid;
+            gap: 0;
+            border: 1px solid rgba(255, 255, 255, .15)
+        }
+
+        .cert-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .cert-item:last-child {
+            border-bottom: none
+        }
+
+        .cert-item .check {
+            width: 10px;
+            height: 10px;
+            background: #4ade80;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .cert-item .k {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #89a0b8;
+            display: block;
+            margin-bottom: 4px
+        }
+
+        .cert-item .v {
+            font-family: var(--display);
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        @media(max-width:820px) {
+            .about-inner {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* industries — stencil grid */
+        .ind {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            background: var(--line)
+        }
+
+        .ind a {
+            background: var(--white);
+            padding: 24px 22px;
+            font-family: var(--display);
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: .2s;
+            border-bottom: 3px solid transparent
+        }
+
+        .ind a:hover {
+            background: var(--orange);
+            color: #fff;
+            border-bottom-color: var(--ink)
+        }
+
+        .ind a .n {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--line);
+            font-weight: 400;
+            transition: .2s
+        }
+
+        .ind a:hover .n {
+            color: rgba(255, 255, 255, .6)
+        }
+
+        @media(max-width:760px) {
+            .ind {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        /* CTA — heavy bar */
+        .cta {
+            background: var(--ink);
+            color: #fff;
+            padding: 90px 0
+        }
+
+        .cta .wrap {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center
+        }
+
+        .cta h2 {
+            font-size: clamp(38px, 6vw, 72px);
+            font-weight: 800;
+            line-height: .96
+        }
+
+        .cta h2 .o {
+            color: var(--orange)
+        }
+
+        .cta p {
+            color: #8a9098;
+            margin-bottom: 26px;
+            font-size: 17px
+        }
+
+        .cta .phone {
+            font-family: var(--display);
+            font-size: clamp(30px, 4.5vw, 50px);
+            font-weight: 800;
+            color: var(--orange);
+            display: block;
+            margin-bottom: 22px
+        }
+
+        .cta-right {
+            text-align: right
+        }
+
+        @media(max-width:760px) {
+            .cta .wrap {
+                grid-template-columns: 1fr
+            }
+
+            .cta-right {
+                text-align: left
+            }
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            padding: 60px 0 26px;
+            border-top: 4px solid var(--orange)
+        }
+
+        .fgrid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 34px;
+            margin-bottom: 42px
+        }
+
+        .fgrid h4 {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 14px
+        }
+
+        .fgrid a,
+        .fgrid p {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 8px
+        }
+
+        .fgrid a:hover {
+            color: #fff
+        }
+
+        .fcopy {
+            border-top: 1px solid #222;
+            padding-top: 22px;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            letter-spacing: .06em;
+            text-transform: uppercase
+        }
+
+        @media(max-width:760px) {
+            .fgrid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: .85s cubic-bezier(.22, 1, .36, 1)
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none
+        }
+
+        .reveal.d1 {
+            transition-delay: .1s
+        }
+
+        .reveal.d2 {
+            transition-delay: .2s
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important
+            }
+
+            html {
+                scroll-behavior: auto
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="util">
+        <div class="wrap"><span>▲ 24/7 EMERGENCY RESPONSE AVAILABLE</span><span>1-902-431-5483 · DARTMOUTH, NS</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="wrap">
+            <nav>
+                <div class="logo">
+                    <div class="bar"></div>FRASCO
+                </div>
+                <div class="navlinks">
+                    <a href="#">Home</a>
+                    <div class="has-drop">
+                        <span class="drop-toggle">Services
+                            <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
+                                <path d="M1 1l4.5 4.5L10 1" stroke="currentColor" stroke-width="1.6"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </span>
+                        <div class="drop">
+                            <a href="#ndt"><span class="n">01</span><span><b>NDE / NDT</b><small>Eddy current,
+                                        ultrasonic, thermography & more</small></span></a>
+                            <a href="#tube"><span class="n">02</span><span><b>Tube Inspection</b><small>Chillers,
+                                        condensers, heat exchangers, boilers</small></span></a>
+                            <a href="#asset"><span class="n">03</span><span><b>Asset Integrity</b><small>Weld testing,
+                                        API, tanks, piping QA/QC</small></span></a>
+                            <a href="#lifting"><span class="n">04</span><span><b>Lifting
+                                        Equipment</b><small>Certification, wire rope, cranes</small></span></a>
+                            <div class="drop-foot"><span>Not sure what you need?</span><a href="#contact">Ask us →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#about">About</a>
+                    <a href="#industries">Industries</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <a href="#contact" class="btn nav-cta" style="clip-path:none">Request Inspection</a>
+                <div class="burger" onclick="document.getElementById('mob').classList.toggle('open')">
+                    <span></span><span></span><span></span></div>
+            </nav>
+        </div>
+        <div class="mobile" id="mob">
+            <a href="#">Home</a>
+            <div class="sub-toggle" onclick="document.getElementById('msub').classList.toggle('open')"
+                style="padding:14px 28px;border-top:1px solid #2e2e2e"><span>Services</span><span>+</span></div>
+            <div class="mobile-sub" id="msub"><a href="#ndt">NDE / NDT</a><a href="#tube">Tube Inspection</a><a
+                    href="#asset">Asset Integrity</a><a href="#lifting">Lifting Equipment</a></div>
+            <a href="#about">About</a><a href="#industries">Industries</a><a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="wrap">
+            <div class="hero-tag">Non-Destructive Testing · Dartmouth, Nova Scotia</div>
+            <h1><span class="line">We find</span><span class="line">what's</span><span
+                    class="line accent">hidden.</span></h1>
+            <p>Frasco strives to be a leader in all aspects of industrial inspection — certified personnel detecting
+                flaws, fractures and fatigue beneath the surface, so your equipment stays reliable and your facility
+                stays productive.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn">Request an Inspection</a>
+                <a href="#services" class="btn btn-o">View Services</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="n">24/7</div>
+                    <div class="l">Emergency response</div>
+                </div>
+                <div class="stat">
+                    <div class="n">Same-Day</div>
+                    <div class="l">On-site results</div>
+                </div>
+                <div class="stat">
+                    <div class="n">3</div>
+                    <div class="l">Certification standards</div>
+                </div>
+                <div class="stat">
+                    <div class="n">Global</div>
+                    <div class="l">Service reach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <div class="section-label" id="services">
+        <h3>Inspection Services</h3><span class="n">04 SERVICE LINES</span>
+    </div>
+    <div class="svc-grid reveal">
+        <div class="svc" id="ndt">
+            <div class="id">// 01</div>
+            <h3>NDE / NDT</h3>
+            <ul>
+                <li>Eddy Current</li>
+                <li>Near Field</li>
+                <li>Magnetic Particle</li>
+                <li>Liquid Penetrant</li>
+                <li>Ultrasonic</li>
+                <li>Thermography</li>
+                <li>Borescope & Visual</li>
+                <li>PMI</li>
+                <li>Remote Visual</li>
+            </ul>
+        </div>
+        <div class="svc" id="tube">
+            <div class="id">// 02</div>
+            <h3>Tube Inspection</h3>
+            <ul>
+                <li>Chiller</li>
+                <li>Condenser</li>
+                <li>Evaporator</li>
+                <li>Coolers</li>
+                <li>Heat Exchangers</li>
+                <li>Fin Fans</li>
+                <li>Boiler</li>
+            </ul>
+        </div>
+        <div class="svc" id="asset">
+            <div class="id">// 03</div>
+            <h3>Asset Integrity QA/QC</h3>
+            <ul>
+                <li>Weld Testing</li>
+                <li>API Pressure Vessel</li>
+                <li>Storage Tanks</li>
+                <li>Piping Systems</li>
+                <li>Visual Inspection</li>
+                <li>3rd-Party Verification</li>
+                <li>Audit Services</li>
+                <li>Dimensional</li>
+                <li>Turnaround</li>
+            </ul>
+        </div>
+        <div class="svc" id="lifting">
+            <div class="id">// 04</div>
+            <h3>Lifting Equipment</h3>
+            <ul>
+                <li>Certification</li>
+                <li>Wire Rope</li>
+                <li>Fork Lifts</li>
+                <li>Gantry Cranes</li>
+                <li>Cranes & Components</li>
+                <li>Work Station Cranes</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- NDT DETAIL -->
+    <div class="section-label">
+        <h3>NDT Detail</h3><span class="n">EDDY CURRENT · SAME-DAY</span>
+    </div>
+    <div class="split reveal">
+        <div class="imgwrap"><img
+                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80"><span
+                class="img-cap">Eddy current field inspection · conductive surface</span></div>
+        <div class="txt">
+            <div class="tag-line">// NDE / NDT</div>
+            <h2>No coating removal. Results the same day.</h2>
+            <p>Eddy current testing is one of the most cost-effective means of evaluating equipment — detecting surface
+                flaws and hairline fractures with minimal preparation. Portable equipment means instant on-site results.
+            </p>
+            <ul>
+                <li>No need to remove paint or surface coatings</li>
+                <li>Detects flaws in ferrous and non-ferrous materials</li>
+                <li>Identifies metal grade, hardness, near-surface defects</li>
+                <li>Same-day reporting for fast response to any findings</li>
+            </ul>
+            <div style="margin-top:28px"><a href="#contact" class="btn">Request NDT →</a></div>
+        </div>
+    </div>
+    <div class="split reveal">
+        <div class="txt" style="border-right:4px solid var(--line)">
+            <div class="tag-line">// Tube Inspection</div>
+            <h2>Prevent failure before it happens.</h2>
+            <p>Equipment breakdown carries an extremely high cost. Frasco partners with your business to ensure minimal
+                downtime — the right evaluation method for every situation, with eddy current testing the most
+                cost-effective and elegant solution for many applications.</p>
+            <ul>
+                <li>Chiller, condenser and evaporator tubes</li>
+                <li>Heat exchangers, fin fans, boiler bundles</li>
+                <li>On-site portable inspection, same-day</li>
+                <li>Reduced maintenance expense, increased profitability</li>
+            </ul>
+            <div style="margin-top:28px"><a href="#contact" class="btn">Request Tube Inspection →</a></div>
+        </div>
+        <div class="imgwrap"><img
+                src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=900&q=80"><span
+                class="img-cap">Tube bundle inspection · heat exchanger system</span></div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about-panel" id="about">
+        <div class="wrap">
+            <div class="about-inner reveal">
+                <div>
+                    <div class="floor-label" style="color:#c0cdd8;margin-bottom:20px">About Frasco</div>
+                    <h2>Inspection services built on integrity, quality and results.</h2>
+                    <p>Based in Dartmouth, Nova Scotia, Frasco provides NDE/NDT and asset integrity testing designed to
+                        limit your facility's downtime and unexpected machinery expense. Our technicians are industry
+                        leaders, and our business revolves around long-term relationships built on results.</p>
+                    <p>Many of our services can be provided on-site with same-day results available — because we
+                        understand that every hour of downtime is costing your company money.</p>
+                    <a href="#contact" class="btn" style="margin-top:8px">Discuss Your Project</a>
+                </div>
+                <div class="certs-list reveal d1">
+                    <div class="cert-item"><span class="check"></span>
+                        <div><span class="k">NDT Personnel Certified To</span><span class="v">CAN/CGSB-48.9712</span>
+                        </div>
+                    </div>
+                    <div class="cert-item"><span class="check"></span>
+                        <div><span class="k">Welding Inspection</span><span class="v">CWB CSA W178.2</span></div>
+                    </div>
+                    <div class="cert-item"><span class="check"></span>
+                        <div><span class="k">API Inspection Standards</span><span class="v">API 510 · 570 · 653</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <div class="section-label" id="industries">
+        <h3>Industries Served</h3><span class="n">12 SECTORS</span>
+    </div>
+    <div class="ind reveal">
+        <a href="#contact"><span>Energy</span><span class="n">01</span></a>
+        <a href="#contact"><span>Refining</span><span class="n">02</span></a>
+        <a href="#contact"><span>Power Gen</span><span class="n">03</span></a>
+        <a href="#contact"><span>Heating & Cooling</span><span class="n">04</span></a>
+        <a href="#contact"><span>Marine</span><span class="n">05</span></a>
+        <a href="#contact"><span>Mining</span><span class="n">06</span></a>
+        <a href="#contact"><span>Welding</span><span class="n">07</span></a>
+        <a href="#contact"><span>Fabrication</span><span class="n">08</span></a>
+        <a href="#contact"><span>Offshore</span><span class="n">09</span></a>
+        <a href="#contact"><span>Pulp & Paper</span><span class="n">10</span></a>
+        <a href="#contact"><span>Construction</span><span class="n">11</span></a>
+        <a href="#contact"><span>Crane & Lifting</span><span class="n">12</span></a>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <div class="wrap">
+            <div class="reveal">
+                <p>Every hour of downtime costs money</p>
+                <h2>Let's keep your<br>facility <span class="o">running.</span></h2>
+            </div>
+            <div class="cta-right reveal d1">
+                <span class="phone">1-902-431-5483</span>
+                <p style="color:#8a9098;margin-bottom:22px">Certified personnel respond 24/7 — same-day results on most
+                    inspections. Serving NS, NB, Newfoundland, Canada, the US and overseas.</p>
+                <a href="#" class="btn">Request an Inspection</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <div class="fgrid">
+                <div>
+                    <div class="logo" style="margin-bottom:14px;font-size:24px">FRASCO</div>
+                    <p>Industrial inspection services and solutions, delivered domestically and internationally from
+                        Dartmouth, Nova Scotia.</p>
+                </div>
+                <div>
+                    <h4>Address</h4>
+                    <p>25 Raddall Ave., Unit 4<br>Dartmouth, NS<br>B3B 1L4</p>
+                </div>
+                <div>
+                    <h4>Contact</h4><a href="tel:19024315483">1-902-431-5483</a>
+                    <p>Fax: 1-902-481-1007</p><a href="mailto:info@frasco.ca">info@frasco.ca</a>
+                </div>
+                <div>
+                    <h4>Serving</h4>
+                    <p>Nova Scotia, New Brunswick & Newfoundland — plus clients throughout Canada, the US and overseas.
+                    </p>
+                </div>
+            </div>
+            <div class="fcopy"><span>© 2026 Frasco Industrial Inspections — All Rights Reserved</span><span>NDE · NDT ·
+                    Asset Integrity · Lifting</span></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
+    <script>
+        (function () {
+            const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!reduce && window.Lenis) {
+                const l = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+                function r(t) { l.raf(t); requestAnimationFrame(r); } requestAnimationFrame(r);
+                document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+                    const id = a.getAttribute('href'); if (id && id.length > 1) { const el = document.querySelector(id); if (el) { e.preventDefault(); l.scrollTo(el, { offset: -72 }); } }
+                }));
+            }
+            if (!reduce) {
+                const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: .12 });
+                document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+            } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+        })();
+    </script>
+</body>
+
+</html>
