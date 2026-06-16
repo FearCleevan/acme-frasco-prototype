@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ACME Sign — Variant 2: Precision Grid</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600;1,900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#CC0000;
+  --black:#080808;
+  --white:#FFFFFF;
+  --warm:#F5F3EF;
+  --muted:#8A8A8A;
+  --border:#E5E5E5;
+  --border-dark:#CCCCCC;
+}
+body{font-family:'DM Sans',sans-serif;color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
+
+/* NAV */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:64px;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--black)}
+.logo span{color:var(--red)}
+nav ul{display:flex;gap:32px;list-style:none}
+nav a{text-decoration:none;font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.04em;transition:color 0.2s}
+nav a:hover{color:var(--black)}
+.h-right{display:flex;align-items:center;gap:24px}
+.h-phone{font-size:13px;font-weight:500;color:var(--black)}
+.h-cta{background:var(--red);color:white;padding:9px 20px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:background 0.2s}
+.h-cta:hover{background:#a80000}
+
+/* HERO — full width text block with image beside */
+.hero{
+  padding-top:64px;display:grid;
+  grid-template-columns:1fr 380px;
+  min-height:100vh;
+}
+.hero-left{
+  padding:80px 56px 56px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid var(--border);
+}
+.hero-tag{
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:0;
+}
+.hero-tag-line{width:28px;height:1px;background:var(--red)}
+.hero-h{
+  font-family:'Fraunces',serif;
+  font-size:clamp(68px,8.5vw,124px);
+  font-weight:900;line-height:0.9;
+  letter-spacing:-0.03em;
+  flex:1;display:flex;align-items:center;
+}
+.hero-h em{font-style:italic;color:var(--red)}
+.hero-foot{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:32px;
+  padding-top:40px;border-top:1px solid var(--border);
+}
+.hero-desc{font-size:16px;font-weight:300;line-height:1.8;color:#555;max-width:440px}
+.hero-btns{display:flex;flex-direction:column;gap:10px;flex-shrink:0;align-items:flex-end}
+.btn-r{background:var(--red);color:white;padding:13px 26px;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background 0.2s}
+.btn-r:hover{background:#a80000}
+.btn-g{background:transparent;color:var(--black);padding:13px 26px;font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border-dark);white-space:nowrap;transition:all 0.2s}
+.btn-g:hover{border-color:var(--black)}
+
+/* RIGHT PANEL — vertical info strip */
+.hero-right{
+  display:flex;flex-direction:column;
+}
+.hero-stat-block{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 32px;border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.hero-stat-block:last-child{border-bottom:none}
+.h-stat-val{
+  font-family:'Fraunces',serif;font-size:56px;font-weight:900;
+  color:var(--black);line-height:1;margin-bottom:8px;
+}
+.h-stat-val em{font-style:italic;color:var(--red)}
+.h-stat-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+
+/* MARQUEE */
+.marquee{
+  background:var(--black);overflow:hidden;white-space:nowrap;
+  padding:14px 0;border-top:none;
+}
+.marquee-inner{
+  display:inline-block;animation:ticker 32s linear infinite;
+  font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);
+}
+.marquee-inner span{margin:0 24px;color:rgba(255,255,255,0.25)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SERVICES */
+.section{padding:96px 56px}
+.section-warm{background:var(--warm)}
+.ey{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.st{
+  font-family:'Fraunces',serif;
+  font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;
+  margin-bottom:16px;
+}
+.sb{font-size:16px;font-weight:300;line-height:1.8;color:#555;max-width:520px;margin-bottom:56px}
+
+/* Services as large typographic rows */
+.svc-table{width:100%;border-collapse:collapse}
+.svc-tr{
+  border-bottom:1px solid var(--border);cursor:pointer;
+  transition:background 0.15s;
+}
+.svc-tr:first-child{border-top:1px solid var(--border)}
+.svc-tr:hover{background:white}
+.svc-td-n{
+  padding:28px 20px 28px 0;width:56px;
+  font-size:12px;font-weight:500;color:var(--muted);vertical-align:top;padding-top:32px;
+}
+.svc-td-name{
+  padding:28px 24px 28px 0;
+  font-family:'Fraunces',serif;font-size:28px;font-weight:700;
+  vertical-align:middle;width:280px;
+}
+.svc-tr.feat .svc-td-name{color:var(--red)}
+.svc-td-desc{
+  padding:28px 24px;font-size:13px;font-weight:400;
+  color:#666;line-height:1.6;vertical-align:middle;
+}
+.svc-td-tag{padding:28px 0;vertical-align:middle;text-align:right;white-space:nowrap}
+.tag-pill{
+  display:inline-block;padding:4px 12px;
+  font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+}
+.tag-r{background:var(--red);color:white}
+.tag-k{background:var(--black);color:white}
+.tag-e{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.svc-td-arr{padding:28px 0 28px 20px;vertical-align:middle;font-size:20px;color:var(--border);transition:color 0.2s}
+.svc-tr:hover .svc-td-arr{color:var(--red)}
+
+/* VEHICLE WRAPS */
+.wrap-full{display:grid;grid-template-columns:1.1fr 1fr;min-height:520px}
+.wrap-ph{
+  background:var(--warm);display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;color:var(--muted);font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.07em;
+  border-right:1px solid var(--border);
+}
+.wrap-ph .ph{font-size:56px}
+.wrap-c{padding:72px 64px;display:flex;flex-direction:column;justify-content:center}
+.wrap-types-list{
+  margin:28px 0;display:flex;flex-direction:column;gap:0;
+  border-top:1px solid var(--border);
+}
+.wt{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 0;border-bottom:1px solid var(--border);
+  font-size:14px;font-weight:500;cursor:pointer;transition:color 0.2s;
+}
+.wt:hover{color:var(--red)}
+.wt span:last-child{color:var(--border);font-size:18px;transition:color 0.2s}
+.wt:hover span:last-child{color:var(--red)}
+
+/* LED */
+.led{background:var(--black);padding:96px 56px;display:grid;grid-template-columns:5fr 4fr;gap:80px;align-items:start}
+.led-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#FFB800;color:var(--black);
+  font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  padding:5px 14px;margin-bottom:24px;
+}
+.led-h{
+  font-family:'Fraunces',serif;font-size:clamp(40px,5vw,64px);font-weight:900;
+  line-height:1;color:white;margin-bottom:20px;
+}
+.led-h em{font-style:italic;color:#FFB800}
+.led-b{font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.55);margin-bottom:28px}
+.led-rows{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.08);margin-bottom:32px}
+.led-row{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  font-size:14px;color:rgba(255,255,255,0.65);
+}
+.led-row::before{content:'–';color:#FFB800;flex-shrink:0;font-weight:600}
+.btn-y{background:#FFB800;color:var(--black);padding:13px 28px;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background 0.2s}
+.btn-y:hover{background:#e6a600}
+.led-r-panel{padding-top:8px}
+.led-r-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06)}
+.led-r-cell{background:var(--black);padding:28px 20px}
+.led-r-val{font-family:'Fraunces',serif;font-size:40px;font-weight:900;color:#FFB800;line-height:1;margin-bottom:6px}
+.led-r-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.led-r-note{
+  padding:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);
+  margin-top:1px;
+}
+.led-r-note p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;font-weight:300}
+
+/* WHY */
+.why-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);border-left:1px solid var(--border)}
+.why-cell{padding:48px 40px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.why-big{font-family:'Fraunces',serif;font-size:72px;font-weight:900;color:var(--border);line-height:1;margin-bottom:16px}
+.why-line{width:20px;height:2px;background:var(--red);margin-bottom:18px}
+.why-t{font-size:17px;font-weight:600;margin-bottom:10px}
+.why-d{font-size:13px;font-weight:300;color:#666;line-height:1.75}
+
+/* AREA + CONTACT */
+.ac{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.ac-left{padding:80px 56px;border-right:1px solid var(--border)}
+.ac-right{padding:80px 56px;background:var(--warm)}
+.at{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
+.at-pill{padding:6px 14px;font-size:11px;font-weight:500;border:1px solid var(--border-dark);color:#555;cursor:default;transition:all 0.2s}
+.at-pill:hover{border-color:var(--red);color:var(--red)}
+.ci{display:flex;flex-direction:column;gap:28px}
+.ci-row{display:flex;gap:14px}
+.ci-icon{font-size:18px;flex-shrink:0;width:22px;text-align:center;margin-top:2px}
+.ci-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.ci-val{font-size:15px;font-weight:500;line-height:1.5}
+
+/* CTA */
+.cta{
+  background:var(--red);padding:80px 56px;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;
+}
+.cta-label{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:12px}
+.cta-h{font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,48px);font-weight:700;color:white;line-height:1.1}
+.cta-h em{font-style:italic}
+.btn-w{background:white;color:var(--red);padding:15px 32px;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.2s}
+.btn-w:hover{background:var(--black);color:white}
+
+/* FOOTER */
+footer{background:var(--black);padding:72px 56px 36px;color:rgba(255,255,255,0.4)}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.fb{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:white;margin-bottom:4px}
+.fb-sub{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.fi{font-size:13px;line-height:2;font-weight:300}
+.fc h5{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:18px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fc ul a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:13px;font-weight:300;transition:color 0.2s}
+.fc ul a:hover{color:white}
+.fd{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;justify-content:space-between;font-size:11px;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ACME <span>SIGN</span> & GRAPHICS</div>
+  <nav>
+    <ul>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Vehicle Wraps</a></li>
+      <li><a href="#">LED Signs</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="h-right">
+    <span class="h-phone">+1 (902) 481-1007</span>
+    <a href="#" class="h-cta">Get a Quote</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">
+      <div class="hero-tag-line"></div>
+      <span>Dartmouth, Nova Scotia · Est. 1989</span>
+    </div>
+    <h1 class="hero-h">
+      We Make<br/>Signs That<br/><em>Work.</em>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-desc">ACME Sign & Graphics creates high-impact signs, vehicle wraps, programmable LED displays, and custom apparel for businesses across Atlantic Canada — solutions that fit any budget.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-r">Get a Free Quote</a>
+        <a href="#" class="btn-g">View Gallery</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-block">
+      <div class="h-stat-val">35<em>+</em></div>
+      <div class="h-stat-label">Years Experience</div>
+    </div>
+    <div class="hero-stat-block">
+      <div class="h-stat-val">72<em>%</em></div>
+      <div class="h-stat-label">More Noticed vs Static</div>
+    </div>
+    <div class="hero-stat-block">
+      <div class="h-stat-val">900<em>%</em></div>
+      <div class="h-stat-label">LED Visibility Boost</div>
+    </div>
+    <div class="hero-stat-block">
+      <div class="h-stat-val">4–6<em>yr</em></div>
+      <div class="h-stat-label">Wrap Lifespan</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    Channel Signs<span>·</span>
+    Vehicle Wraps<span>·</span>
+    LED Displays<span>·</span>
+    Illuminated Signs<span>·</span>
+    Window Graphics<span>·</span>
+    Banners<span>·</span>
+    Apparel<span>·</span>
+    Safety Signs<span>·</span>
+    Decals & Stickers<span>·</span>
+    Sign Service<span>·</span>
+    Channel Signs<span>·</span>
+    Vehicle Wraps<span>·</span>
+    LED Displays<span>·</span>
+    Illuminated Signs<span>·</span>
+    Window Graphics<span>·</span>
+    Banners<span>·</span>
+    Apparel<span>·</span>
+    Safety Signs<span>·</span>
+    Decals & Stickers<span>·</span>
+    Sign Service<span>·</span>
+  </div>
+</div>
+
+<section class="section section-warm">
+  <p class="ey">Services</p>
+  <h2 class="st">Every Sign Has<br/>a Job to Do</h2>
+  <p class="sb">From illuminated storefronts to full fleet wraps — we design and fabricate everything in-house, giving you control over quality, timeline, and cost.</p>
+  <table class="svc-table">
+    <tbody>
+      <tr class="svc-tr feat">
+        <td class="svc-td-n">01</td>
+        <td class="svc-td-name">LED Signs & Displays</td>
+        <td class="svc-td-desc">Full-colour programmable LED signs with built-in WiFi and mobile app control. Get noticed 72% more than static signs. Available to buy, rent, or lease.</td>
+        <td class="svc-td-tag"><span class="tag-pill tag-r">★ Featured</span></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">02</td>
+        <td class="svc-td-name">Vehicle Wraps</td>
+        <td class="svc-td-desc">Full wraps, partial wraps, and fleet graphics. 24/7 mobile advertising that lasts 4–6 years and works wherever the road takes you.</td>
+        <td class="svc-td-tag"><span class="tag-pill tag-k">Popular</span></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">03</td>
+        <td class="svc-td-name">Channel Signs</td>
+        <td class="svc-td-desc">3D dimensional letters in aluminum, stainless steel, or acrylic. Illuminated or non-illuminated. Built for both indoor and outdoor use.</td>
+        <td class="svc-td-tag"></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">04</td>
+        <td class="svc-td-name">Illuminated Signs</td>
+        <td class="svc-td-desc">Light boxes in any shape or size. We consult on bylaws and budget before fabricating — saving you time and money on the front end.</td>
+        <td class="svc-td-tag"></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">05</td>
+        <td class="svc-td-name">Window Graphics</td>
+        <td class="svc-td-desc">Opaque, perforated, frosted, and vinyl lettering. Turn any window into a display that attracts attention and reinforces your brand.</td>
+        <td class="svc-td-tag"></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">06</td>
+        <td class="svc-td-name">Banners</td>
+        <td class="svc-td-desc">Premium 13 oz outdoor vinyl, seamed and grommeted in-house. Same-day turnaround available for urgent orders.</td>
+        <td class="svc-td-tag"><span class="tag-pill tag-e">Fast</span></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">07</td>
+        <td class="svc-td-name">Safety Signs</td>
+        <td class="svc-td-desc">Custom-manufactured in-house. Chemical, construction, electrical, warehouse — everything your workplace safety program requires.</td>
+        <td class="svc-td-tag"></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">08</td>
+        <td class="svc-td-name">Apparel</td>
+        <td class="svc-td-desc">35+ years of screen printing and embroidery. T-shirts, sweatshirts, hats, and more for teams, schools, and businesses of any size.</td>
+        <td class="svc-td-tag"></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+      <tr class="svc-tr">
+        <td class="svc-td-n">09</td>
+        <td class="svc-td-name">Decals & Stickers</td>
+        <td class="svc-td-desc">Custom-cut for vehicles, hard hats, laptops, and toolboxes. Any smooth surface, any design, any quantity — logo branding made easy.</td>
+        <td class="svc-td-tag"></td>
+        <td class="svc-td-arr">→</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section style="padding:0">
+  <div class="wrap-full">
+    <div class="wrap-ph">
+      <div class="ph">🚐</div>
+      <span>Vehicle Wrap Photography</span>
+    </div>
+    <div class="wrap-c">
+      <p class="ey">Mobile Advertising</p>
+      <h2 class="st">Your Brand<br/>in Motion</h2>
+      <p style="font-size:15px;font-weight:300;line-height:1.8;color:#555">One investment. Four to six years of continuous advertising — seen by thousands every single day, everywhere you drive. No recurring costs, no effort required.</p>
+      <div class="wrap-types-list">
+        <div class="wt"><span>Full Vehicle Wraps</span><span>→</span></div>
+        <div class="wt"><span>Partial Wraps</span><span>→</span></div>
+        <div class="wt"><span>Fleet Graphics</span><span>→</span></div>
+        <div class="wt"><span>Custom Design</span><span>→</span></div>
+        <div class="wt"><span>Vehicle Door Graphics</span><span>→</span></div>
+      </div>
+      <a href="#" class="btn-r" style="display:inline-block;margin-top:4px">Get a Wrap Quote</a>
+    </div>
+  </div>
+</section>
+
+<section class="led">
+  <div>
+    <div class="led-badge">★ Featured Service</div>
+    <h2 class="led-h">Programmable<br/><em>LED</em> Signs</h2>
+    <p class="led-b">Bright, full-colour LED signs with built-in WiFi and a mobile app. Update your message from any smartphone or tablet — any time, from anywhere.</p>
+    <div class="led-rows">
+      <div class="led-row">Full-colour indoor & outdoor displays in any size</div>
+      <div class="led-row">Mobile app control — update your message in seconds</div>
+      <div class="led-row">Buy, rent, or lease — options for every budget</div>
+      <div class="led-row">Free indoor installation on all units</div>
+      <div class="led-row">Retrofit your existing sign with a new LED display</div>
+      <div class="led-row">Purchase two or more and save</div>
+    </div>
+    <a href="#" class="btn-y">Get LED Sign Info</a>
+  </div>
+  <div class="led-r-panel">
+    <div class="led-r-grid">
+      <div class="led-r-cell">
+        <div class="led-r-val">72%</div>
+        <div class="led-r-label">More Noticed</div>
+      </div>
+      <div class="led-r-cell">
+        <div class="led-r-val">900%</div>
+        <div class="led-r-label">Visibility Boost</div>
+      </div>
+      <div class="led-r-cell">
+        <div class="led-r-val">24/7</div>
+        <div class="led-r-label">Advertising</div>
+      </div>
+      <div class="led-r-cell">
+        <div class="led-r-val">WiFi</div>
+        <div class="led-r-label">Built-In</div>
+      </div>
+    </div>
+    <div class="led-r-note">
+      <p>All signs come with built-in WiFi and a convenient app for your phone, tablet, or PC. No ladder. No manual letter changes. Just open the app and type.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="ey">Why Choose ACME Sign</p>
+  <h2 class="st">The ACME Advantage</h2>
+  <div class="why-cols">
+    <div class="why-cell">
+      <div class="why-big">01</div>
+      <div class="why-line"></div>
+      <div class="why-t">Local Expertise</div>
+      <p class="why-d">Dartmouth-based for 35+ years. We understand Nova Scotia bylaws, Atlantic weather conditions, and what actually works for businesses in this region.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-big">02</div>
+      <div class="why-line"></div>
+      <div class="why-t">In-House Fabrication</div>
+      <p class="why-d">Everything is built in our shop. No outsourcing — we control every detail of quality, timeline, and installation from the first conversation to the final sign.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-big">03</div>
+      <div class="why-line"></div>
+      <div class="why-t">Any Budget</div>
+      <p class="why-d">From a single decal to a full LED display system — we have honest solutions for every budget without ever compromising on quality or materials.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-big">04</div>
+      <div class="why-line"></div>
+      <div class="why-t">Full Service</div>
+      <p class="why-d">Design, fabrication, and installation under one roof. From first consultation to final install across Nova Scotia — we handle everything.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0">
+  <div class="ac">
+    <div class="ac-left">
+      <p class="ey">Where We Work</p>
+      <h2 class="st">Serving Atlantic<br/>Canada</h2>
+      <p style="font-size:14px;font-weight:300;line-height:1.8;color:#555">From our Dartmouth shop we serve businesses across Nova Scotia, New Brunswick, and Prince Edward Island.</p>
+      <div class="at">
+        <span class="at-pill">Halifax</span><span class="at-pill">Dartmouth</span>
+        <span class="at-pill">Bedford</span><span class="at-pill">Sackville</span>
+        <span class="at-pill">Truro</span><span class="at-pill">Wolfville</span>
+        <span class="at-pill">Kentville</span><span class="at-pill">Digby</span>
+        <span class="at-pill">Yarmouth</span><span class="at-pill">Pictou</span>
+        <span class="at-pill">Antigonish</span><span class="at-pill">New Glasgow</span>
+        <span class="at-pill">Sydney</span><span class="at-pill">Cape Breton</span>
+        <span class="at-pill">Moncton</span><span class="at-pill">Amherst</span>
+        <span class="at-pill">New Brunswick</span><span class="at-pill">Prince Edward Island</span>
+      </div>
+    </div>
+    <div class="ac-right">
+      <p class="ey">Get in Touch</p>
+      <h2 class="st" style="margin-bottom:32px">Contact<br/>Us</h2>
+      <div class="ci">
+        <div class="ci-row">
+          <span class="ci-icon">📍</span>
+          <div><div class="ci-label">Address</div><div class="ci-val">25 Raddall Avenue, Unit 4<br/>Dartmouth, Nova Scotia B3B 1L4</div></div>
+        </div>
+        <div class="ci-row">
+          <span class="ci-icon">📞</span>
+          <div><div class="ci-label">Phone</div><div class="ci-val">+1 (902) 481-1007</div></div>
+        </div>
+        <div class="ci-row">
+          <span class="ci-icon">📠</span>
+          <div><div class="ci-label">Fax</div><div class="ci-val">+1 (902) 481-0511</div></div>
+        </div>
+        <div class="ci-row">
+          <span class="ci-icon">✉️</span>
+          <div><div class="ci-label">Email</div><div class="ci-val">acmesign01@gmail.com</div></div>
+        </div>
+        <div class="ci-row">
+          <span class="ci-icon">🕐</span>
+          <div><div class="ci-label">Hours</div><div class="ci-val">Mon – Fri · 8:30 AM – 5:00 PM</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <div>
+    <p class="cta-label">Ready to stand out?</p>
+    <h2 class="cta-h">Let's make a great<br/><em>first impression.</em></h2>
+  </div>
+  <a href="#" class="btn-w">Get a Free Quote</a>
+</div>
+
+<footer>
+  <div class="fg">
+    <div>
+      <div class="fb">ACME Sign</div>
+      <div class="fb-sub">& Graphics Company</div>
+      <div class="fi">25 Raddall Avenue, Unit 4<br/>Dartmouth, Nova Scotia B3B 1L4<br/>+1 (902) 481-1007<br/>acmesign01@gmail.com</div>
+    </div>
+    <div class="fc">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">LED Signs</a></li>
+        <li><a href="#">Vehicle Wraps</a></li>
+        <li><a href="#">Channel Signs</a></li>
+        <li><a href="#">Illuminated Signs</a></li>
+        <li><a href="#">Window Graphics</a></li>
+        <li><a href="#">Banners</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>More</h5>
+      <ul>
+        <li><a href="#">Safety Signs</a></li>
+        <li><a href="#">Apparel</a></li>
+        <li><a href="#">Decals & Stickers</a></li>
+        <li><a href="#">Dimension Signs</a></li>
+        <li><a href="#">Sign Service</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Artwork Guidelines</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fd">
+    <span>© 2026 ACME Sign & Graphics Co. All Rights Reserved.</span>
+    <span>Serving Atlantic Canada since 1989</span>
+  </div>
+</footer>
+
+</body>
+</html>
