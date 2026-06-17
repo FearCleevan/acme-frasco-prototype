@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ACME Sign & Graphics Co. — Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#CC0000;
+  --red-d:#a80000;
+  --black:#111111;
+  --dark:#1C1C1C;
+  --white:#FFFFFF;
+  --cream:#F5F3EF;
+  --muted:#888;
+  --border:#E0DDD8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── NAV ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  background:var(--white);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:36px;height:36px;background:var(--red);display:flex;align-items:center;justify-content:center;border-radius:4px}
+.logo-mark span{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:white}
+.logo-name{font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--black);line-height:1.3}
+.logo-name small{display:block;font-size:9px;font-weight:500;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase}
+nav{display:flex;gap:28px;list-style:none;align-items:center}
+nav a{font-size:12px;font-weight:600;color:#555;text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
+nav a.active{color:var(--red)}
+nav a:hover{color:var(--black)}
+.nav-r{display:flex;align-items:center;gap:16px}
+.nav-cta{
+  background:var(--black);color:white;
+  padding:10px 22px;font-size:12px;font-weight:700;
+  letter-spacing:0.07em;text-transform:uppercase;
+  text-decoration:none;border-radius:100px;
+  transition:background 0.2s;
+}
+.nav-cta:hover{background:var(--red)}
+
+/* ── HERO SECTION ── */
+.hero-section{
+  margin-top:68px;
+  min-height:calc(100vh - 68px);
+  background:linear-gradient(135deg, #8B0000 0%, var(--red) 35%, #D44000 70%, #E8720A 100%);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+/* bg pattern overlay */
+.hero-section::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 60px);
+  pointer-events:none;
+}
+
+/* ── HERO MAIN (top part) ── */
+.hero-main{
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr 520px;
+  gap:0;
+  padding:60px 72px 40px;
+  align-items:center;
+  position:relative;
+  z-index:1;
+}
+
+/* LEFT */
+.hero-left{display:flex;flex-direction:column;justify-content:space-between;gap:40px;padding-right:48px}
+
+.hero-top{}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,5vw,76px);
+  font-weight:900;
+  line-height:1.0;
+  color:white;
+  letter-spacing:-0.02em;
+  margin-bottom:20px;
+}
+.hero-title em{font-style:italic}
+.hero-desc{
+  font-size:16px;font-weight:400;line-height:1.75;
+  color:rgba(255,255,255,0.8);
+  max-width:420px;
+  margin-bottom:32px;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--black);color:white;
+  padding:14px 30px;
+  font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+  text-decoration:none;border-radius:100px;
+  transition:background 0.25s,transform 0.2s;
+  width:fit-content;
+}
+.hero-btn:hover{background:rgba(0,0,0,0.85);transform:translateY(-1px)}
+.hero-btn svg{width:16px;height:16px;flex-shrink:0}
+
+.hero-bottom-card{
+  background:rgba(0,0,0,0.25);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;
+  padding:24px 28px;
+  display:flex;flex-direction:column;gap:20px;
+  backdrop-filter:blur(6px);
+  max-width:340px;
+}
+.hero-card-label{
+  font-size:13px;font-weight:600;
+  color:rgba(255,255,255,0.7);
+  line-height:1.4;
+}
+.hero-contact-link{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;
+}
+.hero-contact-icon{
+  width:40px;height:40px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.hero-contact-icon svg{width:18px;height:18px;color:white}
+.hero-phone-num{
+  font-size:20px;font-weight:700;color:white;letter-spacing:-0.01em;
+}
+
+/* RIGHT — image card */
+.hero-right{position:relative}
+.hero-image-card{
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  height:460px;
+  box-shadow:0 32px 80px rgba(0,0,0,0.35);
+}
+.hero-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:opacity 0.7s ease;
+  opacity:0;
+}
+.hero-img.active{opacity:1}
+.hero-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+}
+
+/* Slide nav bars */
+.hero-slide-bar-wrapper{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;gap:0;
+  padding:20px 24px;
+  z-index:2;
+}
+.hero-slide-content{
+  flex:1;display:flex;flex-direction:column;gap:8px;cursor:pointer;
+  padding:0 8px;
+}
+.hero-slide-content:first-child{padding-left:0}
+.hero-slide-content:last-child{padding-right:0}
+.hero-slide-bar{
+  height:2px;background:rgba(255,255,255,0.25);border-radius:2px;overflow:hidden;
+}
+.hero-slide-fill{
+  height:100%;width:100%;background:white;border-radius:2px;
+  transform:scaleX(0);transform-origin:left;
+  transition:none;
+}
+.hero-slide-fill.running{
+  transition:transform linear;
+}
+.hero-slide-fill.done{transform:scaleX(1);transition:none}
+.hero-slide-nav-title{
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.75);
+  transition:color 0.2s;
+}
+.hero-slide-content.active .hero-slide-nav-title{color:white}
+
+/* ── HERO BOTTOM STATS ── */
+.hero-bottom{
+  position:relative;z-index:1;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(8px);
+  border-top:1px solid rgba(255,255,255,0.15);
+  padding:28px 72px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:40px;
+}
+.hero-bottom-left{
+  font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);
+  max-width:320px;line-height:1.5;
+}
+.hero-counters{display:flex;gap:48px;align-items:center}
+.counter-item{text-align:left}
+.counter-num{display:flex;align-items:baseline;gap:2px}
+.count-val{font-size:36px;font-weight:800;color:white;letter-spacing:-0.02em;line-height:1}
+.count-sym{font-size:28px;font-weight:800;color:var(--red);line-height:1}
+.counter-label{font-size:13px;font-weight:500;color:rgba(255,255,255,0.65);margin-top:4px}
+
+/* shape accents */
+.hero-shape{
+  position:absolute;bottom:0;width:80px;opacity:0.35;pointer-events:none;
+}
+.hero-shape.left{left:16px}
+.hero-shape.right{right:16px;transform:scaleX(-1)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-main{grid-template-columns:1fr;gap:40px;padding:48px 40px 32px}
+  .hero-left{padding-right:0}
+  .hero-image-card{height:360px}
+  .hero-bottom{padding:24px 40px;flex-wrap:wrap;gap:24px}
+}
+@media(max-width:640px){
+  header{padding:0 24px}
+  nav{display:none}
+  .hero-main{padding:32px 24px 24px}
+  .hero-title{font-size:42px}
+  .hero-bottom{padding:20px 24px}
+  .hero-counters{gap:28px}
+  .count-val{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <a href="#" class="logo">
+    <div class="logo-mark"><span>A</span></div>
+    <div class="logo-name">ACME Sign &amp; Graphics<small>Dartmouth, Nova Scotia</small></div>
+  </a>
+  <nav>
+    <a href="#" class="active">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Portfolio</a>
+    <a href="#">About</a>
+  </nav>
+  <div class="nav-r">
+    <a href="tel:+19025550192" class="nav-cta">Free Quote</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-section">
+
+  <div class="hero-main">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-top">
+        <h1 class="hero-title">Signs built<br>to be seen</h1>
+        <p class="hero-desc">Complete signage solutions focused on impact, durability, and long-term brand visibility.</p>
+        <a href="#services" class="hero-btn">
+          View our services
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-bottom-card">
+        <div class="hero-card-label">20+ years of signage<br>craftsmanship in Atlantic Canada</div>
+        <a href="tel:+19025550192" class="hero-contact-link">
+          <div class="hero-contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <div class="hero-phone-num">+1 (902) 555-0192</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-right">
+      <div class="hero-image-card">
+        <!-- Images from Unsplash (free-to-use) -->
+        <img class="hero-img active" id="slide-0"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80"
+          alt="Channel letter signs on building" loading="eager"/>
+        <img class="hero-img" id="slide-1"
+          src="https://images.unsplash.com/photo-1542744095-291d1f67b221?w=900&q=80"
+          alt="Vehicle wrap graphics" loading="lazy"/>
+        <img class="hero-img" id="slide-2"
+          src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=900&q=80"
+          alt="Large format printing" loading="lazy"/>
+
+        <div class="hero-img-overlay"></div>
+
+        <div class="hero-slide-bar-wrapper">
+          <div class="hero-slide-content active" data-index="0">
+            <div class="hero-slide-bar"><div class="hero-slide-fill" id="fill-0"></div></div>
+            <div class="hero-slide-nav-title">Exterior Signs</div>
+          </div>
+          <div class="hero-slide-content" data-index="1">
+            <div class="hero-slide-bar"><div class="hero-slide-fill" id="fill-1"></div></div>
+            <div class="hero-slide-nav-title">Vehicle Wraps</div>
+          </div>
+          <div class="hero-slide-content" data-index="2">
+            <div class="hero-slide-bar"><div class="hero-slide-fill" id="fill-2"></div></div>
+            <div class="hero-slide-nav-title">Large Format</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-main -->
+
+  <!-- BOTTOM STATS -->
+  <div class="hero-bottom">
+    <p class="hero-bottom-left">A proven track record shaped by experience, quality, and craftsmanship</p>
+    <div class="hero-counters">
+      <div class="counter-item">
+        <div class="counter-num">
+          <span class="count-val" data-target="3500">3,500</span>
+          <span class="count-sym">+</span>
+        </div>
+        <div class="counter-label">Signs successfully installed</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-num">
+          <span class="count-val" data-target="100">100</span>
+          <span class="count-sym">%</span>
+        </div>
+        <div class="counter-label">Quality-focused craftsmanship</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+// ── Slideshow with animated progress bars ──
+const SLIDE_DURATION = 5000;
+const slides = document.querySelectorAll('.hero-img');
+const fills = document.querySelectorAll('.hero-slide-fill');
+const navItems = document.querySelectorAll('.hero-slide-content');
+let current = 0;
+let timer = null;
+let fillStart = null;
+let rafId = null;
+
+function goTo(index) {
+  cancelAnimationFrame(rafId);
+  clearTimeout(timer);
+
+  // reset all fills
+  fills.forEach((f, i) => {
+    f.classList.remove('running','done');
+    f.style.transform = i < index ? 'scaleX(1)' : 'scaleX(0)';
+  });
+
+  slides.forEach(s => s.classList.remove('active'));
+  navItems.forEach(n => n.classList.remove('active'));
+
+  current = index;
+  slides[current].classList.add('active');
+  navItems[current].classList.add('active');
+
+  // Animate the fill for current slide using rAF
+  const fill = fills[current];
+  fill.style.transform = 'scaleX(0)';
+  fillStart = null;
+
+  function animateFill(ts) {
+    if (!fillStart) fillStart = ts;
+    const progress = Math.min((ts - fillStart) / SLIDE_DURATION, 1);
+    fill.style.transform = `scaleX(${progress})`;
+    if (progress < 1) {
+      rafId = requestAnimationFrame(animateFill);
+    } else {
+      fill.classList.add('done');
+      timer = setTimeout(() => goTo((current + 1) % slides.length), 0);
+    }
+  }
+  rafId = requestAnimationFrame(animateFill);
+}
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => goTo(parseInt(item.dataset.index)));
+});
+
+// kick off
+goTo(0);
+</script>
+</body>
+</html>

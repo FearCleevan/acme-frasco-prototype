@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ACME Sign & Graphics Co. — Dartmouth, Nova Scotia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#CC0000;
+  --black:#0D0D0D;
+  --white:#FFFFFF;
+  --off:#F6F5F3;
+  --muted:#888;
+  --border:#E2E2E2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
+
+/* ─── NAV ─── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--white);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;height:70px;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-box{
+  width:36px;height:36px;background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:white;
+}
+.nav-logo-text{
+  font-size:13px;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--black);line-height:1.3;
+}
+.nav-logo-text span{display:block;font-size:9px;font-weight:500;letter-spacing:0.15em;color:var(--muted)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  font-size:12px;font-weight:500;color:#666;text-decoration:none;
+  letter-spacing:0.04em;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--black)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-phone{font-size:13px;font-weight:600;color:var(--black);letter-spacing:0.01em}
+.nav-phone span{color:var(--red)}
+.nav-cta{
+  background:var(--red);color:white;padding:10px 22px;
+  font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s;white-space:nowrap;
+}
+.nav-cta:hover{background:#a80000}
+
+/* ─── HERO ─── */
+.hero{
+  margin-top:70px;
+  position:relative;height:92vh;min-height:580px;
+  overflow:hidden;
+}
+.hero-img{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=1600&q=80');
+  background-size:cover;background-position:center;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  height:100%;display:flex;flex-direction:column;
+  justify-content:center;padding:0 52px;
+}
+.hero-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--red)}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,6.5vw,88px);
+  font-weight:900;line-height:1.0;
+  color:white;max-width:640px;margin-bottom:24px;
+  letter-spacing:-0.01em;
+}
+.hero-title em{font-style:italic;color:var(--red)}
+.hero-sub{
+  font-size:17px;font-weight:300;line-height:1.75;
+  color:rgba(255,255,255,0.75);max-width:480px;margin-bottom:36px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-hero{
+  background:var(--red);color:white;padding:15px 32px;
+  font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s;
+}
+.btn-hero:hover{background:#a80000}
+.btn-hero-ghost{
+  background:transparent;color:white;padding:15px 32px;
+  font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  text-decoration:none;border:1px solid rgba(255,255,255,0.4);transition:all 0.2s;
+}
+.btn-hero-ghost:hover{background:rgba(255,255,255,0.1);border-color:white}
+.hero-scroll{
+  position:absolute;bottom:36px;right:52px;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.hero-scroll span{font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.hero-scroll-line{width:1px;height:44px;background:rgba(255,255,255,0.2)}
+
+/* ─── STATS BAR ─── */
+.stats-bar{
+  background:var(--black);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat{
+  padding:32px 36px;border-right:1px solid rgba(255,255,255,0.07);
+  display:flex;align-items:center;gap:16px;
+}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:'Playfair Display',serif;font-size:44px;font-weight:700;
+  color:white;line-height:1;
+}
+.stat-num sup{font-size:22px;color:var(--red);font-style:italic}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);line-height:1.5}
+
+/* ─── SERVICES ─── */
+.services{padding:88px 52px}
+.section-header{margin-bottom:52px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(30px,3.5vw,46px);font-weight:700;line-height:1.1;color:var(--black)}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  background:var(--border);border:1px solid var(--border);
+}
+.svc-card{
+  background:var(--white);overflow:hidden;cursor:pointer;
+  transition:transform 0.25s;position:relative;
+}
+.svc-card:hover{transform:translateY(-3px);z-index:2;box-shadow:0 12px 40px rgba(0,0,0,0.12)}
+.svc-card.featured{outline:2px solid var(--red);outline-offset:-2px}
+.svc-photo{
+  width:100%;height:220px;object-fit:cover;display:block;
+  transition:transform 0.4s;
+}
+.svc-card:hover .svc-photo{transform:scale(1.04)}
+.svc-body{padding:24px 24px 28px}
+.svc-featured-tag{
+  display:inline-block;background:var(--red);color:white;
+  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  padding:3px 10px;margin-bottom:10px;
+}
+.svc-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.svc-card.featured .svc-name{color:var(--red)}
+.svc-desc{font-size:13px;font-weight:400;color:#666;line-height:1.6;margin-bottom:16px}
+.svc-link{
+  font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--black);text-decoration:none;
+  display:flex;align-items:center;gap:6px;transition:gap 0.2s;
+}
+.svc-link:hover{gap:12px;color:var(--red)}
+
+/* ─── VEHICLE WRAPS FEATURE ─── */
+.wraps-feature{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.wraps-photo-col{position:relative;overflow:hidden}
+.wraps-photo{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.5s;
+}
+.wraps-photo-col:hover .wraps-photo{transform:scale(1.03)}
+.wraps-content{
+  padding:72px 60px;display:flex;flex-direction:column;
+  justify-content:center;background:var(--off);
+}
+.wraps-list{margin:28px 0;display:flex;flex-direction:column;border-top:1px solid var(--border)}
+.wrap-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 0;border-bottom:1px solid var(--border);
+  font-size:14px;font-weight:500;cursor:pointer;transition:color 0.2s;
+}
+.wrap-item:hover{color:var(--red)}
+.wrap-arrow{color:var(--border);font-size:18px;transition:color 0.2s}
+.wrap-item:hover .wrap-arrow{color:var(--red)}
+
+/* ─── LED FEATURE ─── */
+.led-feature{
+  background:var(--black);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:560px;
+}
+.led-photo-col{position:relative;overflow:hidden}
+.led-photo{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.75);transition:transform 0.5s}
+.led-photo-col:hover .led-photo{transform:scale(1.03)}
+.led-photo-badge{
+  position:absolute;top:24px;left:24px;z-index:2;
+  background:#FFB800;color:var(--black);
+  font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;
+  padding:5px 14px;
+}
+.led-content{padding:72px 60px;display:flex;flex-direction:column;justify-content:center}
+.led-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#FFB800;margin-bottom:16px}
+.led-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,4vw,54px);font-weight:700;line-height:1.05;
+  color:white;margin-bottom:18px;
+}
+.led-title span{color:#FFB800}
+.led-desc{font-size:15px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.6);margin-bottom:28px}
+.led-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin-bottom:32px}
+.led-stat{background:var(--black);padding:22px 20px}
+.led-stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#FFB800;line-height:1;margin-bottom:4px}
+.led-stat-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.led-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.led-feat{font-size:13px;color:rgba(255,255,255,0.6);display:flex;align-items:flex-start;gap:10px}
+.led-feat::before{content:'—';color:#FFB800;font-weight:700;flex-shrink:0}
+.btn-amber{
+  background:#FFB800;color:var(--black);padding:13px 28px;
+  font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+  text-decoration:none;display:inline-block;transition:background 0.2s;align-self:flex-start;
+}
+.btn-amber:hover{background:#e6a600}
+
+/* ─── GALLERY ─── */
+.gallery{padding:88px 52px;background:var(--off)}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-template-rows:240px 200px;
+  gap:4px;margin-top:48px;
+}
+.gal-item{overflow:hidden;cursor:pointer;position:relative}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-item.tall{grid-row:span 2}
+.gal-item.wide{grid-column:span 2}
+.gal-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);
+  padding:20px 14px 12px;
+  font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:white;opacity:0;transition:opacity 0.3s;
+}
+.gal-item:hover .gal-label{opacity:1}
+.gallery-cta{text-align:center;margin-top:36px}
+.btn-outline{
+  border:1px solid var(--black);color:var(--black);padding:13px 32px;
+  font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;
+  text-decoration:none;display:inline-block;transition:all 0.2s;
+}
+.btn-outline:hover{background:var(--black);color:white}
+
+/* ─── WHY ─── */
+.why{padding:88px 52px}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:52px;border-top:1px solid var(--border)}
+.why-item{padding:36px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.why-item:nth-child(4n){border-right:none}
+.why-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--border);line-height:1;margin-bottom:12px}
+.why-rule{width:20px;height:2px;background:var(--red);margin-bottom:14px}
+.why-title{font-size:15px;font-weight:600;margin-bottom:8px}
+.why-desc{font-size:13px;font-weight:300;color:#666;line-height:1.7}
+
+/* ─── AREA ─── */
+.area{background:var(--off);padding:72px 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.area-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.area-tag{padding:6px 14px;font-size:11px;font-weight:500;border:1px solid var(--border);color:#666;cursor:default;transition:all 0.2s}
+.area-tag:hover{border-color:var(--red);color:var(--red)}
+.contact-list{display:flex;flex-direction:column;gap:22px}
+.contact-row{display:flex;gap:14px;align-items:flex-start}
+.contact-icon{font-size:18px;flex-shrink:0;width:22px;text-align:center;margin-top:2px}
+.contact-lbl{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.contact-val{font-size:14px;font-weight:500;line-height:1.5;color:var(--black)}
+
+/* ─── CTA BAND ─── */
+.cta-band{
+  background:var(--red);padding:80px 52px;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;
+}
+.cta-label{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:12px}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,46px);font-weight:700;color:white;line-height:1.1}
+.cta-title em{font-style:italic}
+.cta-sub{font-size:14px;color:rgba(255,255,255,0.7);margin-top:10px}
+.btn-white{
+  background:white;color:var(--red);padding:15px 34px;
+  font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;transition:all 0.2s;flex-shrink:0;
+}
+.btn-white:hover{background:var(--black);color:white}
+
+/* ─── FOOTER ─── */
+footer{background:var(--black);padding:72px 52px 36px;color:rgba(255,255,255,0.4)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;margin-bottom:4px}
+.footer-brand-sub{font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.footer-info{font-size:13px;font-weight:300;line-height:2;color:rgba(255,255,255,0.35)}
+.footer-col h5{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{color:rgba(255,255,255,0.3);text-decoration:none;font-size:13px;font-weight:300;transition:color 0.2s}
+.footer-col ul a:hover{color:white}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;justify-content:space-between;font-size:11px;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-box">A</div>
+    <div class="nav-logo-text">
+      ACME Sign & Graphics
+      <span>Dartmouth, Nova Scotia</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#wraps">Vehicle Wraps</a></li>
+    <li><a href="#led">LED Signs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone"><span>📞</span> +1 (902) 481-1007</span>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Dartmouth, Nova Scotia · Est. 1989</p>
+    <h1 class="hero-title">
+      Signs That Make<br/>
+      Your Business<br/>
+      <em>Impossible to Miss</em>
+    </h1>
+    <p class="hero-sub">Custom signage, vehicle wraps, programmable LED displays, and apparel for businesses across Atlantic Canada.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-hero">Get a Free Quote</a>
+      <a href="#gallery" class="btn-hero-ghost">View Our Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">35<sup>+</sup></div>
+    <div class="stat-label">Years in<br/>Business</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">72<sup>%</sup></div>
+    <div class="stat-label">More Noticed<br/>vs Static Signs</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">900<sup>%</sup></div>
+    <div class="stat-label">LED Sign<br/>Visibility Boost</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4–6<sup>yr</sup></div>
+    <div class="stat-label">Vehicle Wrap<br/>Lifespan</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <p class="eyebrow">What We Do</p>
+    <h2 class="section-title">Our Services</h2>
+  </div>
+  <div class="services-grid">
+
+    <!-- LED Signs — Featured -->
+    <div class="svc-card featured">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=800&q=80"
+        alt="LED Signs & Displays" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-featured-tag">★ Featured Service</div>
+        <div class="svc-name">LED Signs & Displays</div>
+        <p class="svc-desc">Programmable full-colour LED signs with built-in WiFi. Update your message from any smartphone. Buy, rent, or lease.</p>
+        <a href="#led" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Vehicle Wraps -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+        alt="Vehicle Wraps" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Vehicle Wraps</div>
+        <p class="svc-desc">Full wraps, partial wraps, and fleet graphics. 24/7 mobile advertising that lasts 4–6 years.</p>
+        <a href="#wraps" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Channel Letter Signs -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80"
+        alt="Channel Letter Signs" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Channel Letter Signs</div>
+        <p class="svc-desc">3D dimensional letters in aluminum, stainless steel, or acrylic. Illuminated or non-illuminated. Indoor and outdoor.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Illuminated Signs -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1567360425618-1594206637d2?w=800&q=80"
+        alt="Illuminated Signs" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Illuminated Signs</div>
+        <p class="svc-desc">Light boxes in any shape or size. We help you navigate bylaws, budget, and best fit before fabricating.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Window Graphics -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1582037928769-181f2644ecb7?w=800&q=80"
+        alt="Window Graphics" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Window Graphics</div>
+        <p class="svc-desc">Opaque, perforated, frosted, and vinyl lettering. Turn any window into a display that works for your business.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Banners -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80"
+        alt="Banners" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Banners</div>
+        <p class="svc-desc">Premium 13 oz outdoor vinyl, seamed and grommeted in-house. Same-day turnaround available on rush orders.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Safety Signs -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&q=80"
+        alt="Safety Signs" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Safety & Parking Signs</div>
+        <p class="svc-desc">Custom-manufactured in-house. Chemical, construction, electrical, and warehouse safety signs for any workplace.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Apparel -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
+        alt="Custom Apparel" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Apparel</div>
+        <p class="svc-desc">35+ years of screen printing and embroidery. Custom T-shirts, sweatshirts, hats, and uniforms for any business or team.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Decals -->
+    <div class="svc-card">
+      <img class="svc-photo"
+        src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80"
+        alt="Decals & Stickers" loading="lazy"/>
+      <div class="svc-body">
+        <div class="svc-name">Decals & Stickers</div>
+        <p class="svc-desc">Custom-cut for vehicles, hard hats, laptops, and toolboxes. Any smooth surface, any design, any quantity.</p>
+        <a href="#" class="svc-link">Learn More <span>→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VEHICLE WRAPS FEATURE -->
+<section id="wraps" style="padding:0">
+  <div class="wraps-feature">
+    <div class="wraps-photo-col">
+      <img class="wraps-photo"
+        src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1000&q=80"
+        alt="Vehicle Wrap"/>
+    </div>
+    <div class="wraps-content">
+      <p class="eyebrow">Mobile Advertising</p>
+      <h2 class="section-title">Your Brand,<br/>Everywhere You Go</h2>
+      <p style="font-size:15px;font-weight:300;line-height:1.8;color:#555;margin-top:16px">One investment. Four to six years of continuous advertising — seen by thousands every day, wherever the road takes you. No recurring costs, no effort required.</p>
+      <div class="wraps-list">
+        <div class="wrap-item"><span>Full Vehicle Wraps</span><span class="wrap-arrow">→</span></div>
+        <div class="wrap-item"><span>Partial Wraps</span><span class="wrap-arrow">→</span></div>
+        <div class="wrap-item"><span>Fleet Graphics</span><span class="wrap-arrow">→</span></div>
+        <div class="wrap-item"><span>Custom Design</span><span class="wrap-arrow">→</span></div>
+        <div class="wrap-item"><span>Vehicle Door Graphics</span><span class="wrap-arrow">→</span></div>
+      </div>
+      <a href="#contact" class="btn-hero" style="display:inline-block;margin-top:4px">Get a Wrap Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- LED FEATURE -->
+<section class="led-feature" id="led">
+  <div class="led-photo-col">
+    <img class="led-photo"
+      src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1000&q=80"
+      alt="LED Signs & Displays"/>
+    <div class="led-photo-badge">★ Featured Service</div>
+  </div>
+  <div class="led-content">
+    <p class="led-eyebrow">Digital Signage</p>
+    <h2 class="led-title">Programmable <span>LED</span><br/>Signs & Displays</h2>
+    <p class="led-desc">Bright, full-colour LED signs with built-in WiFi and a mobile app — change your message in seconds from any smartphone or tablet, any time, anywhere.</p>
+    <div class="led-stats">
+      <div class="led-stat">
+        <div class="led-stat-num">72%</div>
+        <div class="led-stat-label">More Noticed</div>
+      </div>
+      <div class="led-stat">
+        <div class="led-stat-num">900%</div>
+        <div class="led-stat-label">Visibility Boost</div>
+      </div>
+      <div class="led-stat">
+        <div class="led-stat-num">24/7</div>
+        <div class="led-stat-label">Advertising</div>
+      </div>
+      <div class="led-stat">
+        <div class="led-stat-num">WiFi</div>
+        <div class="led-stat-label">Built-In Control</div>
+      </div>
+    </div>
+    <div class="led-features">
+      <div class="led-feat">Indoor & outdoor full-colour displays in any size</div>
+      <div class="led-feat">Free indoor installation included on all units</div>
+      <div class="led-feat">Buy, rent, or lease — options for every budget</div>
+      <div class="led-feat">Retrofit your existing sign with a new LED display</div>
+    </div>
+    <a href="#contact" class="btn-amber">Get LED Sign Info</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-header">
+    <p class="eyebrow">Our Work</p>
+    <h2 class="section-title">Recent Projects</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gal-item tall wide">
+      <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=900&q=80" alt="Storefront Sign"/>
+      <div class="gal-label">Storefront Signs</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Vehicle Wrap"/>
+      <div class="gal-label">Vehicle Wraps</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=600&q=80" alt="LED Display"/>
+      <div class="gal-label">LED Displays</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Channel Letters"/>
+      <div class="gal-label">Channel Letters</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1582037928769-181f2644ecb7?w=600&q=80" alt="Window Graphics"/>
+      <div class="gal-label">Window Graphics</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" alt="Custom Apparel"/>
+      <div class="gal-label">Apparel</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" alt="Banners"/>
+      <div class="gal-label">Banners</div>
+    </div>
+  </div>
+  <div class="gallery-cta">
+    <a href="#" class="btn-outline">View Full Gallery</a>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-header">
+    <p class="eyebrow">Why ACME Sign</p>
+    <h2 class="section-title">The ACME Advantage</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div class="why-rule"></div>
+      <div class="why-title">Local Experts</div>
+      <p class="why-desc">Dartmouth-based for 35+ years. We understand NS bylaws, Atlantic weather, and what works for local businesses.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div class="why-rule"></div>
+      <div class="why-title">In-House Fabrication</div>
+      <p class="why-desc">Everything is built in our shop — no outsourcing. We control quality, timeline, and installation from start to finish.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div class="why-rule"></div>
+      <div class="why-title">Any Budget</div>
+      <p class="why-desc">From a single decal to a full LED display system — we have honest solutions for every budget without compromise.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div class="why-rule"></div>
+      <div class="why-title">Full Service</div>
+      <p class="why-desc">Design, fabrication, and installation all under one roof. From first call to final install — we handle everything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA + CONTACT -->
+<section class="area" id="contact">
+  <div>
+    <p class="eyebrow">Where We Work</p>
+    <h2 class="section-title">Serving Atlantic Canada</h2>
+    <p style="font-size:14px;font-weight:300;line-height:1.85;color:#555;margin-top:16px">From our Dartmouth shop we serve businesses across Nova Scotia, New Brunswick, and Prince Edward Island.</p>
+    <div class="area-tags">
+      <span class="area-tag">Halifax</span><span class="area-tag">Dartmouth</span>
+      <span class="area-tag">Bedford</span><span class="area-tag">Sackville</span>
+      <span class="area-tag">Truro</span><span class="area-tag">Wolfville</span>
+      <span class="area-tag">Kentville</span><span class="area-tag">Digby</span>
+      <span class="area-tag">Yarmouth</span><span class="area-tag">Pictou</span>
+      <span class="area-tag">Antigonish</span><span class="area-tag">New Glasgow</span>
+      <span class="area-tag">Sydney</span><span class="area-tag">Cape Breton</span>
+      <span class="area-tag">Moncton</span><span class="area-tag">Amherst</span>
+      <span class="area-tag">New Brunswick</span><span class="area-tag">PEI</span>
+    </div>
+  </div>
+  <div>
+    <p class="eyebrow">Get in Touch</p>
+    <h2 class="section-title" style="margin-bottom:32px">Contact Us</h2>
+    <div class="contact-list">
+      <div class="contact-row">
+        <span class="contact-icon">📍</span>
+        <div><div class="contact-lbl">Address</div><div class="contact-val">25 Raddall Avenue, Unit 4<br/>Dartmouth, Nova Scotia B3B 1L4</div></div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <div><div class="contact-lbl">Phone</div><div class="contact-val">+1 (902) 481-1007</div></div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📠</span>
+        <div><div class="contact-lbl">Fax</div><div class="contact-val">+1 (902) 481-0511</div></div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">✉️</span>
+        <div><div class="contact-lbl">Email</div><div class="contact-val">acmesign01@gmail.com</div></div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🕐</span>
+        <div><div class="contact-lbl">Hours</div><div class="contact-val">Mon – Fri · 8:30 AM – 5:00 PM</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div>
+    <p class="cta-label">Ready to stand out?</p>
+    <h2 class="cta-title">Let's make a great<br/><em>first impression.</em></h2>
+    <p class="cta-sub">Call us at +1 (902) 481-1007 · Mon – Fri, 8:30 AM – 5:00 PM</p>
+  </div>
+  <a href="#contact" class="btn-white">Get a Free Quote</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">ACME Sign</div>
+      <div class="footer-brand-sub">& Graphics Company</div>
+      <div class="footer-info">
+        25 Raddall Avenue, Unit 4<br/>
+        Dartmouth, Nova Scotia B3B 1L4<br/>
+        +1 (902) 481-1007 · Fax: +1 (902) 481-0511<br/>
+        acmesign01@gmail.com<br/>
+        Mon – Fri · 8:30 AM – 5:00 PM
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">LED Signs</a></li>
+        <li><a href="#">Vehicle Wraps</a></li>
+        <li><a href="#">Channel Letter Signs</a></li>
+        <li><a href="#">Dimensional Signs</a></li>
+        <li><a href="#">Illuminated Signs</a></li>
+        <li><a href="#">Window Graphics</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>More Services</h5>
+      <ul>
+        <li><a href="#">Banners</a></li>
+        <li><a href="#">Safety Signs</a></li>
+        <li><a href="#">Apparel</a></li>
+        <li><a href="#">Decals & Stickers</a></li>
+        <li><a href="#">Sign Service & Repair</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Artwork Guidelines</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ACME Sign & Graphics Co. All Rights Reserved.</span>
+    <span>Serving Atlantic Canada since 1989</span>
+  </div>
+</footer>
+
+</body>
+</html>
