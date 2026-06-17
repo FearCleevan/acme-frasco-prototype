@@ -1,522 +1,1217 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ACME Sign — Variant 3: Spatial Contrast</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --red:#CC0000;
-  --black:#0A0A0A;
-  --white:#FFFFFF;
-  --cream:#F8F5F0;
-  --muted:#909090;
-  --border:#E0E0E0;
-}
-body{font-family:'DM Sans',sans-serif;color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACME Sign — Variant 3: Spatial Contrast</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* NAV */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;height:68px;background:var(--white);
-  border-bottom:1px solid var(--border);
-}
-.logo{
-  font-size:13px;font-weight:600;letter-spacing:0.1em;
-  text-transform:uppercase;color:var(--black);
-}
-.logo b{color:var(--red);font-weight:600}
-nav{display:flex;gap:32px;list-style:none}
-nav a{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
-nav a:hover{color:var(--black)}
-.h-actions{display:flex;align-items:center;gap:20px}
-.h-tel{font-size:13px;font-weight:500;color:var(--black);letter-spacing:0.01em}
-.h-q{background:var(--red);color:white;padding:9px 20px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:background 0.2s}
-.h-q:hover{background:#a80000}
+    :root {
+      --red: #CC0000;
+      --black: #0A0A0A;
+      --white: #FFFFFF;
+      --cream: #F8F5F0;
+      --muted: #909090;
+      --border: #E0E0E0;
+    }
 
-/* HERO — immersive centered type */
-.hero{
-  padding-top:68px;min-height:100vh;
-  background:var(--cream);
-  display:flex;flex-direction:column;
-  position:relative;
-}
-.hero-top{
-  padding:72px 56px 0;
-  display:flex;justify-content:space-between;align-items:flex-start;
-}
-.hero-label{
-  font-size:11px;font-weight:600;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--muted);
-}
-.hero-loc{
-  text-align:right;font-size:12px;font-weight:500;
-  color:var(--muted);letter-spacing:0.04em;line-height:1.8;
-}
-.hero-center{
-  flex:1;display:flex;align-items:center;justify-content:center;
-  padding:40px 56px;
-}
-.hero-h{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(80px,11vw,168px);
-  font-weight:700;line-height:0.88;
-  letter-spacing:-0.02em;
-  text-align:center;
-  color:var(--black);
-}
-.hero-h em{font-style:italic;color:var(--red)}
-.hero-h .sub{
-  display:block;
-  font-size:clamp(20px,2.5vw,34px);
-  font-weight:300;font-style:italic;
-  color:var(--muted);letter-spacing:0.04em;
-  margin-top:16px;font-family:'DM Sans',sans-serif;
-}
-.hero-bottom{
-  padding:32px 56px;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:32px;
-}
-.hero-desc{font-size:15px;font-weight:300;line-height:1.8;color:#555;max-width:440px}
-.hero-btns{display:flex;gap:12px;flex-shrink:0}
-.btn-r{background:var(--red);color:white;padding:13px 28px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:background 0.2s}
-.btn-r:hover{background:#a80000}
-.btn-o{border:1px solid var(--black);color:var(--black);padding:13px 28px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
-.btn-o:hover{background:var(--black);color:white}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased
+    }
 
-/* STATS — full width strip */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--black)}
-.stat{
-  padding:40px 36px;border-right:1px solid rgba(255,255,255,0.07);
-  text-align:center;
-}
-.stat:last-child{border-right:none}
-.stat-n{
-  font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;
-  color:white;line-height:1;margin-bottom:8px;
-}
-.stat-n em{font-style:italic;color:var(--red)}
-.stat-l{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+    /* NAV */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      height: 68px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
 
-/* SECTIONS */
-.sec{padding:104px 56px}
-.sec-cream{background:var(--cream)}
-.ey{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
-.sh{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(36px,4.5vw,58px);font-weight:700;line-height:1.05;
-  margin-bottom:16px;
-}
-.sh em{font-style:italic}
-.sb{font-size:15px;font-weight:300;line-height:1.85;color:#555;max-width:520px;margin-bottom:52px}
+    .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
 
-/* SERVICES — clean 2-col editorial */
-.svc-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:0;
-  border-top:1px solid var(--border);border-left:1px solid var(--border);
-}
-.svc{
-  padding:36px 32px;
-  border-right:1px solid var(--border);border-bottom:1px solid var(--border);
-  cursor:pointer;transition:background 0.2s;
-  display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start;
-}
-.svc:hover{background:white}
-.svc-i{font-size:13px;font-weight:500;color:var(--muted);padding-top:3px}
-.svc-body{}
-.svc-badge{display:inline-block;background:var(--red);color:white;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:2px 8px;margin-bottom:8px}
-.svc-n{
-  font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;
-  line-height:1.2;margin-bottom:8px;
-}
-.svc.feat .svc-n{color:var(--red)}
-.svc-d{font-size:12px;font-weight:400;color:#777;line-height:1.65}
-.svc-a{font-size:18px;color:var(--border);transition:color 0.2s;padding-top:3px}
-.svc:hover .svc-a{color:var(--red)}
+    .logo b {
+      color: var(--red);
+      font-weight: 600
+    }
 
-/* SPLIT FEATURE — wraps */
-.split{display:grid;grid-template-columns:1fr 1fr}
-.split-img{
-  background:var(--cream);min-height:520px;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:10px;color:var(--muted);
-  font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;
-  border-right:1px solid var(--border);
-}
-.split-img .ph{font-size:60px}
-.split-c{padding:72px 60px;display:flex;flex-direction:column;justify-content:center}
-.wl{margin:24px 0;display:flex;flex-direction:column;border-top:1px solid var(--border)}
-.wli{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:15px 0;border-bottom:1px solid var(--border);
-  font-size:14px;font-weight:500;cursor:pointer;transition:color 0.2s;
-}
-.wli:hover{color:var(--red)}
-.wli-a{color:var(--border);font-size:17px;transition:color 0.2s}
-.wli:hover .wli-a{color:var(--red)}
+    nav {
+      display: flex;
+      gap: 32px;
+      list-style: none
+    }
 
-/* LED section */
-.led{
-  background:var(--black);padding:104px 56px;
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
-}
-.led-ep{
-  display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.16em;
-  text-transform:uppercase;background:#FFB800;color:var(--black);
-  padding:4px 12px;margin-bottom:22px;
-}
-.led-h{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(40px,5.5vw,68px);font-weight:700;line-height:1;
-  color:white;margin-bottom:18px;
-}
-.led-h em{font-style:italic;color:#FFB800}
-.led-b{font-size:15px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.5);margin-bottom:24px}
-.led-list{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.07);margin-bottom:30px}
-.led-li{
-  display:flex;gap:12px;align-items:flex-start;
-  padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);
-  font-size:13px;color:rgba(255,255,255,0.6);font-weight:300;
-}
-.led-li::before{content:'—';color:#FFB800;flex-shrink:0;font-weight:600}
-.btn-y{background:#FFB800;color:var(--black);padding:12px 26px;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background 0.2s}
-.btn-y:hover{background:#e6a600}
-.led-panel{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,0.05)}
-.led-panel-row{display:grid;grid-template-columns:1fr 1fr;gap:1px}
-.led-cell{background:var(--black);padding:30px 24px}
-.led-cell-v{
-  font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;
-  color:#FFB800;line-height:1;margin-bottom:6px;
-}
-.led-cell-v em{font-style:italic}
-.led-cell-l{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
-.led-note{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:20px 22px}
-.led-note p{font-size:13px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.7}
+    nav a {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s
+    }
 
-/* WHY */
-.why{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border)}
-.why-item{padding:44px 36px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
-.why-item:nth-child(4n){border-right:none}
-.why-big{
-  font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:700;
-  color:var(--border);line-height:1;margin-bottom:12px;font-style:italic;
-}
-.why-rule{width:20px;height:2px;background:var(--red);margin-bottom:16px}
-.why-t{font-size:16px;font-weight:600;margin-bottom:10px}
-.why-d{font-size:13px;font-weight:300;color:#666;line-height:1.75}
+    nav a:hover {
+      color: var(--black)
+    }
 
-/* AREA + CONTACT */
-.ac{display:grid;grid-template-columns:1fr 1fr}
-.ac-l{padding:88px 56px;border-right:1px solid var(--border)}
-.ac-r{padding:88px 56px;background:var(--cream)}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px}
-.tag{padding:6px 14px;font-size:11px;font-weight:500;border:1px solid var(--border);color:#666;cursor:default;transition:all 0.2s}
-.tag:hover{border-color:var(--red);color:var(--red)}
-.contacts{display:flex;flex-direction:column;gap:24px}
-.citem{display:flex;gap:14px}
-.cicon{font-size:18px;flex-shrink:0;width:22px;text-align:center;margin-top:1px}
-.clabel{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.cval{font-size:15px;font-weight:400;line-height:1.5;color:var(--black)}
+    .h-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px
+    }
 
-/* CTA */
-.cta{
-  background:var(--red);padding:80px 56px;
-  display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;
-}
-.cta-sup{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px}
-.cta-h{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(30px,4vw,52px);font-weight:700;color:white;line-height:1.1;
-}
-.cta-h em{font-style:italic}
-.btn-w{background:white;color:var(--red);padding:14px 32px;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.2s}
-.btn-w:hover{background:var(--black);color:white}
+    .h-tel {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--black);
+      letter-spacing: 0.01em
+    }
 
-/* FOOTER */
-footer{background:var(--black);padding:72px 56px 36px;color:rgba(255,255,255,0.4)}
-.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-.fb{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:white;margin-bottom:4px}
-.fb-s{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
-.fi{font-size:13px;font-weight:300;line-height:2;color:rgba(255,255,255,0.35)}
-.fc h5{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px}
-.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.fc ul a{color:rgba(255,255,255,0.3);text-decoration:none;font-size:13px;font-weight:300;transition:color 0.2s}
-.fc ul a:hover{color:white}
-.fd{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;justify-content:space-between;font-size:11px;flex-wrap:wrap;gap:8px}
-</style>
+    .h-q {
+      background: var(--red);
+      color: white;
+      padding: 9px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s
+    }
+
+    .h-q:hover {
+      background: #a80000
+    }
+
+    /* HERO — immersive centered type */
+    .hero {
+      padding-top: 68px;
+      min-height: 100vh;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .hero-top {
+      padding: 72px 56px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-loc {
+      text-align: right;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    .hero-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 56px;
+    }
+
+    .hero-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(80px, 11vw, 168px);
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: var(--black);
+    }
+
+    .hero-h em {
+      font-style: italic;
+      color: var(--red)
+    }
+
+    .hero-h .sub {
+      display: block;
+      font-size: clamp(20px, 2.5vw, 34px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 16px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .hero-bottom {
+      padding: 32px 56px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: #555;
+      max-width: 440px
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0
+    }
+
+    .btn-r {
+      background: var(--red);
+      color: white;
+      padding: 13px 28px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s
+    }
+
+    .btn-r:hover {
+      background: #a80000
+    }
+
+    .btn-o {
+      border: 1px solid var(--black);
+      color: var(--black);
+      padding: 13px 28px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s
+    }
+
+    .btn-o:hover {
+      background: var(--black);
+      color: white
+    }
+
+    /* STATS — full width strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--black)
+    }
+
+    .stat {
+      padding: 40px 36px;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      text-align: center;
+    }
+
+    .stat:last-child {
+      border-right: none
+    }
+
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-n em {
+      font-style: italic;
+      color: var(--red)
+    }
+
+    .stat-l {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35)
+    }
+
+    /* SECTIONS */
+    .sec {
+      padding: 104px 56px
+    }
+
+    .sec-cream {
+      background: var(--cream)
+    }
+
+    .ey {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px
+    }
+
+    .sh {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4.5vw, 58px);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .sh em {
+      font-style: italic
+    }
+
+    .sb {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #555;
+      max-width: 520px;
+      margin-bottom: 52px
+    }
+
+    /* SERVICES — clean 2-col editorial */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .svc {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .svc:hover {
+      background: white
+    }
+
+    .svc-i {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      padding-top: 3px
+    }
+
+    .svc-body {}
+
+    .svc-badge {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      margin-bottom: 8px
+    }
+
+    .svc-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .svc.feat .svc-n {
+      color: var(--red)
+    }
+
+    .svc-d {
+      font-size: 12px;
+      font-weight: 400;
+      color: #777;
+      line-height: 1.65
+    }
+
+    .svc-a {
+      font-size: 18px;
+      color: var(--border);
+      transition: color 0.2s;
+      padding-top: 3px
+    }
+
+    .svc:hover .svc-a {
+      color: var(--red)
+    }
+
+    /* SPLIT FEATURE — wraps */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .split-img {
+      background: var(--cream);
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-right: 1px solid var(--border);
+    }
+
+    .split-img .ph {
+      font-size: 60px
+    }
+
+    .split-c {
+      padding: 72px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    .wl {
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border)
+    }
+
+    .wli {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .wli:hover {
+      color: var(--red)
+    }
+
+    .wli-a {
+      color: var(--border);
+      font-size: 17px;
+      transition: color 0.2s
+    }
+
+    .wli:hover .wli-a {
+      color: var(--red)
+    }
+
+    /* LED section */
+    .led {
+      background: var(--black);
+      padding: 104px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .led-ep {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: #FFB800;
+      color: var(--black);
+      padding: 4px 12px;
+      margin-bottom: 22px;
+    }
+
+    .led-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 700;
+      line-height: 1;
+      color: white;
+      margin-bottom: 18px;
+    }
+
+    .led-h em {
+      font-style: italic;
+      color: #FFB800
+    }
+
+    .led-b {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 24px
+    }
+
+    .led-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 30px
+    }
+
+    .led-li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 300;
+    }
+
+    .led-li::before {
+      content: '—';
+      color: #FFB800;
+      flex-shrink: 0;
+      font-weight: 600
+    }
+
+    .btn-y {
+      background: #FFB800;
+      color: var(--black);
+      padding: 12px 26px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s
+    }
+
+    .btn-y:hover {
+      background: #e6a600
+    }
+
+    .led-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.05)
+    }
+
+    .led-panel-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px
+    }
+
+    .led-cell {
+      background: var(--black);
+      padding: 30px 24px
+    }
+
+    .led-cell-v {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #FFB800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .led-cell-v em {
+      font-style: italic
+    }
+
+    .led-cell-l {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3)
+    }
+
+    .led-note {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 20px 22px
+    }
+
+    .led-note p {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.7
+    }
+
+    /* WHY */
+    .why {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .why-item {
+      padding: 44px 36px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .why-item:nth-child(4n) {
+      border-right: none
+    }
+
+    .why-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .why-rule {
+      width: 20px;
+      height: 2px;
+      background: var(--red);
+      margin-bottom: 16px
+    }
+
+    .why-t {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px
+    }
+
+    .why-d {
+      font-size: 13px;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.75
+    }
+
+    /* AREA + CONTACT */
+    .ac {
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .ac-l {
+      padding: 88px 56px;
+      border-right: 1px solid var(--border)
+    }
+
+    .ac-r {
+      padding: 88px 56px;
+      background: var(--cream)
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 24px
+    }
+
+    .tag {
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      color: #666;
+      cursor: default;
+      transition: all 0.2s
+    }
+
+    .tag:hover {
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 24px
+    }
+
+    .citem {
+      display: flex;
+      gap: 14px
+    }
+
+    .cicon {
+      font-size: 18px;
+      flex-shrink: 0;
+      width: 22px;
+      text-align: center;
+      margin-top: 1px
+    }
+
+    .clabel {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px
+    }
+
+    .cval {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--black)
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--red);
+      padding: 80px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cta-sup {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 12px
+    }
+
+    .cta-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+    }
+
+    .cta-h em {
+      font-style: italic
+    }
+
+    .btn-w {
+      background: white;
+      color: var(--red);
+      padding: 14px 32px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s
+    }
+
+    .btn-w:hover {
+      background: var(--black);
+      color: white
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 72px 56px 36px;
+      color: rgba(255, 255, 255, 0.4)
+    }
+
+    .fg {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px
+    }
+
+    .fb {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px
+    }
+
+    .fb-s {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 18px
+    }
+
+    .fi {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 2;
+      color: rgba(255, 255, 255, 0.35)
+    }
+
+    .fc h5 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 18px
+    }
+
+    .fc ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .fc ul a {
+      color: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 300;
+      transition: color 0.2s
+    }
+
+    .fc ul a:hover {
+      color: white
+    }
+
+    .fd {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <div class="logo">ACME <b>SIGN</b> & GRAPHICS</div>
-  <nav>
-    <a href="#">Services</a>
-    <a href="#">Vehicle Wraps</a>
-    <a href="#">LED Signs</a>
-    <a href="#">Gallery</a>
-    <a href="#">Contact</a>
-  </nav>
-  <div class="h-actions">
-    <span class="h-tel">+1 (902) 481-1007</span>
-    <a href="#" class="h-q">Get a Quote</a>
-  </div>
-</header>
+  <header>
+    <div class="logo">ACME <b>SIGN</b> & GRAPHICS</div>
+    <nav>
+      <a href="#">Services</a>
+      <a href="#">Vehicle Wraps</a>
+      <a href="#">LED Signs</a>
+      <a href="#">Gallery</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="h-actions">
+      <span class="h-tel">+1 (902) 481-1007</span>
+      <a href="#" class="h-q">Get a Quote</a>
+    </div>
+  </header>
 
-<section class="hero">
-  <div class="hero-top">
-    <p class="hero-label">Signs · Wraps · LED · Apparel</p>
-    <div class="hero-loc">Dartmouth, Nova Scotia<br/>Est. 1989 · Atlantic Canada</div>
-  </div>
-  <div class="hero-center">
-    <h1 class="hero-h">
-      Signs That<br/>Make You<br/><em>Unforgettable</em>
-      <span class="sub">Custom signage, wraps & LED displays for Atlantic Canada</span>
-    </h1>
-  </div>
-  <div class="hero-bottom">
-    <p class="hero-desc">ACME Sign & Graphics creates high-impact signage, vehicle wraps, and programmable LED displays for businesses of any size — at a price that fits your budget.</p>
-    <div class="hero-btns">
-      <a href="#" class="btn-r">Get a Free Quote</a>
-      <a href="#" class="btn-o">View Gallery</a>
+  <section class="hero">
+    <div class="hero-top">
+      <p class="hero-label">Signs · Wraps · LED · Apparel</p>
+      <div class="hero-loc">Dartmouth, Nova Scotia<br />Est. 1989 · Atlantic Canada</div>
     </div>
-  </div>
-</section>
+    <div class="hero-center">
+      <h1 class="hero-h">
+        Signs That<br />Make You<br /><em>Unforgettable</em>
+        <span class="sub">Custom signage, wraps & LED displays for Atlantic Canada</span>
+      </h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-desc">ACME Sign & Graphics creates high-impact signage, vehicle wraps, and programmable LED
+        displays for businesses of any size — at a price that fits your budget.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-r">Get a Free Quote</a>
+        <a href="#" class="btn-o">View Gallery</a>
+      </div>
+    </div>
+  </section>
 
-<div class="stats">
-  <div class="stat"><div class="stat-n">35<em>+</em></div><div class="stat-l">Years in Business</div></div>
-  <div class="stat"><div class="stat-n">72<em>%</em></div><div class="stat-l">More Noticed — LED vs Static</div></div>
-  <div class="stat"><div class="stat-n">900<em>%</em></div><div class="stat-l">LED Visibility Increase</div></div>
-  <div class="stat"><div class="stat-n">4–6<em>yr</em></div><div class="stat-l">Vehicle Wrap Lifespan</div></div>
-</div>
-
-<section class="sec sec-cream">
-  <p class="ey">What We Do</p>
-  <h2 class="sh">Every Sign We Make<br/><em>Has a Job to Do</em></h2>
-  <p class="sb">From illuminated storefronts to full fleet wraps — we design and fabricate everything in-house, giving you full control over quality, timeline, and budget.</p>
-  <div class="svc-grid">
-    <div class="svc feat">
-      <span class="svc-i">01</span>
-      <div class="svc-body">
-        <div class="svc-badge">★ Featured</div>
-        <div class="svc-n">LED Signs & Displays</div>
-        <div class="svc-d">Programmable full-colour LED signs with built-in WiFi and mobile app. Get noticed 72% more. Buy, rent, or lease.</div>
-      </div>
-      <span class="svc-a">→</span>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-n">35<em>+</em></div>
+      <div class="stat-l">Years in Business</div>
     </div>
-    <div class="svc">
-      <span class="svc-i">02</span>
-      <div class="svc-body">
-        <div class="svc-n">Vehicle Wraps</div>
-        <div class="svc-d">Full wraps, partial wraps, and fleet graphics. 24/7 mobile advertising that lasts 4–6 years, wherever you drive.</div>
-      </div>
-      <span class="svc-a">→</span>
+    <div class="stat">
+      <div class="stat-n">72<em>%</em></div>
+      <div class="stat-l">More Noticed — LED vs Static</div>
     </div>
-    <div class="svc">
-      <span class="svc-i">03</span>
-      <div class="svc-body">
-        <div class="svc-n">Channel Signs</div>
-        <div class="svc-d">3D dimensional letters in aluminum, stainless steel, or acrylic. Illuminated or non-illuminated.</div>
-      </div>
-      <span class="svc-a">→</span>
+    <div class="stat">
+      <div class="stat-n">900<em>%</em></div>
+      <div class="stat-l">LED Visibility Increase</div>
     </div>
-    <div class="svc">
-      <span class="svc-i">04</span>
-      <div class="svc-body">
-        <div class="svc-n">Illuminated Signs</div>
-        <div class="svc-d">Light boxes in any shape or size. We help you navigate bylaws and choose the right fit for your budget.</div>
-      </div>
-      <span class="svc-a">→</span>
-    </div>
-    <div class="svc">
-      <span class="svc-i">05</span>
-      <div class="svc-body">
-        <div class="svc-n">Window Graphics</div>
-        <div class="svc-d">Opaque, perforated, frosted, and vinyl lettering. Turn any window into a display that works for you.</div>
-      </div>
-      <span class="svc-a">→</span>
-    </div>
-    <div class="svc">
-      <span class="svc-i">06</span>
-      <div class="svc-body">
-        <div class="svc-n">Banners</div>
-        <div class="svc-d">Premium 13 oz outdoor vinyl, seamed and grommeted in-house. Same-day turnaround available.</div>
-      </div>
-      <span class="svc-a">→</span>
-    </div>
-    <div class="svc">
-      <span class="svc-i">07</span>
-      <div class="svc-body">
-        <div class="svc-n">Safety Signs</div>
-        <div class="svc-d">Custom-manufactured in-house — chemical, construction, electrical, warehouse, and more.</div>
-      </div>
-      <span class="svc-a">→</span>
-    </div>
-    <div class="svc">
-      <span class="svc-i">08</span>
-      <div class="svc-body">
-        <div class="svc-n">Apparel</div>
-        <div class="svc-d">35+ years of screen printing and embroidery. T-shirts, sweatshirts, hats, and more for any team or event.</div>
-      </div>
-      <span class="svc-a">→</span>
-    </div>
-    <div class="svc">
-      <span class="svc-i">09</span>
-      <div class="svc-body">
-        <div class="svc-n">Decals & Stickers</div>
-        <div class="svc-d">Custom-cut for vehicles, hard hats, laptops, toolboxes. Any smooth surface, any design, any quantity.</div>
-      </div>
-      <span class="svc-a">→</span>
-    </div>
-    <div class="svc">
-      <span class="svc-i">10</span>
-      <div class="svc-body">
-        <div class="svc-n">Sign Service & Repair</div>
-        <div class="svc-d">Installation and repair across Nova Scotia. Pylon signs, LED centres, retail installs, vinyl, and more.</div>
-      </div>
-      <span class="svc-a">→</span>
+    <div class="stat">
+      <div class="stat-n">4–6<em>yr</em></div>
+      <div class="stat-l">Vehicle Wrap Lifespan</div>
     </div>
   </div>
-</section>
 
-<section style="padding:0">
-  <div class="split">
-    <div class="split-img">
-      <div class="ph">🚐</div>
-      <span>Vehicle Wrap Photography</span>
-    </div>
-    <div class="split-c">
-      <p class="ey">Mobile Advertising</p>
-      <h2 class="sh">Your Brand<br/><em>Everywhere</em></h2>
-      <p style="font-size:15px;font-weight:300;line-height:1.85;color:#555">One investment. Four to six years of continuous exposure — seen by thousands every day, wherever the road takes you. No recurring costs.</p>
-      <div class="wl">
-        <div class="wli"><span>Full Vehicle Wraps</span><span class="wli-a">→</span></div>
-        <div class="wli"><span>Partial Wraps</span><span class="wli-a">→</span></div>
-        <div class="wli"><span>Fleet Graphics</span><span class="wli-a">→</span></div>
-        <div class="wli"><span>Custom Designs</span><span class="wli-a">→</span></div>
-        <div class="wli"><span>Vehicle Door Graphics</span><span class="wli-a">→</span></div>
+  <section class="sec sec-cream">
+    <p class="ey">What We Do</p>
+    <h2 class="sh">Every Sign We Make<br /><em>Has a Job to Do</em></h2>
+    <p class="sb">From illuminated storefronts to full fleet wraps — we design and fabricate everything in-house, giving
+      you full control over quality, timeline, and budget.</p>
+    <div class="svc-grid">
+      <div class="svc feat">
+        <span class="svc-i">01</span>
+        <div class="svc-body">
+          <div class="svc-badge">★ Featured</div>
+          <div class="svc-n">LED Signs & Displays</div>
+          <div class="svc-d">Programmable full-colour LED signs with built-in WiFi and mobile app. Get noticed 72% more.
+            Buy, rent, or lease.</div>
+        </div>
+        <span class="svc-a">→</span>
       </div>
-      <a href="#" class="btn-r" style="display:inline-block">Get a Wrap Quote</a>
-    </div>
-  </div>
-</section>
-
-<section class="led">
-  <div>
-    <div class="led-ep">★ Featured Service</div>
-    <h2 class="led-h">Programmable<br/><em>LED</em> Signs</h2>
-    <p class="led-b">Bright, full-colour LED signs with built-in WiFi and a mobile app. Update your message from any smartphone — any time, from anywhere.</p>
-    <div class="led-list">
-      <div class="led-li">Full-colour indoor & outdoor displays in any size</div>
-      <div class="led-li">Mobile app control — update your message in seconds</div>
-      <div class="led-li">Buy, rent, or lease — options for every budget</div>
-      <div class="led-li">Free indoor installation on all units</div>
-      <div class="led-li">Retrofit your existing sign with a new LED display</div>
-      <div class="led-li">Purchase two or more and save</div>
-    </div>
-    <a href="#" class="btn-y">Get LED Sign Info</a>
-  </div>
-  <div class="led-panel">
-    <div class="led-panel-row">
-      <div class="led-cell"><div class="led-cell-v">72<em>%</em></div><div class="led-cell-l">More Noticed</div></div>
-      <div class="led-cell"><div class="led-cell-v">900<em>%</em></div><div class="led-cell-l">Visibility Boost</div></div>
-    </div>
-    <div class="led-panel-row">
-      <div class="led-cell"><div class="led-cell-v">24/7</div><div class="led-cell-l">Advertising</div></div>
-      <div class="led-cell"><div class="led-cell-v"><em>WiFi</em></div><div class="led-cell-l">Built-In</div></div>
-    </div>
-    <div class="led-note"><p>All signs include built-in WiFi and a mobile app — no ladder, no manual letter changes, no hassle. Just open the app and update your message instantly.</p></div>
-  </div>
-</section>
-
-<section class="sec">
-  <p class="ey">Why Choose ACME Sign</p>
-  <h2 class="sh">The ACME<br/><em>Advantage</em></h2>
-  <div class="why">
-    <div class="why-item"><div class="why-big">01</div><div class="why-rule"></div><div class="why-t">Local Expertise</div><p class="why-d">Dartmouth-based for 35+ years. We understand Nova Scotia bylaws, Atlantic weather, and what works for businesses in this region.</p></div>
-    <div class="why-item"><div class="why-big">02</div><div class="why-rule"></div><div class="why-t">In-House Fabrication</div><p class="why-d">Everything is built in our shop — no outsourcing, no middlemen. We control quality, timeline, and installation from start to finish.</p></div>
-    <div class="why-item"><div class="why-big">03</div><div class="why-rule"></div><div class="why-t">Any Budget</div><p class="why-d">From a single decal to a full LED display system — honest solutions for every budget without compromising on quality.</p></div>
-    <div class="why-item"><div class="why-big">04</div><div class="why-rule"></div><div class="why-t">Full Service</div><p class="why-d">Design, fabrication, and installation under one roof. From first consultation to the final install — we handle everything.</p></div>
-  </div>
-</section>
-
-<section style="padding:0">
-  <div class="ac">
-    <div class="ac-l">
-      <p class="ey">Where We Work</p>
-      <h2 class="sh">Serving Atlantic<br/><em>Canada</em></h2>
-      <p style="font-size:14px;font-weight:300;line-height:1.85;color:#555">From our Dartmouth shop we serve businesses across Nova Scotia, New Brunswick, and Prince Edward Island.</p>
-      <div class="tags">
-        <span class="tag">Halifax</span><span class="tag">Dartmouth</span>
-        <span class="tag">Bedford</span><span class="tag">Sackville</span>
-        <span class="tag">Truro</span><span class="tag">Wolfville</span>
-        <span class="tag">Kentville</span><span class="tag">Digby</span>
-        <span class="tag">Yarmouth</span><span class="tag">Pictou</span>
-        <span class="tag">Antigonish</span><span class="tag">New Glasgow</span>
-        <span class="tag">Sydney</span><span class="tag">Cape Breton</span>
-        <span class="tag">Moncton</span><span class="tag">Amherst</span>
-        <span class="tag">New Brunswick</span><span class="tag">Prince Edward Island</span>
+      <div class="svc">
+        <span class="svc-i">02</span>
+        <div class="svc-body">
+          <div class="svc-n">Vehicle Wraps</div>
+          <div class="svc-d">Full wraps, partial wraps, and fleet graphics. 24/7 mobile advertising that lasts 4–6
+            years, wherever you drive.</div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">03</span>
+        <div class="svc-body">
+          <div class="svc-n">Channel Signs</div>
+          <div class="svc-d">3D dimensional letters in aluminum, stainless steel, or acrylic. Illuminated or
+            non-illuminated.</div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">04</span>
+        <div class="svc-body">
+          <div class="svc-n">Illuminated Signs</div>
+          <div class="svc-d">Light boxes in any shape or size. We help you navigate bylaws and choose the right fit for
+            your budget.</div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">05</span>
+        <div class="svc-body">
+          <div class="svc-n">Window Graphics</div>
+          <div class="svc-d">Opaque, perforated, frosted, and vinyl lettering. Turn any window into a display that works
+            for you.</div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">06</span>
+        <div class="svc-body">
+          <div class="svc-n">Banners</div>
+          <div class="svc-d">Premium 13 oz outdoor vinyl, seamed and grommeted in-house. Same-day turnaround available.
+          </div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">07</span>
+        <div class="svc-body">
+          <div class="svc-n">Safety Signs</div>
+          <div class="svc-d">Custom-manufactured in-house — chemical, construction, electrical, warehouse, and more.
+          </div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">08</span>
+        <div class="svc-body">
+          <div class="svc-n">Apparel</div>
+          <div class="svc-d">35+ years of screen printing and embroidery. T-shirts, sweatshirts, hats, and more for any
+            team or event.</div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">09</span>
+        <div class="svc-body">
+          <div class="svc-n">Decals & Stickers</div>
+          <div class="svc-d">Custom-cut for vehicles, hard hats, laptops, toolboxes. Any smooth surface, any design, any
+            quantity.</div>
+        </div>
+        <span class="svc-a">→</span>
+      </div>
+      <div class="svc">
+        <span class="svc-i">10</span>
+        <div class="svc-body">
+          <div class="svc-n">Sign Service & Repair</div>
+          <div class="svc-d">Installation and repair across Nova Scotia. Pylon signs, LED centres, retail installs,
+            vinyl, and more.</div>
+        </div>
+        <span class="svc-a">→</span>
       </div>
     </div>
-    <div class="ac-r">
-      <p class="ey">Get in Touch</p>
-      <h2 class="sh" style="margin-bottom:32px">Contact<br/><em>Us</em></h2>
-      <div class="contacts">
-        <div class="citem"><span class="cicon">📍</span><div><div class="clabel">Address</div><div class="cval">25 Raddall Avenue, Unit 4<br/>Dartmouth, Nova Scotia B3B 1L4</div></div></div>
-        <div class="citem"><span class="cicon">📞</span><div><div class="clabel">Phone</div><div class="cval">+1 (902) 481-1007</div></div></div>
-        <div class="citem"><span class="cicon">📠</span><div><div class="clabel">Fax</div><div class="cval">+1 (902) 481-0511</div></div></div>
-        <div class="citem"><span class="cicon">✉️</span><div><div class="clabel">Email</div><div class="cval">acmesign01@gmail.com</div></div></div>
-        <div class="citem"><span class="cicon">🕐</span><div><div class="clabel">Hours</div><div class="cval">Mon – Fri · 8:30 AM – 5:00 PM</div></div></div>
+  </section>
+
+  <section style="padding:0">
+    <div class="split">
+      <div class="split-img">
+        <div class="ph">🚐</div>
+        <span>Vehicle Wrap Photography</span>
+      </div>
+      <div class="split-c">
+        <p class="ey">Mobile Advertising</p>
+        <h2 class="sh">Your Brand<br /><em>Everywhere</em></h2>
+        <p style="font-size:15px;font-weight:300;line-height:1.85;color:#555">One investment. Four to six years of
+          continuous exposure — seen by thousands every day, wherever the road takes you. No recurring costs.</p>
+        <div class="wl">
+          <div class="wli"><span>Full Vehicle Wraps</span><span class="wli-a">→</span></div>
+          <div class="wli"><span>Partial Wraps</span><span class="wli-a">→</span></div>
+          <div class="wli"><span>Fleet Graphics</span><span class="wli-a">→</span></div>
+          <div class="wli"><span>Custom Designs</span><span class="wli-a">→</span></div>
+          <div class="wli"><span>Vehicle Door Graphics</span><span class="wli-a">→</span></div>
+        </div>
+        <a href="#" class="btn-r" style="display:inline-block">Get a Wrap Quote</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="cta">
-  <div>
-    <p class="cta-sup">Ready to stand out?</p>
-    <h2 class="cta-h">Let's make a great<br/><em>first impression.</em></h2>
-  </div>
-  <a href="#" class="btn-w">Get a Free Quote</a>
-</div>
-
-<footer>
-  <div class="fg">
+  <section class="led">
     <div>
-      <div class="fb">ACME Sign</div>
-      <div class="fb-s">& Graphics Company</div>
-      <div class="fi">25 Raddall Avenue, Unit 4<br/>Dartmouth, Nova Scotia B3B 1L4<br/>+1 (902) 481-1007<br/>acmesign01@gmail.com<br/>Mon – Fri · 8:30 AM – 5:00 PM</div>
+      <div class="led-ep">★ Featured Service</div>
+      <h2 class="led-h">Programmable<br /><em>LED</em> Signs</h2>
+      <p class="led-b">Bright, full-colour LED signs with built-in WiFi and a mobile app. Update your message from any
+        smartphone — any time, from anywhere.</p>
+      <div class="led-list">
+        <div class="led-li">Full-colour indoor & outdoor displays in any size</div>
+        <div class="led-li">Mobile app control — update your message in seconds</div>
+        <div class="led-li">Buy, rent, or lease — options for every budget</div>
+        <div class="led-li">Free indoor installation on all units</div>
+        <div class="led-li">Retrofit your existing sign with a new LED display</div>
+        <div class="led-li">Purchase two or more and save</div>
+      </div>
+      <a href="#" class="btn-y">Get LED Sign Info</a>
     </div>
-    <div class="fc"><h5>Services</h5><ul>
-      <li><a href="#">LED Signs</a></li>
-      <li><a href="#">Vehicle Wraps</a></li>
-      <li><a href="#">Channel Signs</a></li>
-      <li><a href="#">Illuminated Signs</a></li>
-      <li><a href="#">Window Graphics</a></li>
-      <li><a href="#">Banners</a></li>
-    </ul></div>
-    <div class="fc"><h5>More</h5><ul>
-      <li><a href="#">Safety Signs</a></li>
-      <li><a href="#">Apparel</a></li>
-      <li><a href="#">Decals & Stickers</a></li>
-      <li><a href="#">Dimension Signs</a></li>
-      <li><a href="#">Sign Service</a></li>
-    </ul></div>
-    <div class="fc"><h5>Company</h5><ul>
-      <li><a href="#">Gallery</a></li>
-      <li><a href="#">Artwork Guidelines</a></li>
-      <li><a href="#">Contact Us</a></li>
-      <li><a href="#">Get a Quote</a></li>
-    </ul></div>
+    <div class="led-panel">
+      <div class="led-panel-row">
+        <div class="led-cell">
+          <div class="led-cell-v">72<em>%</em></div>
+          <div class="led-cell-l">More Noticed</div>
+        </div>
+        <div class="led-cell">
+          <div class="led-cell-v">900<em>%</em></div>
+          <div class="led-cell-l">Visibility Boost</div>
+        </div>
+      </div>
+      <div class="led-panel-row">
+        <div class="led-cell">
+          <div class="led-cell-v">24/7</div>
+          <div class="led-cell-l">Advertising</div>
+        </div>
+        <div class="led-cell">
+          <div class="led-cell-v"><em>WiFi</em></div>
+          <div class="led-cell-l">Built-In</div>
+        </div>
+      </div>
+      <div class="led-note">
+        <p>All signs include built-in WiFi and a mobile app — no ladder, no manual letter changes, no hassle. Just open
+          the app and update your message instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="ey">Why Choose ACME Sign</p>
+    <h2 class="sh">The ACME<br /><em>Advantage</em></h2>
+    <div class="why">
+      <div class="why-item">
+        <div class="why-big">01</div>
+        <div class="why-rule"></div>
+        <div class="why-t">Local Expertise</div>
+        <p class="why-d">Dartmouth-based for 35+ years. We understand Nova Scotia bylaws, Atlantic weather, and what
+          works for businesses in this region.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-big">02</div>
+        <div class="why-rule"></div>
+        <div class="why-t">In-House Fabrication</div>
+        <p class="why-d">Everything is built in our shop — no outsourcing, no middlemen. We control quality, timeline,
+          and installation from start to finish.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-big">03</div>
+        <div class="why-rule"></div>
+        <div class="why-t">Any Budget</div>
+        <p class="why-d">From a single decal to a full LED display system — honest solutions for every budget without
+          compromising on quality.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-big">04</div>
+        <div class="why-rule"></div>
+        <div class="why-t">Full Service</div>
+        <p class="why-d">Design, fabrication, and installation under one roof. From first consultation to the final
+          install — we handle everything.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0">
+    <div class="ac">
+      <div class="ac-l">
+        <p class="ey">Where We Work</p>
+        <h2 class="sh">Serving Atlantic<br /><em>Canada</em></h2>
+        <p style="font-size:14px;font-weight:300;line-height:1.85;color:#555">From our Dartmouth shop we serve
+          businesses across Nova Scotia, New Brunswick, and Prince Edward Island.</p>
+        <div class="tags">
+          <span class="tag">Halifax</span><span class="tag">Dartmouth</span>
+          <span class="tag">Bedford</span><span class="tag">Sackville</span>
+          <span class="tag">Truro</span><span class="tag">Wolfville</span>
+          <span class="tag">Kentville</span><span class="tag">Digby</span>
+          <span class="tag">Yarmouth</span><span class="tag">Pictou</span>
+          <span class="tag">Antigonish</span><span class="tag">New Glasgow</span>
+          <span class="tag">Sydney</span><span class="tag">Cape Breton</span>
+          <span class="tag">Moncton</span><span class="tag">Amherst</span>
+          <span class="tag">New Brunswick</span><span class="tag">Prince Edward Island</span>
+        </div>
+      </div>
+      <div class="ac-r">
+        <p class="ey">Get in Touch</p>
+        <h2 class="sh" style="margin-bottom:32px">Contact<br /><em>Us</em></h2>
+        <div class="contacts">
+          <div class="citem"><span class="cicon">📍</span>
+            <div>
+              <div class="clabel">Address</div>
+              <div class="cval">25 Raddall Avenue, Unit 4<br />Dartmouth, Nova Scotia B3B 1L4</div>
+            </div>
+          </div>
+          <div class="citem"><span class="cicon">📞</span>
+            <div>
+              <div class="clabel">Phone</div>
+              <div class="cval">+1 (902) 481-1007</div>
+            </div>
+          </div>
+          <div class="citem"><span class="cicon">📠</span>
+            <div>
+              <div class="clabel">Fax</div>
+              <div class="cval">+1 (902) 481-0511</div>
+            </div>
+          </div>
+          <div class="citem"><span class="cicon">✉️</span>
+            <div>
+              <div class="clabel">Email</div>
+              <div class="cval">acmesign01@gmail.com</div>
+            </div>
+          </div>
+          <div class="citem"><span class="cicon">🕐</span>
+            <div>
+              <div class="clabel">Hours</div>
+              <div class="cval">Mon – Fri · 8:30 AM – 5:00 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div>
+      <p class="cta-sup">Ready to stand out?</p>
+      <h2 class="cta-h">Let's make a great<br /><em>first impression.</em></h2>
+    </div>
+    <a href="#" class="btn-w">Get a Free Quote</a>
   </div>
-  <div class="fd">
-    <span>© 2026 ACME Sign & Graphics Co. All Rights Reserved.</span>
-    <span>Serving Atlantic Canada since 1989</span>
-  </div>
-</footer>
+
+  <footer>
+    <div class="fg">
+      <div>
+        <div class="fb">ACME Sign</div>
+        <div class="fb-s">& Graphics Company</div>
+        <div class="fi">25 Raddall Avenue, Unit 4<br />Dartmouth, Nova Scotia B3B 1L4<br />+1 (902)
+          481-1007<br />acmesign01@gmail.com<br />Mon – Fri · 8:30 AM – 5:00 PM</div>
+      </div>
+      <div class="fc">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">LED Signs</a></li>
+          <li><a href="#">Vehicle Wraps</a></li>
+          <li><a href="#">Channel Signs</a></li>
+          <li><a href="#">Illuminated Signs</a></li>
+          <li><a href="#">Window Graphics</a></li>
+          <li><a href="#">Banners</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h5>More</h5>
+        <ul>
+          <li><a href="#">Safety Signs</a></li>
+          <li><a href="#">Apparel</a></li>
+          <li><a href="#">Decals & Stickers</a></li>
+          <li><a href="#">Dimension Signs</a></li>
+          <li><a href="#">Sign Service</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Artwork Guidelines</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Get a Quote</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fd">
+      <span>© 2026 ACME Sign & Graphics Co. All Rights Reserved.</span>
+      <span>Serving Atlantic Canada since 1989</span>
+    </div>
+  </footer>
 
 </body>
+
 </html>
